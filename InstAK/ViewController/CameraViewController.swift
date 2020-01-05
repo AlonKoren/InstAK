@@ -116,11 +116,8 @@ class CameraViewController: UIViewController {
         if (!isCaptionTextViewEmpty()){
             caption = captionTextView.text!
         }
-        
-        newPostDocument.setData([
-            "photoUrl" : photoUrl,
-            "caption" : caption
-        ]){ err in
+        let post:Post = Post(captionText: caption, photoUrlString: photoUrl)
+        newPostDocument.setData(try! DictionaryEncoder().encode(post)){ err in
            if let err = err {
             ProgressHUD.showError(err.localizedDescription)
            } else {

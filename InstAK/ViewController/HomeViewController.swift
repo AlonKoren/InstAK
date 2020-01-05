@@ -8,35 +8,73 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class HomeViewController: UIViewController {
 
     
+    @IBOutlet weak var tableView: UITableView!
+    
+    var posts = [Post]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        tableView.dataSource = self
+        loadPosts()
+//        var post = Post(captionText: "George", photoUrlString: "url1")
+//        print(post.caption)
+//        print(post.photoUrl)
+    }
+    
+    func loadPosts() {
+        
+        Firestore.firestore().collection("posts").addSnapshotListener { (querySnapshot, error) in
+            guard let snapshot = querySnapshot else {
+                print(error!.localizedDescription)
+                return
+            }
+            for diff in snapshot.documentChanges{
+                if (diff.type == .added) {
+                    print("New Post : \(diff.document.data())")
+                    let post:Post = try! DictionaryDecoder().decode(Post.self, from: diff.document.data())
+                    self.posts.append(post)
+                }
+                if (diff.type == .modified) {
+                    print("Modified Post : \(diff.document.data())")
+                }
+                if (diff.type == .removed) {
+                    print("Removed Post : \(diff.document.data())")
+                }
+            }
+            print(self.posts)
+            self.tableView.reloadData()
+        }
     }
     
     @IBAction func logout_TouchUpInside(_ sender: Any) {
         do{
             try Auth.auth().signOut()
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let signInVC = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
+            signInVC.modalPresentationStyle = .fullScreen
+            self.present(signInVC, animated: true, completion: nil)
         }catch let logoutError{
             print(logoutError)
         }
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let signInVC = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
-        signInVC.modalPresentationStyle = .fullScreen
-        self.present(signInVC, animated: true, completion: nil)
+        
     }
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension HomeViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.posts.count
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
+        
+        cell.textLabel?.text = "text:\t\(self.posts[indexPath.row].caption)"
+        return cell
+    }
 }
