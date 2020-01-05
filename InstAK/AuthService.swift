@@ -32,8 +32,9 @@ class AuthService  {
             let uid = authResult?.user.uid
             let storageRef = Storage.storage().reference().child("profile_image").child(uid!)
 
-            
-                storageRef.putData(imageData, metadata: nil) { (metadata, error) in
+            let metadata = StorageMetadata()
+            metadata.contentType = "image/jpeg"
+                storageRef.putData(imageData, metadata: metadata) { (metadata, error) in
                     if error != nil{
                         return
                     }

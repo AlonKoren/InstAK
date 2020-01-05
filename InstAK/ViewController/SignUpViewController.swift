@@ -30,7 +30,7 @@ class SignUpViewController: UIViewController {
         profileImage.layer.cornerRadius = 31
         profileImage.clipsToBounds = true
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(SignUpViewController.handleSelectProfileImageView))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleSelectProfileImageView))
         profileImage.addGestureRecognizer(tapGesture)
         profileImage.isUserInteractionEnabled = true
 
