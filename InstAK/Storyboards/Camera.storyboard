@@ -14,14 +14,65 @@
                     <view key="view" contentMode="scaleToFill" id="xZT-W8-8VP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ahc-R3-bTF">
+                                <rect key="frame" x="0.0" y="44" width="414" height="550"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadPic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="jkQ-z7-2Ii">
+                                        <rect key="frame" x="8" y="8" width="398" height="398"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="398" id="TvP-V4-wEL"/>
+                                            <constraint firstAttribute="height" constant="398" id="V0N-fd-s9T"/>
+                                        </constraints>
+                                    </imageView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mtB-yN-jK9">
+                                        <rect key="frame" x="8" y="414" width="398" height="128"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="jkQ-z7-2Ii" firstAttribute="leading" secondItem="Ahc-R3-bTF" secondAttribute="leading" constant="8" id="Len-II-0qI"/>
+                                    <constraint firstItem="mtB-yN-jK9" firstAttribute="leading" secondItem="Ahc-R3-bTF" secondAttribute="leading" constant="8" id="T3t-jb-rKF"/>
+                                    <constraint firstAttribute="trailing" secondItem="mtB-yN-jK9" secondAttribute="trailing" constant="8" id="ZlO-f6-vKr"/>
+                                    <constraint firstItem="mtB-yN-jK9" firstAttribute="top" secondItem="jkQ-z7-2Ii" secondAttribute="bottom" constant="8" id="e9K-17-dZ6"/>
+                                    <constraint firstAttribute="trailing" secondItem="jkQ-z7-2Ii" secondAttribute="trailing" constant="8" id="f4s-MR-N7g"/>
+                                    <constraint firstAttribute="height" constant="550" id="l2c-bk-vhr"/>
+                                    <constraint firstItem="jkQ-z7-2Ii" firstAttribute="top" secondItem="Ahc-R3-bTF" secondAttribute="top" constant="8" id="pJ3-uL-Wyc"/>
+                                    <constraint firstAttribute="bottom" secondItem="mtB-yN-jK9" secondAttribute="bottom" constant="8" id="x5I-42-aj4"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K26-pb-FkE">
+                                <rect key="frame" x="9" y="613" width="396" height="65"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="6nL-gA-TyZ"/>
+                                </constraints>
+                                <state key="normal" title="Share">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ahc-R3-bTF" firstAttribute="trailing" secondItem="Tf1-NC-w60" secondAttribute="trailing" id="0MQ-Gr-Hyv"/>
+                            <constraint firstItem="Tf1-NC-w60" firstAttribute="trailing" secondItem="K26-pb-FkE" secondAttribute="trailing" constant="9" id="NHL-xB-85o"/>
+                            <constraint firstItem="Tf1-NC-w60" firstAttribute="bottom" secondItem="K26-pb-FkE" secondAttribute="bottom" constant="9" id="Qmd-Pn-fju"/>
+                            <constraint firstItem="Ahc-R3-bTF" firstAttribute="top" secondItem="Tf1-NC-w60" secondAttribute="top" id="VW6-mT-zlB"/>
+                            <constraint firstItem="Ahc-R3-bTF" firstAttribute="leading" secondItem="Tf1-NC-w60" secondAttribute="leading" id="ioA-YA-Tun"/>
+                            <constraint firstItem="K26-pb-FkE" firstAttribute="leading" secondItem="Tf1-NC-w60" secondAttribute="leading" constant="9" id="lFx-CR-CWs"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Tf1-NC-w60"/>
                     </view>
                     <navigationItem key="navigationItem" title="Camera" id="lA8-WL-LNu"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GuV-Qt-wdm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1223" y="704"/>
+            <point key="canvasLocation" x="-1223.1884057971015" y="703.53260869565224"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OIN-gX-hH2">
@@ -46,5 +97,6 @@
     </scenes>
     <resources>
         <image name="Photo" width="22" height="23"/>
+        <image name="uploadPic_logo" width="750" height="750"/>
     </resources>
 </document>
