@@ -10,7 +10,7 @@
         <!--Sign In View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SignInViewController" customModule="InstAK" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInViewController" id="BYZ-38-t0r" customClass="SignInViewController" customModule="InstAK" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -25,6 +25,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                        <connections>
+                                            <action selector="textFieldDidChange" destination="BYZ-38-t0r" eventType="editingChanged" id="vAX-FB-HjT"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="56U-LS-Jho">
                                         <rect key="frame" x="0.0" y="54" width="374" height="34"/>
@@ -33,6 +36,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <connections>
+                                            <action selector="textFieldDidChange" destination="BYZ-38-t0r" eventType="editingChanged" id="fW7-W1-0ph"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gZy-ri-92s">
                                         <rect key="frame" x="0.0" y="108" width="374" height="44"/>
@@ -44,7 +50,7 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="qQt-5s-GFp" kind="presentation" modalPresentationStyle="fullScreen" id="wo6-gw-cwa"/>
+                                            <action selector="signInButton_TouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gwb-9r-amE"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -84,8 +90,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="emailTextField" destination="h6f-ZY-BfC" id="9Wf-8h-oC6"/>
+                        <outlet property="emailTextField" destination="h6f-ZY-BfC" id="nge-GT-Ptg"/>
                         <outlet property="passwordTextField" destination="56U-LS-Jho" id="UID-cJ-bh9"/>
+                        <outlet property="signInButton" destination="gZy-ri-92s" id="gxo-Zf-1aQ"/>
+                        <segue destination="qQt-5s-GFp" kind="presentation" identifier="signInToTabbarVC" modalPresentationStyle="fullScreen" id="UiR-da-o4x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -110,6 +118,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                        <connections>
+                                            <action selector="textFieldDidChange" destination="F3h-zE-dgx" eventType="editingChanged" id="Q9G-pG-QYi"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xvO-Ve-1wt">
                                         <rect key="frame" x="0.0" y="54" width="374" height="34"/>
@@ -118,6 +129,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                        <connections>
+                                            <action selector="textFieldDidChange" destination="F3h-zE-dgx" eventType="editingChanged" id="3E5-0G-Xgb"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1fu-DU-H9n">
                                         <rect key="frame" x="0.0" y="108" width="374" height="34"/>
@@ -126,6 +140,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <connections>
+                                            <action selector="textFieldDidChange" destination="F3h-zE-dgx" eventType="editingChanged" id="4dp-TI-Xur"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="grI-Ry-mTE">
                                         <rect key="frame" x="0.0" y="162" width="374" height="44"/>
@@ -137,7 +154,7 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="qQt-5s-GFp" kind="presentation" modalPresentationStyle="fullScreen" id="aOp-7R-aSn"/>
+                                            <action selector="signUpBtn_TouchUpInside:" destination="F3h-zE-dgx" eventType="touchUpInside" id="QM7-XQ-7z5"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -180,7 +197,9 @@
                         <outlet property="emailTextField" destination="xvO-Ve-1wt" id="4hl-ND-dg9"/>
                         <outlet property="passwordTextField" destination="1fu-DU-H9n" id="sPd-QH-9M3"/>
                         <outlet property="profileImage" destination="daU-To-pwi" id="IO2-7R-ulK"/>
+                        <outlet property="signUpButton" destination="grI-Ry-mTE" id="yjz-ok-ffB"/>
                         <outlet property="usernameTextField" destination="a3w-sb-pSb" id="ASi-XW-vFI"/>
+                        <segue destination="qQt-5s-GFp" kind="presentation" identifier="signUpToTabbarVC" modalPresentationStyle="fullScreen" id="hoW-hb-NvK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7PE-97-UL2" sceneMemberID="firstResponder"/>
@@ -200,6 +219,6 @@
         <image name="placeholder-avatar-profile" width="1024" height="1024"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aOp-7R-aSn"/>
+        <segue reference="UiR-da-o4x"/>
     </inferredMetricsTieBreakers>
 </document>

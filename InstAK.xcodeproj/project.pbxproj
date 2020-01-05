@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,9 @@
 		0A013D7123AE8BCA00838A21 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A013D7023AE8BCA00838A21 /* ProfileViewController.swift */; };
 		0A013D7423B7C26200838A21 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A013D7223B7C26200838A21 /* Home.storyboard */; };
 		0A013D7623B7D0AF00838A21 /* Feeds.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A013D7523B7D0AF00838A21 /* Feeds.storyboard */; };
+		0A2D5CBE23B8EA370026F64E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A2D5CBD23B8EA370026F64E /* GoogleService-Info.plist */; };
+		0A5EB7A123BE63AE007A1BEF /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5EB7A023BE63AE007A1BEF /* AuthService.swift */; };
+		0A5EB7A323BE7F3B007A1BEF /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5EB7A223BE7F3B007A1BEF /* Config.swift */; };
 		0A91A99823B7D4CB00AE21FB /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A91A99623B7D4CB00AE21FB /* Discover.storyboard */; };
 		0A91A99A23B7D58400AE21FB /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A91A99923B7D58400AE21FB /* Camera.storyboard */; };
 		0A91A99D23B7D5EB00AE21FB /* Activity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A91A99B23B7D5EB00AE21FB /* Activity.storyboard */; };
@@ -27,6 +30,9 @@
 		0AB36EA623A284D200FE9CD5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AB36EA423A284D200FE9CD5 /* LaunchScreen.storyboard */; };
 		0AB36EB123A284D200FE9CD5 /* InstAKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB36EB023A284D200FE9CD5 /* InstAKTests.swift */; };
 		0AB36EBC23A284D200FE9CD5 /* InstAKUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB36EBB23A284D200FE9CD5 /* InstAKUITests.swift */; };
+		2B7E0EB90A506F2C83BC936B /* Pods_InstAKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BCF3AD1280E28BA8963CC9E /* Pods_InstAKTests.framework */; };
+		9C9C0BC70CD679B9BBD55E5C /* Pods_InstAK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F73B0B6C58F58C12002C89 /* Pods_InstAK.framework */; };
+		EE9BACB70FEF145FBC8A9D43 /* Pods_InstAK_InstAKUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 296F1532656435728A7D308D /* Pods_InstAK_InstAKUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		062ED9236A294BC16A9C0BC0 /* Pods-InstAKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstAKTests.debug.xcconfig"; path = "Target Support Files/Pods-InstAKTests/Pods-InstAKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0A013D6823AE8A2D00838A21 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0A013D6A23AE8AA500838A21 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		0A013D6C23AE8AEA00838A21 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +61,10 @@
 		0A013D7023AE8BCA00838A21 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0A013D7323B7C26200838A21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = InstAK/Base.lproj/Home.storyboard; sourceTree = "<group>"; };
 		0A013D7523B7D0AF00838A21 /* Feeds.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feeds.storyboard; sourceTree = "<group>"; };
+		0A2D5CBD23B8EA370026F64E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0A589F3223C0ED0C000D6C9F /* InstAK-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InstAK-Bridging-Header.h"; sourceTree = "<group>"; };
+		0A5EB7A023BE63AE007A1BEF /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		0A5EB7A223BE7F3B007A1BEF /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		0A91A99723B7D4CB00AE21FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = InstAK/InstAK/Base.lproj/Discover.storyboard; sourceTree = "<group>"; };
 		0A91A99923B7D58400AE21FB /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
 		0A91A99C23B7D5EB00AE21FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = InstAK/InstAK/Base.lproj/Activity.storyboard; sourceTree = "<group>"; };
@@ -73,6 +84,14 @@
 		0AB36EB723A284D200FE9CD5 /* InstAKUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstAKUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AB36EBB23A284D200FE9CD5 /* InstAKUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstAKUITests.swift; sourceTree = "<group>"; };
 		0AB36EBD23A284D200FE9CD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		296F1532656435728A7D308D /* Pods_InstAK_InstAKUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstAK_InstAKUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		338B8FA7CA751A543C85690E /* Pods-InstAK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstAK.debug.xcconfig"; path = "Target Support Files/Pods-InstAK/Pods-InstAK.debug.xcconfig"; sourceTree = "<group>"; };
+		3D44D232229041E31569C386 /* Pods-InstAK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstAK.release.xcconfig"; path = "Target Support Files/Pods-InstAK/Pods-InstAK.release.xcconfig"; sourceTree = "<group>"; };
+		69E3D12D2D803545AE425DD0 /* Pods-InstAK-InstAKUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstAK-InstAKUITests.release.xcconfig"; path = "Target Support Files/Pods-InstAK-InstAKUITests/Pods-InstAK-InstAKUITests.release.xcconfig"; sourceTree = "<group>"; };
+		89F73B0B6C58F58C12002C89 /* Pods_InstAK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstAK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BCF3AD1280E28BA8963CC9E /* Pods_InstAKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstAKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9311C654C2CD11BC03F813AE /* Pods-InstAKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstAKTests.release.xcconfig"; path = "Target Support Files/Pods-InstAKTests/Pods-InstAKTests.release.xcconfig"; sourceTree = "<group>"; };
+		F308FB403E777F327DA5ADF2 /* Pods-InstAK-InstAKUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstAK-InstAKUITests.debug.xcconfig"; path = "Target Support Files/Pods-InstAK-InstAKUITests/Pods-InstAK-InstAKUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C9C0BC70CD679B9BBD55E5C /* Pods_InstAK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B7E0EB90A506F2C83BC936B /* Pods_InstAKTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE9BACB70FEF145FBC8A9D43 /* Pods_InstAK_InstAKUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +157,8 @@
 				0AB36EAF23A284D200FE9CD5 /* InstAKTests */,
 				0AB36EBA23A284D200FE9CD5 /* InstAKUITests */,
 				0AB36E9723A284D000FE9CD5 /* Products */,
+				8DDBB60FFD7A960FD7A92B93 /* Pods */,
+				16F1F0BA260FBD37AE0F9F77 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -152,12 +176,16 @@
 			isa = PBXGroup;
 			children = (
 				0AB36E9923A284D000FE9CD5 /* AppDelegate.swift */,
+				0A5EB7A023BE63AE007A1BEF /* AuthService.swift */,
+				0A5EB7A223BE7F3B007A1BEF /* Config.swift */,
 				0AB36E9B23A284D000FE9CD5 /* SceneDelegate.swift */,
 				0A2D5CBC23B8E24F0026F64E /* ViewController */,
 				0A2D5CBB23B8E2090026F64E /* Storyboards */,
 				0AB36EA223A284D200FE9CD5 /* Assets.xcassets */,
 				0AB36EA423A284D200FE9CD5 /* LaunchScreen.storyboard */,
 				0AB36EA723A284D200FE9CD5 /* Info.plist */,
+				0A2D5CBD23B8EA370026F64E /* GoogleService-Info.plist */,
+				0A589F3223C0ED0C000D6C9F /* InstAK-Bridging-Header.h */,
 			);
 			path = InstAK;
 			sourceTree = "<group>";
@@ -180,6 +208,29 @@
 			path = InstAKUITests;
 			sourceTree = "<group>";
 		};
+		16F1F0BA260FBD37AE0F9F77 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				89F73B0B6C58F58C12002C89 /* Pods_InstAK.framework */,
+				296F1532656435728A7D308D /* Pods_InstAK_InstAKUITests.framework */,
+				8BCF3AD1280E28BA8963CC9E /* Pods_InstAKTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8DDBB60FFD7A960FD7A92B93 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				338B8FA7CA751A543C85690E /* Pods-InstAK.debug.xcconfig */,
+				3D44D232229041E31569C386 /* Pods-InstAK.release.xcconfig */,
+				F308FB403E777F327DA5ADF2 /* Pods-InstAK-InstAKUITests.debug.xcconfig */,
+				69E3D12D2D803545AE425DD0 /* Pods-InstAK-InstAKUITests.release.xcconfig */,
+				062ED9236A294BC16A9C0BC0 /* Pods-InstAKTests.debug.xcconfig */,
+				9311C654C2CD11BC03F813AE /* Pods-InstAKTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -187,9 +238,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0AB36EC023A284D200FE9CD5 /* Build configuration list for PBXNativeTarget "InstAK" */;
 			buildPhases = (
+				92A00F67402180AE253EEE9E /* [CP] Check Pods Manifest.lock */,
 				0AB36E9223A284D000FE9CD5 /* Sources */,
 				0AB36E9323A284D000FE9CD5 /* Frameworks */,
 				0AB36E9423A284D000FE9CD5 /* Resources */,
+				CCDF15F87A207ED189A85CB4 /* [CP] Embed Pods Frameworks */,
+				AD7C4D4820A3B8EAF3E91C04 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -204,6 +258,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0AB36EC323A284D200FE9CD5 /* Build configuration list for PBXNativeTarget "InstAKTests" */;
 			buildPhases = (
+				96D060AC52E7129F2F6C3C3C /* [CP] Check Pods Manifest.lock */,
 				0AB36EA823A284D200FE9CD5 /* Sources */,
 				0AB36EA923A284D200FE9CD5 /* Frameworks */,
 				0AB36EAA23A284D200FE9CD5 /* Resources */,
@@ -222,9 +277,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0AB36EC623A284D200FE9CD5 /* Build configuration list for PBXNativeTarget "InstAKUITests" */;
 			buildPhases = (
+				D6B5D600EE9FF6E8A1A313D7 /* [CP] Check Pods Manifest.lock */,
 				0AB36EB323A284D200FE9CD5 /* Sources */,
 				0AB36EB423A284D200FE9CD5 /* Frameworks */,
 				0AB36EB523A284D200FE9CD5 /* Resources */,
+				8B19DA2C1B2E96DED66B1DD8 /* [CP] Embed Pods Frameworks */,
+				7EA76543C31724CAE152CE47 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -248,6 +306,7 @@
 				TargetAttributes = {
 					0AB36E9523A284D000FE9CD5 = {
 						CreatedOnToolsVersion = 11.3;
+						LastSwiftMigration = 1130;
 					};
 					0AB36EAB23A284D200FE9CD5 = {
 						CreatedOnToolsVersion = 11.3;
@@ -291,6 +350,7 @@
 				0AB36EA123A284D000FE9CD5 /* Main.storyboard in Resources */,
 				0A013D7423B7C26200838A21 /* Home.storyboard in Resources */,
 				0A91A99F23B7D64900AE21FB /* Profile.storyboard in Resources */,
+				0A2D5CBE23B8EA370026F64E /* GoogleService-Info.plist in Resources */,
 				0A91A99823B7D4CB00AE21FB /* Discover.storyboard in Resources */,
 				0A91A99D23B7D5EB00AE21FB /* Activity.storyboard in Resources */,
 			);
@@ -312,6 +372,143 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7EA76543C31724CAE152CE47 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InstAK-InstAKUITests/Pods-InstAK-InstAKUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InstAK-InstAKUITests/Pods-InstAK-InstAKUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InstAK-InstAKUITests/Pods-InstAK-InstAKUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8B19DA2C1B2E96DED66B1DD8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InstAK-InstAKUITests/Pods-InstAK-InstAKUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InstAK-InstAKUITests/Pods-InstAK-InstAKUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InstAK-InstAKUITests/Pods-InstAK-InstAKUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		92A00F67402180AE253EEE9E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-InstAK-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		96D060AC52E7129F2F6C3C3C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-InstAKTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AD7C4D4820A3B8EAF3E91C04 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InstAK/Pods-InstAK-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InstAK/Pods-InstAK-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InstAK/Pods-InstAK-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CCDF15F87A207ED189A85CB4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InstAK/Pods-InstAK-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InstAK/Pods-InstAK-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InstAK/Pods-InstAK-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D6B5D600EE9FF6E8A1A313D7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-InstAK-InstAKUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0AB36E9223A284D000FE9CD5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -321,9 +518,11 @@
 				0AB36E9A23A284D000FE9CD5 /* AppDelegate.swift in Sources */,
 				0AB36E9C23A284D000FE9CD5 /* SceneDelegate.swift in Sources */,
 				0A013D6F23AE8B9B00838A21 /* ActivityViewController.swift in Sources */,
+				0A5EB7A323BE7F3B007A1BEF /* Config.swift in Sources */,
 				0A013D6B23AE8AA500838A21 /* DiscoverViewController.swift in Sources */,
 				0A013D6D23AE8AEA00838A21 /* CameraViewController.swift in Sources */,
 				0A013D7123AE8BCA00838A21 /* ProfileViewController.swift in Sources */,
+				0A5EB7A123BE63AE007A1BEF /* AuthService.swift in Sources */,
 				0AAC99FE23A9125D00A60A90 /* SignUpViewController.swift in Sources */,
 				0AAC99FC23A9012200A60A90 /* SignInViewController.swift in Sources */,
 			);
@@ -520,8 +719,10 @@
 		};
 		0AB36EC123A284D200FE9CD5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 338B8FA7CA751A543C85690E /* Pods-InstAK.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M725KCJQA7;
 				INFOPLIST_FILE = InstAK/Info.plist;
@@ -531,6 +732,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.alon.InstAK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "InstAK/InstAK-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -538,8 +741,10 @@
 		};
 		0AB36EC223A284D200FE9CD5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D44D232229041E31569C386 /* Pods-InstAK.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M725KCJQA7;
 				INFOPLIST_FILE = InstAK/Info.plist;
@@ -549,6 +754,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.alon.InstAK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "InstAK/InstAK-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -556,6 +762,7 @@
 		};
 		0AB36EC423A284D200FE9CD5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 062ED9236A294BC16A9C0BC0 /* Pods-InstAKTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -578,6 +785,7 @@
 		};
 		0AB36EC523A284D200FE9CD5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9311C654C2CD11BC03F813AE /* Pods-InstAKTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -600,6 +808,7 @@
 		};
 		0AB36EC723A284D200FE9CD5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F308FB403E777F327DA5ADF2 /* Pods-InstAK-InstAKUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -620,6 +829,7 @@
 		};
 		0AB36EC823A284D200FE9CD5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69E3D12D2D803545AE425DD0 /* Pods-InstAK-InstAKUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

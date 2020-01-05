@@ -17,7 +17,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="SHq-Vb-beB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="InstAK" id="FZU-tT-Tsr"/>
+                    <navigationItem key="navigationItem" title="InstAK" id="FZU-tT-Tsr">
+                        <barButtonItem key="leftBarButtonItem" title="LogOut" id="gc4-lD-3ey">
+                            <connections>
+                                <action selector="logout_TouchUpInside:" destination="Bm3-eL-W91" id="50X-4K-ckS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uHJ-pG-ddc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
