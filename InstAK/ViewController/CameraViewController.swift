@@ -18,6 +18,8 @@ class CameraViewController: UIViewController {
     
     @IBOutlet weak var shareButton: UIButton!
     
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    
     var selectedImage: UIImage?
     
     override func viewDidLoad() {
@@ -25,15 +27,63 @@ class CameraViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleSelectPhoto))
         photo.addGestureRecognizer(tapGesture)
         photo.isUserInteractionEnabled = true
+        
+        captionTextView.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        resetView()
+    }
+    
+    @IBAction func cancel_TouchUpInside(_ sender: Any) {
+        resetView()
+    }
+    
+    func resetView(){
+        view.endEditing(true)
+        self.initPlaceHolder()
+        self.photo.image = UIImage(named: "uploadPic_logo")
+        self.selectedImage = nil
+        postDidChange()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
     
     @objc func handleSelectPhoto()   {
+        view.endEditing(true)
+        
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         present(pickerController, animated: true, completion: nil)
     }
     
+    func postDidChange() {
+        if self.selectedImage != nil{
+            self.shareButton.setTitleColor(UIColor.white, for: .normal)
+            self.shareButton.isEnabled = true
+        }
+        else{
+            self.shareButton.setTitleColor(UIColor.lightText, for: .normal)
+            self.shareButton.isEnabled = false
+        }
+        isCancelEnabled()
+    }
+    
+    
+    func isCancelEnabled(){
+        if self.selectedImage == nil && self.isCaptionTextViewEmpty(){
+            self.cancelButton.isEnabled = false
+        }else{
+            self.cancelButton.isEnabled = true
+        }
+    }
+    
+    
     @IBAction func shareButton_TouchUpInside(_ sender: Any) {
+        view.endEditing(true)
         ProgressHUD.show("Waiting...", interaction: false)
         if let imageData = self.selectedImage!.jpegData(compressionQuality: 0.9) {
             let photoIdString = NSUUID().uuidString
@@ -58,44 +108,28 @@ class CameraViewController: UIViewController {
     }
     
     func sendDataToDatabase(photoUrl : String) {
-            
         let db = Firestore.firestore()
         let postsCollection = db.collection("posts")
         let newPostDocument = postsCollection.document()
         //let newPostId = newPostDocument.documentID
+        var caption : String = ""
+        if (!isCaptionTextViewEmpty()){
+            caption = captionTextView.text!
+        }
+        
         newPostDocument.setData([
-            "photoUrl" : photoUrl
+            "photoUrl" : photoUrl,
+            "caption" : caption
         ]){ err in
            if let err = err {
-                ProgressHUD.showError(err.localizedDescription)
+            ProgressHUD.showError(err.localizedDescription)
            } else {
             ProgressHUD.showSuccess("Success")
+//            resetView()
+            self.tabBarController?.selectedIndex = 0
            }
-   }
-//        postsCollection.document(uid).setData([
-//               "uid": uid,
-//               "username": username,
-//               "email": email,
-//               "profileImage": profileImageUrl
-//           ]) { err in
-//               if let err = err {
-//                   print("Error writing document: \(err)")
-//               } else {
-//                   print("Document successfully written!")
-//                   onSuccess()
-//               }
-//           }
+        }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 extension CameraViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -103,8 +137,37 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
         if let image = info[UIImagePickerController.InfoKey.originalImage.self] as? UIImage{
             selectedImage = image
             photo.image = image
-            //textFieldDidChange()
+            postDidChange()
         };
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension CameraViewController: UITextViewDelegate{
+    
+    func initPlaceHolder(){
+        captionTextView.text = "Description"
+        captionTextView.textColor = UIColor.lightGray
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if captionTextView.textColor == UIColor.lightGray{
+            captionTextView.text = nil
+            captionTextView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        self.isCancelEnabled()
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if captionTextView.text.isEmpty{
+            initPlaceHolder()
+        }
+    }
+    
+    func isCaptionTextViewEmpty() -> Bool{
+        return captionTextView.text.isEmpty || captionTextView.text == "Description" && captionTextView.textColor == UIColor.lightGray
     }
 }

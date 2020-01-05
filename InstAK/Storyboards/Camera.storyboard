@@ -28,7 +28,6 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mtB-yN-jK9">
                                         <rect key="frame" x="8" y="414" width="398" height="128"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -71,8 +70,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Tf1-NC-w60"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Camera" id="lA8-WL-LNu"/>
+                    <navigationItem key="navigationItem" title="Camera" id="lA8-WL-LNu">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="K4g-uq-f9M">
+                            <connections>
+                                <action selector="cancel_TouchUpInside:" destination="GmV-S2-aZ2" id="RTO-Oc-drI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="cancelButton" destination="K4g-uq-f9M" id="cTA-SY-lR1"/>
                         <outlet property="captionTextView" destination="mtB-yN-jK9" id="XZg-PH-xyA"/>
                         <outlet property="photo" destination="jkQ-z7-2Ii" id="D7g-Mc-MSu"/>
                         <outlet property="shareButton" destination="K26-pb-FkE" id="l7i-a6-cud"/>
