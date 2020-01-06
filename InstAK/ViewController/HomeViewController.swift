@@ -19,6 +19,8 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.estimatedRowHeight = 520
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.dataSource = self
         loadPosts()
 //        var post = Post(captionText: "George", photoUrlString: "url1")
@@ -72,9 +74,13 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! HomeTableViewCell
         
-        cell.textLabel?.text = "text:\t\(self.posts[indexPath.row].caption)"
+        cell.profileImageView.image = UIImage(named: "profileImage_avivCar.jpg")
+        cell.nameLabel.text = "Alon"
+        cell.postImageView.image = UIImage(named: "izik.jpg")
+        cell.captionLabel.text = "IzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzik"
+        //cell.textLabel?.text = "text:\t\(self.posts[indexPath.row].caption)"
         return cell
     }
 }

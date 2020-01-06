@@ -19,6 +19,7 @@
 		0A589F3A23C2982B000D6C9F /* DictionaryCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A589F3923C2982B000D6C9F /* DictionaryCoder.swift */; };
 		0A5EB7A123BE63AE007A1BEF /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5EB7A023BE63AE007A1BEF /* AuthService.swift */; };
 		0A5EB7A323BE7F3B007A1BEF /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5EB7A223BE7F3B007A1BEF /* Config.swift */; };
+		0A6B485B23C354BE00FBC41F /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6B485A23C354BE00FBC41F /* HomeTableViewCell.swift */; };
 		0A91A99823B7D4CB00AE21FB /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A91A99623B7D4CB00AE21FB /* Discover.storyboard */; };
 		0A91A99A23B7D58400AE21FB /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A91A99923B7D58400AE21FB /* Camera.storyboard */; };
 		0A91A99D23B7D5EB00AE21FB /* Activity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A91A99B23B7D5EB00AE21FB /* Activity.storyboard */; };
@@ -69,6 +70,7 @@
 		0A589F3923C2982B000D6C9F /* DictionaryCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryCoder.swift; sourceTree = "<group>"; };
 		0A5EB7A023BE63AE007A1BEF /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		0A5EB7A223BE7F3B007A1BEF /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		0A6B485A23C354BE00FBC41F /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		0A91A99723B7D4CB00AE21FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = InstAK/InstAK/Base.lproj/Discover.storyboard; sourceTree = "<group>"; };
 		0A91A99923B7D58400AE21FB /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
 		0A91A99C23B7D5EB00AE21FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = InstAK/InstAK/Base.lproj/Activity.storyboard; sourceTree = "<group>"; };
@@ -163,6 +165,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		0A6B485C23C354E200FBC41F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0A6B485A23C354BE00FBC41F /* HomeTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		0AB36E8D23A284D000FE9CD5 = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +203,7 @@
 				0A5EB7A023BE63AE007A1BEF /* AuthService.swift */,
 				0A5EB7A223BE7F3B007A1BEF /* Config.swift */,
 				0AB36E9B23A284D000FE9CD5 /* SceneDelegate.swift */,
+				0A6B485C23C354E200FBC41F /* Views */,
 				0A2D5CBC23B8E24F0026F64E /* ViewController */,
 				0A2D5CBB23B8E2090026F64E /* Storyboards */,
 				0AB36EA223A284D200FE9CD5 /* Assets.xcassets */,
@@ -530,6 +541,7 @@
 			files = (
 				0A013D6923AE8A2D00838A21 /* HomeViewController.swift in Sources */,
 				0AB36E9A23A284D000FE9CD5 /* AppDelegate.swift in Sources */,
+				0A6B485B23C354BE00FBC41F /* HomeTableViewCell.swift in Sources */,
 				0AB36E9C23A284D000FE9CD5 /* SceneDelegate.swift in Sources */,
 				0A589F3823C26709000D6C9F /* Post.swift in Sources */,
 				0A013D6F23AE8B9B00838A21 /* ActivityViewController.swift in Sources */,
