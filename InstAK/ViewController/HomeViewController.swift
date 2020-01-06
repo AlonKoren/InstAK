@@ -63,6 +63,15 @@ class HomeViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    @IBAction func button_TouchUpInside(_ sender: Any) {
+        self.performSegue(withIdentifier: "commentSegue", sender: nil)
+    }
+    
     func fetchUser(uid: String, completed: @escaping () -> Void) {
         Firestore.firestore().collection("users").document(uid).getDocument { (document, error) in
             if let userDocument = document, userDocument.exists{

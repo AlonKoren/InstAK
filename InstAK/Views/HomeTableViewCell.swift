@@ -54,7 +54,8 @@ class HomeTableViewCell: UITableViewCell {
             self.nameLabel.text = user.username
             if let profileImageUrlString = user.prifileImage {
                 let profileImageUrl = URL(string: profileImageUrlString)
-                self.profileImageView.kf.setImage(with: profileImageUrl, placeholder: UIImage(named: "placeholder-avatar-profile"), options: [.forceRefresh])
+                let placeholder = #imageLiteral(resourceName: "placeholder-avatar-profile")
+                self.profileImageView.kf.setImage(with: profileImageUrl, placeholder: placeholder, options: [.forceRefresh])
             }else{
                 print("profileImageUrlString does not exist")
             }
@@ -69,7 +70,7 @@ class HomeTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        profileImageView.image = UIImage(named: "placeholder-avatar-profile")
+        profileImageView.image = #imageLiteral(resourceName: "placeholder-avatar-profile")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
