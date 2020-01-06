@@ -17,6 +17,7 @@
 		0A1E3EF823C39E71001B09B0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E3EF723C39E71001B09B0 /* User.swift */; };
 		0A1E3EFA23C3CFCA001B09B0 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E3EF923C3CFCA001B09B0 /* CommentViewController.swift */; };
 		0A1E3EFC23C3D001001B09B0 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E3EFB23C3D001001B09B0 /* CommentTableViewCell.swift */; };
+		0A1E3EFE23C3EE83001B09B0 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E3EFD23C3EE83001B09B0 /* Comment.swift */; };
 		0A2D5CBE23B8EA370026F64E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A2D5CBD23B8EA370026F64E /* GoogleService-Info.plist */; };
 		0A589F3823C26709000D6C9F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A589F3723C26709000D6C9F /* Post.swift */; };
 		0A589F3A23C2982B000D6C9F /* DictionaryCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A589F3923C2982B000D6C9F /* DictionaryCoder.swift */; };
@@ -70,6 +71,7 @@
 		0A1E3EF723C39E71001B09B0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0A1E3EF923C3CFCA001B09B0 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		0A1E3EFB23C3D001001B09B0 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		0A1E3EFD23C3EE83001B09B0 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		0A2D5CBD23B8EA370026F64E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A589F3223C0ED0C000D6C9F /* InstAK-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InstAK-Bridging-Header.h"; sourceTree = "<group>"; };
 		0A589F3723C26709000D6C9F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				0A589F3723C26709000D6C9F /* Post.swift */,
 				0A589F3923C2982B000D6C9F /* DictionaryCoder.swift */,
 				0A1E3EF723C39E71001B09B0 /* User.swift */,
+				0A1E3EFD23C3EE83001B09B0 /* Comment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				0A589F3823C26709000D6C9F /* Post.swift in Sources */,
 				0A013D6F23AE8B9B00838A21 /* ActivityViewController.swift in Sources */,
 				0A1E3EFC23C3D001001B09B0 /* CommentTableViewCell.swift in Sources */,
+				0A1E3EFE23C3EE83001B09B0 /* Comment.swift in Sources */,
 				0A589F3A23C2982B000D6C9F /* DictionaryCoder.swift in Sources */,
 				0A5EB7A323BE7F3B007A1BEF /* Config.swift in Sources */,
 				0A1E3EFA23C3CFCA001B09B0 /* CommentViewController.swift in Sources */,
