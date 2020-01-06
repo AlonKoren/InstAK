@@ -10,13 +10,8 @@ import Foundation
 
 class Post : Codable{
     
-    var caption: String
-    var photoUrl: String
-    
-//    enum CodingKeys: String, CodingKey {
-//        case caption
-//        case photoUrl
-//    }
+    var caption: String?
+    var photoUrl: String?
     
     init(captionText: String, photoUrlString: String) {
         caption = captionText
