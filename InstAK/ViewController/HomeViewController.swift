@@ -20,6 +20,8 @@ class HomeViewController: UIViewController {
     var posts = [Post]()
     var users = [User]()
     
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.estimatedRowHeight = 520
@@ -32,7 +34,7 @@ class HomeViewController: UIViewController {
     }
     
     func loadPosts() {
-        
+        activityIndicatorView.startAnimating()
         Firestore.firestore().collection("posts").addSnapshotListener { (querySnapshot, error) in
             guard let snapshot = querySnapshot else {
                 print(error!.localizedDescription)
@@ -45,6 +47,7 @@ class HomeViewController: UIViewController {
                     self.fetchUser(uid: post.uid!, completed: {
                         self.posts.append(post)
                         print(self.posts)
+                        self.activityIndicatorView.stopAnimating()
                         self.tableView.reloadData()
                     })
                     

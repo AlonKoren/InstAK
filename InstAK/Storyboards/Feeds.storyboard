@@ -141,13 +141,18 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="hWz-G9-NOv">
+                                <rect key="frame" x="188.66666666666666" y="347" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="hWz-G9-NOv" firstAttribute="centerY" secondItem="SHq-Vb-beB" secondAttribute="centerY" id="6uu-H7-Qbl"/>
                             <constraint firstItem="SDi-Uk-rc0" firstAttribute="leading" secondItem="SHq-Vb-beB" secondAttribute="leading" id="P5f-6c-rLh"/>
                             <constraint firstItem="SDi-Uk-rc0" firstAttribute="trailing" secondItem="SHq-Vb-beB" secondAttribute="trailing" id="RYX-dP-eEU"/>
                             <constraint firstAttribute="bottom" secondItem="SDi-Uk-rc0" secondAttribute="bottom" constant="20" symbolic="YES" id="bYi-FB-G9Z"/>
                             <constraint firstItem="SDi-Uk-rc0" firstAttribute="top" secondItem="19t-cU-ymi" secondAttribute="top" constant="20" symbolic="YES" id="jxD-LH-Nbf"/>
+                            <constraint firstItem="hWz-G9-NOv" firstAttribute="centerX" secondItem="SHq-Vb-beB" secondAttribute="centerX" id="trG-hb-IAj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SHq-Vb-beB"/>
                     </view>
@@ -159,6 +164,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="hWz-G9-NOv" id="0c9-bZ-znz"/>
                         <outlet property="tableView" destination="SDi-Uk-rc0" id="BL9-4c-gyH"/>
                     </connections>
                 </viewController>
