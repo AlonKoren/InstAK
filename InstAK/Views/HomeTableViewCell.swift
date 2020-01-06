@@ -27,6 +27,22 @@ class HomeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var captionLabel: UILabel!
     
+    var post: Post? {
+        didSet{
+            updateView()
+        }
+    }
+    
+    func updateView() {
+        captionLabel.text = post?.caption
+        profileImageView.image = UIImage(named: "profileImage_avivCar.jpg")
+        nameLabel.text = "Alon"
+        if let photoUrlString = post?.photoUrl {
+            let photoUrl = URL(string: photoUrlString)
+            postImageView.kf.setImage(with: photoUrl)
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

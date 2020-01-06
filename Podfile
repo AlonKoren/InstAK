@@ -15,6 +15,7 @@ target 'InstAK' do
 	pod 'Firebase/Firestore'
 	pod 'ProgressHUD'
 	pod 'SDWebImage'
+  pod 'Kingfisher', '~> 5.0'
 
   target 'InstAKTests' do
     inherit! :search_paths

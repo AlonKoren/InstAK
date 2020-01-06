@@ -9,6 +9,8 @@
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
+import Kingfisher
+
 
 class HomeViewController: UIViewController {
 
@@ -75,12 +77,8 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! HomeTableViewCell
-        
-        cell.profileImageView.image = UIImage(named: "profileImage_avivCar.jpg")
-        cell.nameLabel.text = "Alon"
-        cell.postImageView.image = UIImage(named: "izik.jpg")
-        cell.captionLabel.text = "IzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzikIzik"
-        //cell.textLabel?.text = "text:\t\(self.posts[indexPath.row].caption)"
+        let post = posts[indexPath.row]
+        cell.post = post
         return cell
     }
 }
