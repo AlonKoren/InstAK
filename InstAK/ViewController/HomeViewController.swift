@@ -18,6 +18,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var posts = [Post]()
+    var users = [User]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +42,12 @@ class HomeViewController: UIViewController {
                 if (diff.type == .added) {
                     print("New Post : \(diff.document.data())")
                     let post:Post = try! DictionaryDecoder().decode(Post.self, from: diff.document.data())
-                    self.posts.append(post)
+                    self.fetchUser(uid: post.uid!, completed: {
+                        self.posts.append(post)
+                        print(self.posts)
+                        self.tableView.reloadData()
+                    })
+                    
                 }
                 if (diff.type == .modified) {
                     print("Modified Post : \(diff.document.data())")
@@ -50,8 +56,19 @@ class HomeViewController: UIViewController {
                     print("Removed Post : \(diff.document.data())")
                 }
             }
-            print(self.posts)
-            self.tableView.reloadData()
+            
+        }
+    }
+    
+    func fetchUser(uid: String, completed: @escaping () -> Void) {
+        Firestore.firestore().collection("users").document(uid).getDocument { (document, error) in
+            if let userDocument = document, userDocument.exists{
+                let user: User = try! DictionaryDecoder().decode(User.self, from: userDocument.data()!)
+                self.users.append(user)
+                completed()
+                }else{
+                print("document does not exist")
+            }
         }
     }
     
@@ -78,7 +95,9 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! HomeTableViewCell
         let post = posts[indexPath.row]
+        let user = users[indexPath.row]
         cell.post = post
+        cell.user = user
         return cell
     }
 }

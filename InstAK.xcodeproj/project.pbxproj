@@ -14,6 +14,7 @@
 		0A013D7123AE8BCA00838A21 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A013D7023AE8BCA00838A21 /* ProfileViewController.swift */; };
 		0A013D7423B7C26200838A21 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A013D7223B7C26200838A21 /* Home.storyboard */; };
 		0A013D7623B7D0AF00838A21 /* Feeds.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A013D7523B7D0AF00838A21 /* Feeds.storyboard */; };
+		0A1E3EF823C39E71001B09B0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E3EF723C39E71001B09B0 /* User.swift */; };
 		0A2D5CBE23B8EA370026F64E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A2D5CBD23B8EA370026F64E /* GoogleService-Info.plist */; };
 		0A589F3823C26709000D6C9F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A589F3723C26709000D6C9F /* Post.swift */; };
 		0A589F3A23C2982B000D6C9F /* DictionaryCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A589F3923C2982B000D6C9F /* DictionaryCoder.swift */; };
@@ -64,6 +65,7 @@
 		0A013D7023AE8BCA00838A21 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0A013D7323B7C26200838A21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = InstAK/Base.lproj/Home.storyboard; sourceTree = "<group>"; };
 		0A013D7523B7D0AF00838A21 /* Feeds.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feeds.storyboard; sourceTree = "<group>"; };
+		0A1E3EF723C39E71001B09B0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0A2D5CBD23B8EA370026F64E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A589F3223C0ED0C000D6C9F /* InstAK-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InstAK-Bridging-Header.h"; sourceTree = "<group>"; };
 		0A589F3723C26709000D6C9F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			children = (
 				0A589F3723C26709000D6C9F /* Post.swift */,
 				0A589F3923C2982B000D6C9F /* DictionaryCoder.swift */,
+				0A1E3EF723C39E71001B09B0 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				0A013D6F23AE8B9B00838A21 /* ActivityViewController.swift in Sources */,
 				0A589F3A23C2982B000D6C9F /* DictionaryCoder.swift in Sources */,
 				0A5EB7A323BE7F3B007A1BEF /* Config.swift in Sources */,
+				0A1E3EF823C39E71001B09B0 /* User.swift in Sources */,
 				0A013D6B23AE8AA500838A21 /* DiscoverViewController.swift in Sources */,
 				0A013D6D23AE8AEA00838A21 /* CameraViewController.swift in Sources */,
 				0A013D7123AE8BCA00838A21 /* ProfileViewController.swift in Sources */,

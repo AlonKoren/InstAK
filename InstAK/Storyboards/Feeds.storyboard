@@ -26,7 +26,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="590"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileImage_avivCar" translatesAutoresizingMaskIntoConstraints="NO" id="6YR-Y1-sRa">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6YR-Y1-sRa">
                                                     <rect key="frame" x="16" y="8" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="Dbr-1v-3Jl"/>
@@ -49,7 +49,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="izik" translatesAutoresizingMaskIntoConstraints="NO" id="jR3-Hl-DZy">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jR3-Hl-DZy">
                                                     <rect key="frame" x="0.66666666666665719" y="56" width="414" height="414"/>
                                                     <color key="backgroundColor" red="0.88627450980392153" green="0.8862745098" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -194,9 +194,7 @@
         <image name="Comment" width="43" height="41"/>
         <image name="Home" width="21" height="23"/>
         <image name="Home_Selected" width="21" height="23"/>
-        <image name="izik" width="206" height="257"/>
         <image name="like" width="46" height="41"/>
-        <image name="profileImage_avivCar" width="828" height="828"/>
         <image name="share" width="37" height="41"/>
     </resources>
 </document>

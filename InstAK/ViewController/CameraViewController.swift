@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseStorage
 import FirebaseFirestore
+import FirebaseAuth
 
 class CameraViewController: UIViewController {
 
@@ -116,7 +117,11 @@ class CameraViewController: UIViewController {
         if (!isCaptionTextViewEmpty()){
             caption = captionTextView.text!
         }
-        let post:Post = Post(captionText: caption, photoUrlString: photoUrl)
+        guard let currentUser = Auth.auth().currentUser else {
+            return
+        }
+        let currentUserId = currentUser.uid
+        let post:Post = Post(captionText: caption, photoUrlString: photoUrl, uid: currentUserId)
         newPostDocument.setData(try! DictionaryEncoder().encode(post)){ err in
            if let err = err {
             ProgressHUD.showError(err.localizedDescription)

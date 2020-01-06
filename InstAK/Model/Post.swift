@@ -12,9 +12,11 @@ class Post : Codable{
     
     var caption: String?
     var photoUrl: String?
+    var uid: String?
     
-    init(captionText: String, photoUrlString: String) {
-        caption = captionText
-        photoUrl = photoUrlString
+    init(captionText: String, photoUrlString: String, uid: String) {
+        self.caption = captionText
+        self.photoUrl = photoUrlString
+        self.uid = uid
     }
 }

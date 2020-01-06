@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class HomeTableViewCell: UITableViewCell {
 
@@ -33,19 +34,42 @@ class HomeTableViewCell: UITableViewCell {
         }
     }
     
+    var user: User? {
+          didSet{
+              setupUserInfo()
+          }
+      }
+      
+    
     func updateView() {
         captionLabel.text = post?.caption
-        profileImageView.image = UIImage(named: "profileImage_avivCar.jpg")
-        nameLabel.text = "Alon"
         if let photoUrlString = post?.photoUrl {
             let photoUrl = URL(string: photoUrlString)
             postImageView.kf.setImage(with: photoUrl)
         }
     }
     
+    func setupUserInfo() {
+        if let user = user{
+            self.nameLabel.text = user.username
+            if let profileImageUrlString = user.prifileImage {
+                let profileImageUrl = URL(string: profileImageUrlString)
+                self.profileImageView.kf.setImage(with: profileImageUrl, placeholder: UIImage(named: "placeholder-avatar-profile"), options: [.forceRefresh])
+            }else{
+                print("profileImageUrlString does not exist")
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        nameLabel.text = ""
+        captionLabel.text = ""
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        profileImageView.image = UIImage(named: "placeholder-avatar-profile")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
