@@ -18,6 +18,9 @@ class CommentViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var constraintToBottom: NSLayoutConstraint!
+    
+    
     let postId = "QOB9d5G3w1mqpQ22R1Uw"
     var comments = [Comment]()
     var users = [String : User]()
@@ -29,6 +32,13 @@ class CommentViewController: UIViewController {
         tableView.estimatedRowHeight = 77
         tableView.rowHeight = UITableView.automaticDimension
         self.tableView.dataSource = self
+        self.tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,6 +68,29 @@ class CommentViewController: UIViewController {
         }
         comments.removeAll()
     }
+    
+    @objc func hideKeyboard() {
+        view.endEditing(true)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        hideKeyboard()
+    }
+    @objc func keyboardWillShow(_ notification : NSNotification){
+        let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
+        UIView.animate(withDuration: 0.3) {
+            self.constraintToBottom.constant = -keyboardFrame!.height
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification : NSNotification){
+        UIView.animate(withDuration: 0.3) {
+            self.constraintToBottom.constant = 0
+            self.view.layoutIfNeeded()
+        }
+    }
+    
     
     @IBAction func textFieldDidChange() {
         guard let commentText = commentTextField.text, !commentText.isEmpty
@@ -141,6 +174,7 @@ class CommentViewController: UIViewController {
             return
            }
             self.empty()
+            self.hideKeyboard()
         }
     }
     
