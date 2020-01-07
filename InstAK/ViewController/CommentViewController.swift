@@ -67,33 +67,33 @@ class CommentViewController: UIViewController {
     // load all comments from DB in realtime
     func loadComments(){
         let db = Firestore.firestore()
-        
-        listener = db.collection("post-comments").document(postId).addSnapshotListener { (querySnapshot, error) in
-            if let error = error {
-                print("error geting document: \(error)")
+        listener = db.collection("post-comments").document(postId).collection("comments").addSnapshotListener { (querySnapshot, error) in
+            guard let snapshot = querySnapshot else{
+                print("Error fetching snapshots: \(error!)")
                 return
-            }else {
-                
-                let commentsPosts = querySnapshot!.data()!["comments"] as! [String]
-                for commentId in commentsPosts{
-                    let isExist = self.comments.contains { (comment) -> Bool in
-                        return comment.commnetId == commentId
+            }
+            snapshot.documentChanges.forEach { diff in
+                let comment: Comment = try! DictionaryDecoder().decode(Comment.self,from: diff.document.data())
+                if (diff.type == .added) {
+                    print("New comment: \(comment)")
+                    self.comments.append(comment)
+                }
+                if (diff.type == .modified) {
+                    print("Modified comment: \(comment)")
+                    self.comments.removeAll { (oldComment) -> Bool in
+                        return oldComment.commnetId == comment.commnetId
                     }
-                    if isExist {
-                        continue
-                    }
-                    db.collection("comments").document(commentId).getDocument { (documentSnapshot, err) in
-                        if let err = err {
-                            print("error geting document: \(err)")
-                            return
-                        }
-                        let comment: Comment = try! DictionaryDecoder().decode(Comment.self,from: documentSnapshot!.data()!)
-                        self.comments.append(comment)
-                        print(self.comments)
+                    self.comments.append(comment)
+                }
+                if (diff.type == .removed) {
+                    print("Removed comment: \(comment)")
+                    self.comments.removeAll { (oldComment) -> Bool in
+                        return oldComment.commnetId == comment.commnetId
                     }
                 }
-                print("success get post-comments")
             }
+            print(self.comments)
+            
         }
     }
     
@@ -103,28 +103,20 @@ class CommentViewController: UIViewController {
    // add comment to DB
     @IBAction func sendButton_TouchUpInside(_ sender: Any) {
         let db = Firestore.firestore()
-        let commentsCollection = db.collection("comments")
-        let newCommentDocument = commentsCollection.document()
-        let newCommentId = newCommentDocument.documentID
+        let commentsCollection = db.collection("post-comments").document(postId).collection("comments")
+        let commentsDocument = commentsCollection.document()
+        let newCommentId =  commentsDocument.documentID
 
         guard let currentUser = Auth.auth().currentUser else {
             return
         }
         let currentUserId = currentUser.uid
         let comment: Comment = Comment(commentText: commentTextField.text!, uid: currentUserId,commnetId: newCommentId)
-        newCommentDocument.setData(try! DictionaryEncoder().encode(comment)){ err in
+        commentsDocument.setData(try! DictionaryEncoder().encode(comment)){ err in
            if let err = err {
             ProgressHUD.showError(err.localizedDescription)
             return
            }
-            db.collection("post-comments").document(self.postId).updateData(["comments" : FieldValue.arrayUnion([newCommentId])]){
-                err in
-                if let err = err {
-                    print("error updating document: \(err)")
-                }else {
-                    print("success upload comment")
-                }
-            }
             self.empty()
         }
     }
