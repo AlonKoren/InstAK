@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import FirebaseFirestore
-import FirebaseAuth
+//import FirebaseFirestore
 
 class CommentViewController: UIViewController {
 
@@ -24,7 +23,7 @@ class CommentViewController: UIViewController {
     var postId : String!
     var comments = [Comment]()
     var users = [String : User]()
-    var listener : ListenerRegistration?
+//    var listener : ListenerRegistration?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,9 +63,9 @@ class CommentViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         print("CommentViewController viewDidDisappear")
-        if let listener = listener{
-            listener.remove()
-        }
+//        if let listener = listener{
+//            listener.remove()
+//        }
         comments.removeAll()
     }
     
@@ -106,76 +105,50 @@ class CommentViewController: UIViewController {
     
     // load all comments from DB in realtime
     func loadComments(){
-        let db = Firestore.firestore()
-        listener = db.collection("post-comments").document(postId).collection("comments").addSnapshotListener { (querySnapshot, error) in
-            guard let snapshot = querySnapshot else{
-                print("Error fetching snapshots: \(error!)")
-                return
+        
+        Api.Comment.observeComments(postId: postId, onAdded: { (addComment) in
+            self.comments.append(addComment)
+            
+            Api.User.observeUser(withId: addComment.uid! , onCompletion: { (user) in
+                self.users.updateValue(user, forKey: addComment.commnetId!)
+                self.tableView.reloadData()
+            }) { (error) in
+                print(error.localizedDescription)
             }
-            snapshot.documentChanges.forEach { diff in
-                let comment: Comment = try! DictionaryDecoder().decode(Comment.self,from: diff.document.data())
-                
-                    
-                if (diff.type == .added) {
-                    print("New comment: \(comment)")
-                    self.comments.append(comment)
-                    self.fetchUser(uid: comment.uid!){user in
-                        self.users.updateValue(user, forKey: comment.commnetId!)
-                        self.tableView.reloadData()
-                    }
-                }
-                if (diff.type == .modified) {
-                    print("Modified comment: \(comment)")
-                    self.comments.removeAll(where: { (oldComment) -> Bool in
-                        return oldComment.commnetId == comment.commnetId
-                    })
-                    self.comments.append(comment)
-                }
-                if (diff.type == .removed) {
-                    print("Removed comment: \(comment)")
-                    self.comments.removeAll(where: { (oldComment) -> Bool in
-                        return oldComment.commnetId == comment.commnetId
-                    })
-                    self.users.removeValue(forKey: comment.commnetId!)
-                }
-            }
-            print(self.comments)
+        }, onModified: { (modifiedComment) in
+            
+            self.comments.removeAll(where: { (oldComment) -> Bool in
+                return oldComment.commnetId == modifiedComment.commnetId
+            })
+            self.comments.append(modifiedComment)
+            
             self.tableView.reloadData()
+        }, onRemoved: { (removedComment) in
+            
+            self.comments.removeAll(where: { (oldComment) -> Bool in
+                return oldComment.commnetId == removedComment.commnetId
+            })
+            self.users.removeValue(forKey: removedComment.commnetId!)
+            
+            self.tableView.reloadData()
+        }) { (error) in
+            print(error.localizedDescription)
         }
     }
-    
-    func fetchUser(uid: String, completed: @escaping (User) -> Void) {
-        Firestore.firestore().collection("users").document(uid).getDocument { (document, error) in
-            if let userDocument = document, userDocument.exists{
-                let user: User = try! DictionaryDecoder().decode(User.self, from: userDocument.data()!)
-                completed(user)
-                }else{
-                print("document does not exist")
-            }
-        }
-    }
-    
-    
 
    // add comment to DB
     @IBAction func sendButton_TouchUpInside(_ sender: Any) {
-        let db = Firestore.firestore()
-        let commentsCollection = db.collection("post-comments").document(postId).collection("comments")
-        let commentsDocument = commentsCollection.document()
-        let newCommentId =  commentsDocument.documentID
-
-        guard let currentUser = Auth.auth().currentUser else {
-            return
-        }
-        let currentUserId = currentUser.uid
-        let comment: Comment = Comment(commentText: commentTextField.text!, uid: currentUserId,commnetId: newCommentId)
-        commentsDocument.setData(try! DictionaryEncoder().encode(comment)){ err in
-           if let err = err {
-            ProgressHUD.showError(err.localizedDescription)
-            return
-           }
+        
+        
+        guard let currentUserId = AuthService.getCurrentUserId() else {
+           return
+       }
+        
+        Api.Comment.addComment(postId: postId, commentText: commentTextField.text!, userId: currentUserId, onCompletion: { (comment) in
             self.empty()
             self.hideKeyboard()
+        }) { (error) in
+            ProgressHUD.showError(error.localizedDescription)
         }
     }
     

@@ -50,17 +50,32 @@ class AuthService  {
             }
         }
     
-static func setUserInformation(profileImageUrl: String, username: String, email:String,uid: String, onSuccess: @escaping () -> Void){
-    let db = Firestore.firestore()
-    let user: User = User(email: email, prifileImage: profileImageUrl, username: username, uid: uid)
-    db.collection("users").document(uid).setData(try! DictionaryEncoder().encode(user)) { err in
-        if let err = err {
-            print("Error writing document: \(err)")
-        } else {
-            print("Document successfully written!")
-            onSuccess()
-        }
+    static func signOut() throws -> Void{
+        try Auth.auth().signOut()
     }
+    
+    static func getCurrentUserId() -> String?{
+        return Auth.auth().currentUser?.uid
+    }
+    
+    static func isSignIn() -> Bool{
+        guard let _ = getCurrentUserId() else {
+            return false
+        }
+        return true
+    }
+    
+    static func setUserInformation(profileImageUrl: String, username: String, email:String,uid: String, onSuccess: @escaping () -> Void){
+        let db = Firestore.firestore()
+        let user: User = User(email: email, prifileImage: profileImageUrl, username: username, uid: uid)
+        db.collection("users").document(uid).setData(try! DictionaryEncoder().encode(user)) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+                onSuccess()
+            }
+        }
     }
 
 }

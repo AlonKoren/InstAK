@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseFirestore
 import Kingfisher
 
 
@@ -28,49 +26,39 @@ class HomeViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.dataSource = self
         loadPosts()
-//        var post = Post(captionText: "George", photoUrlString: "url1")
-//        print(post.caption)
-//        print(post.photoUrl)
     }
     
     func loadPosts() {
         activityIndicatorView.startAnimating()
-        Firestore.firestore().collection("posts").addSnapshotListener { (querySnapshot, error) in
-            guard let snapshot = querySnapshot else {
-                print(error!.localizedDescription)
-                return
+        
+        Api.Post.observePosts(onAdded: { (addedPost) in
+            Api.User.observeUser(withId: addedPost.uid!, onCompletion: { (user:User) in
+                self.posts.append(addedPost)
+                self.users.updateValue(user, forKey: addedPost.postId!)
+                print(self.posts)
+                self.activityIndicatorView.stopAnimating()
+                self.tableView.reloadData()
+            }) { (error) in
+                print(error.localizedDescription)
             }
-            for diff in snapshot.documentChanges{
-                let post:Post = try! DictionaryDecoder().decode(Post.self, from: diff.document.data())
-                if (diff.type == .added) {
-                    print("New Post : \(post)")
-                    
-                    self.fetchUser(uid: post.uid!, completed: {user in
-                        self.posts.append(post)
-                        self.users.updateValue(user, forKey: post.postId!)
-                        print(self.posts)
-                        self.activityIndicatorView.stopAnimating()
-                        self.tableView.reloadData()
-                    })
-                    
-                }
-                if (diff.type == .modified) {
-                    print("Modified Post : \(post)")
-                    self.posts.removeAll { (oldPost) -> Bool in
-                        return oldPost.postId == post.postId
-                    }
-                    self.posts.append(post)
-                }
-                if (diff.type == .removed) {
-                    print("Removed Post : \(post)")
-                    self.posts.removeAll { (oldPost) -> Bool in
-                        return oldPost.postId == post.postId
-                    }
-                    self.users.removeValue(forKey: post.postId!)
-                }
+        }, onModified: { (modifiedpost) in
+            
+            self.posts.removeAll { (oldPost) -> Bool in
+                return oldPost.postId == modifiedpost.postId
             }
+            self.posts.append(modifiedpost)
             print(self.posts)
             self.tableView.reloadData()
+        }, onRemoved: { (removedPost) in
+            
+            self.posts.removeAll { (oldPost) -> Bool in
+                return oldPost.postId == removedPost.postId
+            }
+            self.users.removeValue(forKey: removedPost.postId!)
+            print(self.posts)
+            self.tableView.reloadData()
+        }) { (error) in
+            print(error.localizedDescription)
         }
     }
     
@@ -78,21 +66,10 @@ class HomeViewController: UIViewController {
         self.performSegue(withIdentifier: "CommentSegue", sender: nil)
     }
     
-    func fetchUser(uid: String, completed: @escaping (User) -> Void) {
-        Firestore.firestore().collection("users").document(uid).getDocument { (document, error) in
-            if let userDocument = document, userDocument.exists{
-                let user: User = try! DictionaryDecoder().decode(User.self, from: userDocument.data()!)
-                
-                completed(user)
-                }else{
-                print("document does not exist")
-            }
-        }
-    }
     
     @IBAction func logout_TouchUpInside(_ sender: Any) {
         do{
-            try Auth.auth().signOut()
+            try AuthService.signOut()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let signInVC = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
             signInVC.modalPresentationStyle = .fullScreen
@@ -109,7 +86,6 @@ class HomeViewController: UIViewController {
             let postId = sender as! String
             commentViewController.postId = postId
             print("postId=\(postId)")
-            
         }
     }
     
