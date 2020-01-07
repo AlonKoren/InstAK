@@ -100,8 +100,19 @@ class HomeViewController: UIViewController {
         }catch let logoutError{
             print(logoutError)
         }
-        
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("segue.identifier =\(String(describing: segue.identifier))")
+        if segue.identifier == "CommentSegue"{
+            let commentViewController = segue.destination as! CommentViewController
+            let postId = sender as! String
+            commentViewController.postId = postId
+            print("postId=\(postId)")
+            
+        }
+    }
+    
 }
 
 extension HomeViewController: UITableViewDataSource {
@@ -116,6 +127,13 @@ extension HomeViewController: UITableViewDataSource {
         let user = users[post.postId!]
         cell.post = post
         cell.user = user
+        cell.delegate = self
         return cell
+    }
+}
+
+extension HomeViewController: HomeTableViewCellDelegate{
+    func goToCommentViewController(postId: String) {
+        self.performSegue(withIdentifier: "CommentSegue", sender: postId)
     }
 }

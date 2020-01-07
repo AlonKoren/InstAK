@@ -153,14 +153,14 @@
 		0A2D5CBC23B8E24F0026F64E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				0AAC99FD23A9125C00A60A90 /* SignUpViewController.swift */,
-				0AAC99FB23A9012200A60A90 /* SignInViewController.swift */,
-				0A013D6823AE8A2D00838A21 /* HomeViewController.swift */,
-				0A013D6A23AE8AA500838A21 /* DiscoverViewController.swift */,
-				0A013D6C23AE8AEA00838A21 /* CameraViewController.swift */,
 				0A013D6E23AE8B9B00838A21 /* ActivityViewController.swift */,
-				0A013D7023AE8BCA00838A21 /* ProfileViewController.swift */,
+				0A013D6C23AE8AEA00838A21 /* CameraViewController.swift */,
 				0A1E3EF923C3CFCA001B09B0 /* CommentViewController.swift */,
+				0A013D6A23AE8AA500838A21 /* DiscoverViewController.swift */,
+				0A013D6823AE8A2D00838A21 /* HomeViewController.swift */,
+				0A013D7023AE8BCA00838A21 /* ProfileViewController.swift */,
+				0AAC99FB23A9012200A60A90 /* SignInViewController.swift */,
+				0AAC99FD23A9125C00A60A90 /* SignUpViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";

@@ -9,6 +9,10 @@
 import UIKit
 import Kingfisher
 
+protocol HomeTableViewCellDelegate {
+    func goToCommentViewController(postId : String)
+}
+
 class HomeTableViewCell: UITableViewCell {
 
     
@@ -27,6 +31,8 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var likeCountButton: UIButton!
     
     @IBOutlet weak var captionLabel: UILabel!
+    
+    var delegate : HomeTableViewCellDelegate?
     
     var post: Post? {
         didSet{
@@ -66,6 +72,17 @@ class HomeTableViewCell: UITableViewCell {
         super.awakeFromNib()
         nameLabel.text = ""
         captionLabel.text = ""
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.commentImageView_TouchUpInside))
+        commentImageView.addGestureRecognizer(tapGesture)
+        commentImageView.isUserInteractionEnabled = true
+
+    }
+    
+    @objc func commentImageView_TouchUpInside(){
+        if let postId = post?.postId{
+            delegate?.goToCommentViewController(postId: postId)
+        }
     }
     
     override func prepareForReuse() {

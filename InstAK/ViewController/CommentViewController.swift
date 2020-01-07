@@ -21,7 +21,7 @@ class CommentViewController: UIViewController {
     @IBOutlet weak var constraintToBottom: NSLayoutConstraint!
     
     
-    let postId = "QOB9d5G3w1mqpQ22R1Uw"
+    var postId : String!
     var comments = [Comment]()
     var users = [String : User]()
     var listener : ListenerRegistration?
@@ -29,6 +29,7 @@ class CommentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("CommentViewController viewDidLoad")
+        title = "Comment"
         tableView.estimatedRowHeight = 77
         tableView.rowHeight = UITableView.automaticDimension
         self.tableView.dataSource = self
