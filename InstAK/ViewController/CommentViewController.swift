@@ -16,13 +16,19 @@ class CommentViewController: UIViewController {
     
     @IBOutlet weak var sendButton: UIButton!
     
-    let postId = "hzTqqO50h6BFae0hc8lm"
+    @IBOutlet weak var tableView: UITableView!
+    
+    let postId = "QOB9d5G3w1mqpQ22R1Uw"
     var comments = [Comment]()
+    var users = [String : User]()
     var listener : ListenerRegistration?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("CommentViewController viewDidLoad")
+        tableView.estimatedRowHeight = 77
+        tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,29 +80,46 @@ class CommentViewController: UIViewController {
             }
             snapshot.documentChanges.forEach { diff in
                 let comment: Comment = try! DictionaryDecoder().decode(Comment.self,from: diff.document.data())
+                
+                    
                 if (diff.type == .added) {
                     print("New comment: \(comment)")
                     self.comments.append(comment)
+                    self.fetchUser(uid: comment.uid!){user in
+                        self.users.updateValue(user, forKey: comment.commnetId!)
+                        self.tableView.reloadData()
+                    }
                 }
                 if (diff.type == .modified) {
                     print("Modified comment: \(comment)")
-                    self.comments.removeAll { (oldComment) -> Bool in
+                    self.comments.removeAll(where: { (oldComment) -> Bool in
                         return oldComment.commnetId == comment.commnetId
-                    }
+                    })
                     self.comments.append(comment)
                 }
                 if (diff.type == .removed) {
                     print("Removed comment: \(comment)")
-                    self.comments.removeAll { (oldComment) -> Bool in
+                    self.comments.removeAll(where: { (oldComment) -> Bool in
                         return oldComment.commnetId == comment.commnetId
-                    }
+                    })
+                    self.users.removeValue(forKey: comment.commnetId!)
                 }
             }
             print(self.comments)
-            
+            self.tableView.reloadData()
         }
     }
     
+    func fetchUser(uid: String, completed: @escaping (User) -> Void) {
+        Firestore.firestore().collection("users").document(uid).getDocument { (document, error) in
+            if let userDocument = document, userDocument.exists{
+                let user: User = try! DictionaryDecoder().decode(User.self, from: userDocument.data()!)
+                completed(user)
+                }else{
+                print("document does not exist")
+            }
+        }
+    }
     
     
 
@@ -127,3 +150,17 @@ class CommentViewController: UIViewController {
     }
 }
 
+extension CommentViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.comments.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentTableViewCell
+        let comment: Comment = self.comments[indexPath.row]
+        cell.comment = comment
+        cell.user = users[comment.commnetId!]
+        return cell
+    }
+}

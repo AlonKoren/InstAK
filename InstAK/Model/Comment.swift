@@ -8,7 +8,16 @@
 
 import Foundation
 
-class Comment : Codable{
+class Comment : Codable , Hashable{
+    static func == (lhs: Comment, rhs: Comment) -> Bool {
+        return (lhs.hashValue == rhs.hashValue)
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.commnetId)
+    }
+    
+    
     
     var commentText: String?
     var uid: String?

@@ -10,13 +10,16 @@ import Foundation
 
 class Post : Codable{
     
+
+    var postId: String?
     var caption: String?
     var photoUrl: String?
     var uid: String?
     
-    init(captionText: String, photoUrlString: String, uid: String) {
+    init(captionText: String, photoUrlString: String, uid: String,postId: String) {
         self.caption = captionText
         self.photoUrl = photoUrlString
         self.uid = uid
+        self.postId = postId
     }
 }

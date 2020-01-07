@@ -121,20 +121,13 @@ class CameraViewController: UIViewController {
             return
         }
         let currentUserId = currentUser.uid
-        let post:Post = Post(captionText: caption, photoUrlString: photoUrl, uid: currentUserId)
+        let post:Post = Post(captionText: caption, photoUrlString: photoUrl, uid: currentUserId,postId: newPostId)
         newPostDocument.setData(try! DictionaryEncoder().encode(post)){ err in
            if let err = err {
             ProgressHUD.showError(err.localizedDescription)
            } else {
-            db.collection("post-comments").document(newPostId).setData(["comments" : []])
-                { err in
-                   if let err = err {
-                    ProgressHUD.showError(err.localizedDescription)
-                   } else {
-                    ProgressHUD.showSuccess("Success")
-                    self.tabBarController?.selectedIndex = 0
-                   }
-                }
+            ProgressHUD.showSuccess("Success")
+            self.tabBarController?.selectedIndex = 0
            }
         }
     }

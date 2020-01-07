@@ -18,7 +18,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var posts = [Post]()
-    var users = [User]()
+    var users = [String: User]()
     
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
@@ -41,11 +41,13 @@ class HomeViewController: UIViewController {
                 return
             }
             for diff in snapshot.documentChanges{
+                let post:Post = try! DictionaryDecoder().decode(Post.self, from: diff.document.data())
                 if (diff.type == .added) {
-                    print("New Post : \(diff.document.data())")
-                    let post:Post = try! DictionaryDecoder().decode(Post.self, from: diff.document.data())
-                    self.fetchUser(uid: post.uid!, completed: {
+                    print("New Post : \(post)")
+                    
+                    self.fetchUser(uid: post.uid!, completed: {user in
                         self.posts.append(post)
+                        self.users.updateValue(user, forKey: post.postId!)
                         print(self.posts)
                         self.activityIndicatorView.stopAnimating()
                         self.tableView.reloadData()
@@ -53,26 +55,35 @@ class HomeViewController: UIViewController {
                     
                 }
                 if (diff.type == .modified) {
-                    print("Modified Post : \(diff.document.data())")
+                    print("Modified Post : \(post)")
+                    self.posts.removeAll { (oldPost) -> Bool in
+                        return oldPost.postId == post.postId
+                    }
+                    self.posts.append(post)
                 }
                 if (diff.type == .removed) {
-                    print("Removed Post : \(diff.document.data())")
+                    print("Removed Post : \(post)")
+                    self.posts.removeAll { (oldPost) -> Bool in
+                        return oldPost.postId == post.postId
+                    }
+                    self.users.removeValue(forKey: post.postId!)
                 }
             }
-            
+            print(self.posts)
+            self.tableView.reloadData()
         }
     }
     
     @IBAction func button_TouchUpInside(_ sender: Any) {
-        self.performSegue(withIdentifier: "commentSegue", sender: nil)
+        self.performSegue(withIdentifier: "CommentSegue", sender: nil)
     }
     
-    func fetchUser(uid: String, completed: @escaping () -> Void) {
+    func fetchUser(uid: String, completed: @escaping (User) -> Void) {
         Firestore.firestore().collection("users").document(uid).getDocument { (document, error) in
             if let userDocument = document, userDocument.exists{
                 let user: User = try! DictionaryDecoder().decode(User.self, from: userDocument.data()!)
-                self.users.append(user)
-                completed()
+                
+                completed(user)
                 }else{
                 print("document does not exist")
             }
@@ -102,7 +113,7 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! HomeTableViewCell
         let post = posts[indexPath.row]
-        let user = users[indexPath.row]
+        let user = users[post.postId!]
         cell.post = post
         cell.user = user
         return cell
