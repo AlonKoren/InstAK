@@ -112,7 +112,7 @@ class CameraViewController: UIViewController {
         let db = Firestore.firestore()
         let postsCollection = db.collection("posts")
         let newPostDocument = postsCollection.document()
-        //let newPostId = newPostDocument.documentID
+        let newPostId = newPostDocument.documentID
         var caption : String = ""
         if (!isCaptionTextViewEmpty()){
             caption = captionTextView.text!
@@ -126,9 +126,15 @@ class CameraViewController: UIViewController {
            if let err = err {
             ProgressHUD.showError(err.localizedDescription)
            } else {
-            ProgressHUD.showSuccess("Success")
-//            resetView()
-            self.tabBarController?.selectedIndex = 0
+            db.collection("post-comments").document(newPostId).setData(["comments" : []])
+                { err in
+                   if let err = err {
+                    ProgressHUD.showError(err.localizedDescription)
+                   } else {
+                    ProgressHUD.showSuccess("Success")
+                    self.tabBarController?.selectedIndex = 0
+                   }
+                }
            }
         }
     }
