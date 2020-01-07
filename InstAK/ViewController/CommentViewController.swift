@@ -18,16 +18,41 @@ class CommentViewController: UIViewController {
     
     let postId = "hzTqqO50h6BFae0hc8lm"
     var comments = [Comment]()
+    var listener : ListenerRegistration?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadComments()
+        print("CommentViewController viewDidLoad")
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("CommentViewController viewWillAppear")
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        print("CommentViewController viewDidAppear")
         empty()
-        
+        loadComments()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("CommentViewController viewWillDisappear")
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("CommentViewController viewDidDisappear")
+        if let listener = listener{
+            listener.remove()
+        }
+        comments.removeAll()
+    }
+    
     @IBAction func textFieldDidChange() {
         guard let commentText = commentTextField.text, !commentText.isEmpty
             else{
@@ -39,29 +64,31 @@ class CommentViewController: UIViewController {
         sendButton.isEnabled = true
     }
     
+    // load all comments from DB in realtime
     func loadComments(){
         let db = Firestore.firestore()
         
-        db.collection("post-comments").document(postId).addSnapshotListener { (querySnapshot, error) in
+        listener = db.collection("post-comments").document(postId).addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 print("error geting document: \(error)")
                 return
             }else {
                 
                 let commentsPosts = querySnapshot!.data()!["comments"] as! [String]
-                for commentPost in commentsPosts{
+                for commentId in commentsPosts{
                     let isExist = self.comments.contains { (comment) -> Bool in
-                        return comment.commnetId == commentPost
+                        return comment.commnetId == commentId
                     }
-                    if isExist{
+                    if isExist {
                         continue
                     }
-                    db.collection("comments").document(commentPost).getDocument { (documentSnapshot, err) in
+                    db.collection("comments").document(commentId).getDocument { (documentSnapshot, err) in
                         if let err = err {
                             print("error geting document: \(err)")
                             return
                         }
-                        self.comments.append(try! DictionaryDecoder().decode(Comment.self,from: documentSnapshot!.data()!))
+                        let comment: Comment = try! DictionaryDecoder().decode(Comment.self,from: documentSnapshot!.data()!)
+                        self.comments.append(comment)
                         print(self.comments)
                     }
                 }
@@ -71,12 +98,9 @@ class CommentViewController: UIViewController {
     }
     
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true
-    }
+    
 
-   
+   // add comment to DB
     @IBAction func sendButton_TouchUpInside(_ sender: Any) {
         let db = Firestore.firestore()
         let commentsCollection = db.collection("comments")
