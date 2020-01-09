@@ -12,8 +12,9 @@ import FirebaseFirestore
 class CommentApi {
     private var COLLECTION_POST_COMMENTS = Firestore.firestore().collection("post-comments")
   
-    func observeComments(postId:String, onAdded: @escaping (Comment)-> Void , onModified: @escaping (Comment)-> Void , onRemoved: @escaping (Comment)-> Void, onError : @escaping (Error)-> Void){
-            COLLECTION_POST_COMMENTS.document(postId).collection("comments")
+    func observeComments(postId:String, onAdded: @escaping (Comment)-> Void , onModified: @escaping (Comment)-> Void , onRemoved: @escaping (Comment)-> Void, onError : @escaping (Error)-> Void) ->Listener{
+        let listener:Listener = Listener()
+        listener.firestoreListener = COLLECTION_POST_COMMENTS.document(postId).collection("comments")
                 .addSnapshotListener { (querySnapshot, error) in
             guard let snapshot = querySnapshot else {
                 onError(error!)
@@ -35,6 +36,7 @@ class CommentApi {
                 }
             }
         }
+        return listener
     }
     
     func addComment(postId: String, commentText: String, userId: String , onCompletion: @escaping (Comment)-> Void, onError : @escaping (Error)-> Void){

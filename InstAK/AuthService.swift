@@ -8,8 +8,6 @@
 
 import Foundation
 import FirebaseAuth
-import FirebaseStorage
-import FirebaseFirestore
 
 class AuthService  {
     
@@ -30,25 +28,16 @@ class AuthService  {
                 return
             }
             let uid = authResult?.user.uid
-            let storageRef = Storage.storage().reference().child("profile_image").child(uid!)
-
-            let metadata = StorageMetadata()
-            metadata.contentType = "image/jpeg"
-                storageRef.putData(imageData, metadata: metadata) { (metadata, error) in
-                    if error != nil{
-                        return
-                    }
-                    storageRef.downloadURL(completion: { (url, error) in
-                        if error != nil {
-                            return
-                        }
-                        let profileImageUrl = url?.absoluteString
-                        
-                        self.setUserInformation(profileImageUrl: profileImageUrl!, username: username, email: email,uid: uid!, onSuccess: onSuccess)
-                    })
-                }
+            
+            StorageService.addProfileImage(uid: uid!, imageData : imageData, onSuccess: { (url : URL) in
+                let profileImageUrl = url.absoluteString
+                self.setUserInformation(profileImageUrl: profileImageUrl, username: username, email: email,uid: uid!, onSuccess: onSuccess)
+                
+            }) { (error) in
+                return
             }
         }
+    }
     
     static func signOut() throws -> Void{
         try Auth.auth().signOut()
@@ -66,15 +55,11 @@ class AuthService  {
     }
     
     static func setUserInformation(profileImageUrl: String, username: String, email:String,uid: String, onSuccess: @escaping () -> Void){
-        let db = Firestore.firestore()
-        let user: User = User(email: email, prifileImage: profileImageUrl, username: username, uid: uid)
-        db.collection("users").document(uid).setData(try! DictionaryEncoder().encode(user)) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-                onSuccess()
-            }
+        Api.User.addUserToDatabase(profileImageUrl: profileImageUrl, username: username, email: email, uid: uid, onSuccess: { (user : User) in
+            print("Document successfully written!")
+            onSuccess()
+        }) { (err) in
+            print("Error writing document: \(err)")
         }
     }
 

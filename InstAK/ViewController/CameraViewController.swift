@@ -7,9 +7,7 @@
 //
 
 import UIKit
-import FirebaseStorage
-import FirebaseFirestore
-import FirebaseAuth
+
 
 class CameraViewController: UIViewController {
 
@@ -87,49 +85,38 @@ class CameraViewController: UIViewController {
         view.endEditing(true)
         ProgressHUD.show("Waiting...", interaction: false)
         if let imageData = self.selectedImage!.jpegData(compressionQuality: 0.9) {
+            
             let photoIdString = NSUUID().uuidString
-            let storageRef = Storage.storage().reference().child("posts").child(photoIdString)
-            let metadata = StorageMetadata()
-            metadata.contentType = "image/jpeg"
-            storageRef.putData(imageData, metadata: metadata) { (metadata, error) in
-                if error != nil{
-                    ProgressHUD.showError(error!.localizedDescription)
-                    return
-                }
-                storageRef.downloadURL(completion: { (url, error) in
-                    if error != nil {
-                        ProgressHUD.showError(error!.localizedDescription)
-                        return
-                    }
-                    let photoUrl = url?.absoluteString
-                    self.sendDataToDatabase(photoUrl: photoUrl!)
-                })
+            StorageService.addPostImage(postId: photoIdString, imageData: imageData, onSuccess: { (url : URL) in
+                let photoUrl = url.absoluteString
+                self.sendDataToDatabase(photoUrl: photoUrl)
+                
+            }) { (error) in
+                ProgressHUD.showError(error.localizedDescription)
             }
         }
     }
     
     func sendDataToDatabase(photoUrl : String) {
-        let db = Firestore.firestore()
-        let postsCollection = db.collection("posts")
-        let newPostDocument = postsCollection.document()
-        let newPostId = newPostDocument.documentID
+        
+        
         var caption : String = ""
         if (!isCaptionTextViewEmpty()){
             caption = captionTextView.text!
         }
-        guard let currentUser = Auth.auth().currentUser else {
+
+        guard let currentUserId = AuthService.getCurrentUserId() else {
             return
         }
-        let currentUserId = currentUser.uid
-        let post:Post = Post(captionText: caption, photoUrlString: photoUrl, uid: currentUserId,postId: newPostId)
-        newPostDocument.setData(try! DictionaryEncoder().encode(post)){ err in
-           if let err = err {
-            ProgressHUD.showError(err.localizedDescription)
-           } else {
+        
+        
+        Api.Post.addPostToDatabase(caption: caption, photoUrl: photoUrl, uid: currentUserId, onCompletion: { (post : Post) in
             ProgressHUD.showSuccess("Success")
             self.tabBarController?.selectedIndex = 0
-           }
+        }) { (error) in
+            ProgressHUD.showError(error.localizedDescription)
         }
+
     }
 }
 extension CameraViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{

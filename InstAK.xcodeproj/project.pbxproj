@@ -41,6 +41,8 @@
 		0AB36EA623A284D200FE9CD5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AB36EA423A284D200FE9CD5 /* LaunchScreen.storyboard */; };
 		0AB36EB123A284D200FE9CD5 /* InstAKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB36EB023A284D200FE9CD5 /* InstAKTests.swift */; };
 		0AB36EBC23A284D200FE9CD5 /* InstAKUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB36EBB23A284D200FE9CD5 /* InstAKUITests.swift */; };
+		0AE2931623C79E7300803787 /* Listener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE2931523C79E7300803787 /* Listener.swift */; };
+		0AE2931823C7A61300803787 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE2931723C7A61300803787 /* StorageService.swift */; };
 		2B7E0EB90A506F2C83BC936B /* Pods_InstAKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BCF3AD1280E28BA8963CC9E /* Pods_InstAKTests.framework */; };
 		9C9C0BC70CD679B9BBD55E5C /* Pods_InstAK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F73B0B6C58F58C12002C89 /* Pods_InstAK.framework */; };
 		EE9BACB70FEF145FBC8A9D43 /* Pods_InstAK_InstAKUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 296F1532656435728A7D308D /* Pods_InstAK_InstAKUITests.framework */; };
@@ -106,6 +108,8 @@
 		0AB36EB723A284D200FE9CD5 /* InstAKUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstAKUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AB36EBB23A284D200FE9CD5 /* InstAKUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstAKUITests.swift; sourceTree = "<group>"; };
 		0AB36EBD23A284D200FE9CD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0AE2931523C79E7300803787 /* Listener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listener.swift; sourceTree = "<group>"; };
+		0AE2931723C7A61300803787 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		296F1532656435728A7D308D /* Pods_InstAK_InstAKUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstAK_InstAKUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		338B8FA7CA751A543C85690E /* Pods-InstAK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstAK.debug.xcconfig"; path = "Target Support Files/Pods-InstAK/Pods-InstAK.debug.xcconfig"; sourceTree = "<group>"; };
 		3D44D232229041E31569C386 /* Pods-InstAK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstAK.release.xcconfig"; path = "Target Support Files/Pods-InstAK/Pods-InstAK.release.xcconfig"; sourceTree = "<group>"; };
@@ -180,6 +184,7 @@
 				0A589F3923C2982B000D6C9F /* DictionaryCoder.swift */,
 				0A1E3EF723C39E71001B09B0 /* User.swift */,
 				0A1E3EFD23C3EE83001B09B0 /* Comment.swift */,
+				0AE2931523C79E7300803787 /* Listener.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -221,6 +226,7 @@
 				0A589F3623C266BD000D6C9F /* Model */,
 				0AB36E9923A284D000FE9CD5 /* AppDelegate.swift */,
 				0A5EB7A023BE63AE007A1BEF /* AuthService.swift */,
+				0AE2931723C7A61300803787 /* StorageService.swift */,
 				0A5EB7A223BE7F3B007A1BEF /* Config.swift */,
 				0AB36E9B23A284D000FE9CD5 /* SceneDelegate.swift */,
 				0A6B485C23C354E200FBC41F /* Views */,
@@ -576,6 +582,7 @@
 				0A04377423C519750099F3C7 /* CommentApi.swift in Sources */,
 				0A5EB7A323BE7F3B007A1BEF /* Config.swift in Sources */,
 				0A1E3EFA23C3CFCA001B09B0 /* CommentViewController.swift in Sources */,
+				0AE2931823C7A61300803787 /* StorageService.swift in Sources */,
 				0A04377223C518F20099F3C7 /* Api.swift in Sources */,
 				0A1E3EF823C39E71001B09B0 /* User.swift in Sources */,
 				0A013D6B23AE8AA500838A21 /* DiscoverViewController.swift in Sources */,
@@ -583,6 +590,7 @@
 				0A013D7123AE8BCA00838A21 /* ProfileViewController.swift in Sources */,
 				0A04376E23C511F70099F3C7 /* PostApi.swift in Sources */,
 				0A5EB7A123BE63AE007A1BEF /* AuthService.swift in Sources */,
+				0AE2931623C79E7300803787 /* Listener.swift in Sources */,
 				0AAC99FE23A9125D00A60A90 /* SignUpViewController.swift in Sources */,
 				0AAC99FC23A9012200A60A90 /* SignInViewController.swift in Sources */,
 			);

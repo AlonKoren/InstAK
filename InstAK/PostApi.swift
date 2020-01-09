@@ -36,19 +36,19 @@ class PostApi {
         }
     }
     
-//    func addPost(captionText: String, photoUrlString: String, userId: String , onCompletion: @escaping (Post)-> Void, onError : @escaping (Error)-> Void){
-//        let commentsCollection = COLLECTION_POST_COMMENTS.document(postId).collection("comments")
-//        let commentsDocument = commentsCollection.document()
-//        let newCommentId =  commentsDocument.documentID
-//        
-//        let comment: Comment = Comment(commentText: commentText, uid: userId,commnetId: newCommentId)
-//        
-//        commentsDocument.setData(try! DictionaryEncoder().encode(comment)){ err in
-//           if let err = err {
-//            onError(err)
-//            return
-//           }
-//            onCompletion(comment)
-//        }
-//    }
+    func addPostToDatabase(caption: String, photoUrl: String, uid: String , onCompletion: @escaping (Post)-> Void, onError : @escaping (Error)-> Void){
+        let postsCollection = COLLECTION_POSTS
+        let newPostDocument = postsCollection.document()
+        let newPostId =  newPostDocument.documentID
+        
+        let post:Post = Post(captionText: caption, photoUrlString: photoUrl, uid: uid, postId: newPostId)
+        
+        newPostDocument.setData(try! DictionaryEncoder().encode(post)){ err in
+           if let err = err {
+                onError(err)
+                return
+           }
+            onCompletion(post)
+        }
+    }
 }

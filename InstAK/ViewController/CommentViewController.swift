@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import FirebaseFirestore
 
 class CommentViewController: UIViewController {
 
@@ -23,7 +22,7 @@ class CommentViewController: UIViewController {
     var postId : String!
     var comments = [Comment]()
     var users = [String : User]()
-//    var listener : ListenerRegistration?
+    var listener : Listener?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,9 +62,7 @@ class CommentViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         print("CommentViewController viewDidDisappear")
-//        if let listener = listener{
-//            listener.remove()
-//        }
+        listener?.disconnected()
         comments.removeAll()
     }
     
@@ -106,7 +103,7 @@ class CommentViewController: UIViewController {
     // load all comments from DB in realtime
     func loadComments(){
         
-        Api.Comment.observeComments(postId: postId, onAdded: { (addComment) in
+        listener = Api.Comment.observeComments(postId: postId, onAdded: { (addComment) in
             self.comments.append(addComment)
             
             Api.User.observeUser(withId: addComment.uid! , onCompletion: { (user) in
