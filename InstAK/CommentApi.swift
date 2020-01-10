@@ -10,7 +10,7 @@ import Foundation
 import FirebaseFirestore
 
 class CommentApi {
-    private var COLLECTION_POST_COMMENTS = Firestore.firestore().collection("post-comments")
+    private var COLLECTION_POST_COMMENTS = Firestore.firestore().collection("posts") // "post-comments"
   
     func observeComments(postId:String, onAdded: @escaping (Comment)-> Void , onModified: @escaping (Comment)-> Void , onRemoved: @escaping (Comment)-> Void, onError : @escaping (Error)-> Void) ->Listener{
         let listener:Listener = Listener()

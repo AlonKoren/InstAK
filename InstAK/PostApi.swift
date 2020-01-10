@@ -10,7 +10,7 @@ import Foundation
 import FirebaseFirestore
 
 class PostApi {
-    private var COLLECTION_POSTS = Firestore.firestore().collection("posts")
+    var COLLECTION_POSTS = Firestore.firestore().collection("posts")
     
     func observePosts(onAdded: @escaping (Post)-> Void , onModified: @escaping (Post)-> Void , onRemoved: @escaping (Post)-> Void, onError : @escaping (Error)-> Void){
         COLLECTION_POSTS.addSnapshotListener { (querySnapshot, error) in
