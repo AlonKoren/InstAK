@@ -24,5 +24,11 @@ class Post : Codable{
         self.likeCount = 0
     }
     
-    
+    func setData(post: Post){
+        self.caption = post.caption
+        self.photoUrl = post.photoUrl
+        self.uid = post.uid
+        self.postId = post.postId
+        self.likeCount = post.likeCount
+    }
 }

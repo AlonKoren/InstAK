@@ -9,7 +9,6 @@
 import UIKit
 import Kingfisher
 
-import FirebaseFirestore
 
 protocol HomeTableViewCellDelegate {
     func goToCommentViewController(postId : String)
@@ -56,13 +55,14 @@ class HomeTableViewCell: UITableViewCell {
             postImageView.kf.setImage(with: photoUrl)
         }
         
-        if let postId = post?.postId, let userId = AuthService.getCurrentUserId(){
-            Api.Post.COLLECTION_POSTS.document(postId).collection("likes").document(userId).getDocument { (documentSnapshot, error) in
-                if let err = error {
-                    print("error: \(err)")
-                    return
-                }
-                let isLiked = documentSnapshot!.exists
+        
+        updateLike(post: post!)
+    }
+    
+    func updateLike(post : Post) {
+        
+        if let postId = post.postId, let userId = AuthService.getCurrentUserId(){
+            Api.Post.isLiked(postId: postId, userId: userId, onCompletion: { (isLiked : Bool) in
                 if isLiked{
                     self.likeImageView.image = #imageLiteral(resourceName: "likeSelected")
                     print("like")
@@ -70,10 +70,17 @@ class HomeTableViewCell: UITableViewCell {
                     self.likeImageView.image = #imageLiteral(resourceName: "like")
                     print("unlike")
                 }
+            }) { (err) in
+                print("error: \(err)")
             }
         }
-        
-        likeCountButton.titleLabel?.text = "\(post?.likeCount ?? 0) likes"
+        if let count = post.likeCount{
+            if count != 0{
+                likeCountButton.setTitle("\(count) likes!", for: UIControl.State.normal)
+            }else{
+                likeCountButton.setTitle("Be the first like this", for: UIControl.State.normal)
+            }
+        }
     }
     
     func setupUserInfo() {
@@ -82,7 +89,7 @@ class HomeTableViewCell: UITableViewCell {
             if let profileImageUrlString = user.prifileImage {
                 let profileImageUrl = URL(string: profileImageUrlString)
                 let placeholder = #imageLiteral(resourceName: "placeholder-avatar-profile")
-                self.profileImageView.kf.setImage(with: profileImageUrl, placeholder: placeholder, options: [.forceRefresh])
+                self.profileImageView.kf.setImage(with: profileImageUrl, placeholder: placeholder, options: [])
             }else{
                 print("profileImageUrlString does not exist")
             }
@@ -129,63 +136,22 @@ class HomeTableViewCell: UITableViewCell {
     
     
     func incrementLikes() {
-        let db = Firestore.firestore()
-
+        
         guard let postid = post?.postId, let userId = AuthService.getCurrentUserId() else{
             return
         }
-        let postReference = Api.Post.COLLECTION_POSTS.document(postid)
-        let likeUsereReference = postReference.collection("likes").document(userId)
-        db.runTransaction({ (transaction, errorPointer) -> Any? in
-            let postDocument , likeUserPostDocument : DocumentSnapshot
-            do {
-                try postDocument = transaction.getDocument(postReference)
-                try likeUserPostDocument = transaction.getDocument(likeUsereReference)
-            } catch let fetchError as NSError {
-                errorPointer?.pointee = fetchError
-                return nil
+        Api.Post.incrementLike(postId: postid, userId: userId, onCompletion: { (isLiked) in
+            if isLiked{
+                self.likeImageView.image = #imageLiteral(resourceName: "likeSelected")
+                print("like")
+            }else{
+                self.likeImageView.image = #imageLiteral(resourceName: "like")
+                print("unlike")
             }
-
-            guard var oldLikeCount = postDocument.data()?["likeCount"] as? Int else {
-                let error = NSError(
-                    domain: "AppErrorDomain",
-                    code: -1,
-                    userInfo: [
-                        NSLocalizedDescriptionKey: "Unable to retrieve likeCount from snapshot \(postDocument)"
-                    ]
-                )
-                errorPointer?.pointee = error
-                return nil
-            }
-            var isIncrement:Bool
-            if likeUserPostDocument.exists{ // unlike the post
-                oldLikeCount -= 1
-                transaction.deleteDocument(likeUsereReference)
-                isIncrement = false
-            } else {                        // like the post
-                oldLikeCount += 1
-                transaction.setData([userId:true], forDocument: likeUsereReference)
-                isIncrement = true
-            }
-
-            transaction.updateData(["likeCount": oldLikeCount], forDocument: postReference)
-            return isIncrement
-        }) { (object, error) in
-            if let error = error {
-                print("Transaction failed: \(error)")
-            } else {
-                print("Transaction successfully committed!")
-                let isLiked:Bool = object as! Bool
-                
-                if isLiked{
-                    self.likeImageView.image = #imageLiteral(resourceName: "likeSelected")
-                    print("like")
-                }else{
-                    self.likeImageView.image = #imageLiteral(resourceName: "like")
-                    print("unlike")
-                }
-            }
+        }) { (error) in
+            print("\(error.localizedDescription)")
         }
+
     }
 
 }

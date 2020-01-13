@@ -10,7 +10,7 @@ import Foundation
 import FirebaseFirestore
 
 class PostApi {
-    var COLLECTION_POSTS = Firestore.firestore().collection("posts")
+    private var COLLECTION_POSTS = Firestore.firestore().collection("posts")
     
     func observePosts(onAdded: @escaping (Post)-> Void , onModified: @escaping (Post)-> Void , onRemoved: @escaping (Post)-> Void, onError : @escaping (Error)-> Void){
         COLLECTION_POSTS.addSnapshotListener { (querySnapshot, error) in
@@ -49,6 +49,72 @@ class PostApi {
                 return
            }
             onCompletion(post)
+        }
+    }
+    
+    
+    func isLiked(postId : String, userId : String, onCompletion: @escaping (Bool)-> Void, onError : @escaping (Error)-> Void) {
+        Api.Post.COLLECTION_POSTS.document(postId).collection("likes")
+                    .document(userId).getDocument { (documentSnapshot, error) in
+            if let err = error {
+                onError(err)
+                return
+            }
+            let isLiked : Bool = documentSnapshot!.exists
+            onCompletion(isLiked)
+        }
+    }
+    
+    
+    func incrementLike(postId : String, userId : String, onCompletion: @escaping (Bool)-> Void, onError : @escaping (Error)-> Void){
+        
+        let db = Firestore.firestore()
+        let postReference = Api.Post.COLLECTION_POSTS.document(postId)
+        let likeUsereReference = postReference.collection("likes").document(userId)
+        db.runTransaction({ (transaction, errorPointer) -> Any? in
+            let postDocument , likeUserPostDocument : DocumentSnapshot
+            do {
+                try postDocument = transaction.getDocument(postReference)
+                try likeUserPostDocument = transaction.getDocument(likeUsereReference)
+            } catch let fetchError as NSError {
+                errorPointer?.pointee = fetchError
+                return nil
+            }
+
+            guard var oldLikeCount = postDocument.data()?["likeCount"] as? Int else {
+                let error = NSError(
+                    domain: "AppErrorDomain",
+                    code: -1,
+                    userInfo: [
+                        NSLocalizedDescriptionKey: "Unable to retrieve likeCount from snapshot \(postDocument)"
+                    ]
+                )
+                errorPointer?.pointee = error
+                return nil
+            }
+            var isIncrement:Bool
+            if likeUserPostDocument.exists{ // unlike the post
+                oldLikeCount -= 1
+                transaction.deleteDocument(likeUsereReference)
+                isIncrement = false
+            } else {                        // like the post
+                oldLikeCount += 1
+                transaction.setData([userId:true], forDocument: likeUsereReference)
+                isIncrement = true
+            }
+
+            transaction.updateData(["likeCount": oldLikeCount], forDocument: postReference)
+            return (isIncrement)
+        }) { (object, error) in
+            if let error = error {
+                print("Transaction failed: \(error)")
+                onError(error)
+            } else {
+                print("Transaction successfully committed!")
+                
+                let isLiked:Bool = object! as! Bool
+                onCompletion(isLiked)
+            }
         }
     }
 }

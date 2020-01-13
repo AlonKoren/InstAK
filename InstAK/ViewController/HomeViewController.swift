@@ -42,10 +42,11 @@ class HomeViewController: UIViewController {
             }
         }, onModified: { (modifiedpost) in
             
-            self.posts.removeAll { (oldPost) -> Bool in
-                return oldPost.postId == modifiedpost.postId
+            self.posts.forEach { (oldPost) in
+                if oldPost.postId == modifiedpost.postId {
+                    oldPost.setData(post: modifiedpost)
+                }
             }
-            self.posts.append(modifiedpost)
             print(self.posts)
             self.tableView.reloadData()
         }, onRemoved: { (removedPost) in

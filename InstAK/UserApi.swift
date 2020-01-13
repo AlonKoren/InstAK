@@ -10,7 +10,7 @@ import Foundation
 import FirebaseFirestore
 
 class UserApi {
-    var COLLECTION_USERS = Firestore.firestore().collection("users")
+    private var COLLECTION_USERS = Firestore.firestore().collection("users")
     
     func observeUser(withId uid: String ,onCompletion: @escaping (User)-> Void , onError : @escaping (Error)-> Void){
         COLLECTION_USERS.document(uid).getDocument { (document, error) in
