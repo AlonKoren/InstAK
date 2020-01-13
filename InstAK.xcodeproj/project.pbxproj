@@ -43,6 +43,7 @@
 		0AB36EBC23A284D200FE9CD5 /* InstAKUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB36EBB23A284D200FE9CD5 /* InstAKUITests.swift */; };
 		0AE2931623C79E7300803787 /* Listener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE2931523C79E7300803787 /* Listener.swift */; };
 		0AE2931823C7A61300803787 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE2931723C7A61300803787 /* StorageService.swift */; };
+		0AF790BF23CCE77A0062CA22 /* HeaderProfileCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF790BE23CCE77A0062CA22 /* HeaderProfileCollectionReusableView.swift */; };
 		2B7E0EB90A506F2C83BC936B /* Pods_InstAKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BCF3AD1280E28BA8963CC9E /* Pods_InstAKTests.framework */; };
 		9C9C0BC70CD679B9BBD55E5C /* Pods_InstAK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F73B0B6C58F58C12002C89 /* Pods_InstAK.framework */; };
 		EE9BACB70FEF145FBC8A9D43 /* Pods_InstAK_InstAKUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 296F1532656435728A7D308D /* Pods_InstAK_InstAKUITests.framework */; };
@@ -110,6 +111,7 @@
 		0AB36EBD23A284D200FE9CD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AE2931523C79E7300803787 /* Listener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listener.swift; sourceTree = "<group>"; };
 		0AE2931723C7A61300803787 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		0AF790BE23CCE77A0062CA22 /* HeaderProfileCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProfileCollectionReusableView.swift; sourceTree = "<group>"; };
 		296F1532656435728A7D308D /* Pods_InstAK_InstAKUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstAK_InstAKUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		338B8FA7CA751A543C85690E /* Pods-InstAK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstAK.debug.xcconfig"; path = "Target Support Files/Pods-InstAK/Pods-InstAK.debug.xcconfig"; sourceTree = "<group>"; };
 		3D44D232229041E31569C386 /* Pods-InstAK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstAK.release.xcconfig"; path = "Target Support Files/Pods-InstAK/Pods-InstAK.release.xcconfig"; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			children = (
 				0A6B485A23C354BE00FBC41F /* HomeTableViewCell.swift */,
 				0A1E3EFB23C3D001001B09B0 /* CommentTableViewCell.swift */,
+				0AF790BE23CCE77A0062CA22 /* HeaderProfileCollectionReusableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -589,6 +592,7 @@
 				0A013D6D23AE8AEA00838A21 /* CameraViewController.swift in Sources */,
 				0A013D7123AE8BCA00838A21 /* ProfileViewController.swift in Sources */,
 				0A04376E23C511F70099F3C7 /* PostApi.swift in Sources */,
+				0AF790BF23CCE77A0062CA22 /* HeaderProfileCollectionReusableView.swift in Sources */,
 				0A5EB7A123BE63AE007A1BEF /* AuthService.swift in Sources */,
 				0AE2931623C79E7300803787 /* Listener.swift in Sources */,
 				0AAC99FE23A9125D00A60A90 /* SignUpViewController.swift in Sources */,
