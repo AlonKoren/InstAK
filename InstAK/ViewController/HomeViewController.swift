@@ -68,14 +68,14 @@ class HomeViewController: UIViewController {
     
     
     @IBAction func logout_TouchUpInside(_ sender: Any) {
-        do{
-            try AuthService.signOut()
+        AuthService.signOut(onSuccess: {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let signInVC = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
             signInVC.modalPresentationStyle = .fullScreen
             self.present(signInVC, animated: true, completion: nil)
-        }catch let logoutError{
-            print(logoutError)
+        }) { (error) in
+            ProgressHUD.showError(error.localizedDescription)
+            print(error)
         }
     }
     

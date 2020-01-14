@@ -149,7 +149,7 @@ class HomeTableViewCell: UITableViewCell {
                 print("unlike")
             }
         }) { (error) in
-            print("\(error.localizedDescription)")
+            ProgressHUD.showError(error.localizedDescription)
         }
 
     }

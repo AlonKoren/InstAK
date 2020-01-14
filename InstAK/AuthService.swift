@@ -39,8 +39,13 @@ class AuthService  {
         }
     }
     
-    static func signOut() throws -> Void{
-        try Auth.auth().signOut()
+    static func signOut(onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void){
+        do{
+            try Auth.auth().signOut()
+            onSuccess()
+        }catch let logoutError{
+            onError(logoutError)
+        }
     }
     
     static func getCurrentUserId() -> String?{
