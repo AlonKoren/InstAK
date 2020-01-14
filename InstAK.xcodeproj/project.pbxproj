@@ -44,6 +44,7 @@
 		0AB36EA623A284D200FE9CD5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AB36EA423A284D200FE9CD5 /* LaunchScreen.storyboard */; };
 		0AB36EB123A284D200FE9CD5 /* InstAKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB36EB023A284D200FE9CD5 /* InstAKTests.swift */; };
 		0AB36EBC23A284D200FE9CD5 /* InstAKUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB36EBB23A284D200FE9CD5 /* InstAKUITests.swift */; };
+		0AE13C8523CE588100D53554 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE13C8423CE588100D53554 /* SearchViewController.swift */; };
 		0AE2931623C79E7300803787 /* Listener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE2931523C79E7300803787 /* Listener.swift */; };
 		0AE2931823C7A61300803787 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE2931723C7A61300803787 /* StorageService.swift */; };
 		0AE6E3D523CE008A00D7FECD /* FollowApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6E3D423CE008A00D7FECD /* FollowApi.swift */; };
@@ -118,6 +119,7 @@
 		0AB36EB723A284D200FE9CD5 /* InstAKUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstAKUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AB36EBB23A284D200FE9CD5 /* InstAKUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstAKUITests.swift; sourceTree = "<group>"; };
 		0AB36EBD23A284D200FE9CD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0AE13C8423CE588100D53554 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		0AE2931523C79E7300803787 /* Listener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listener.swift; sourceTree = "<group>"; };
 		0AE2931723C7A61300803787 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		0AE6E3D423CE008A00D7FECD /* FollowApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowApi.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				0AAC99FB23A9012200A60A90 /* SignInViewController.swift */,
 				0AAC99FD23A9125C00A60A90 /* SignUpViewController.swift */,
 				0A08696D23CDF24E005FA46E /* PeopleViewController.swift */,
+				0AE13C8423CE588100D53554 /* SearchViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				0A589F3823C26709000D6C9F /* Post.swift in Sources */,
 				0A013D6F23AE8B9B00838A21 /* ActivityViewController.swift in Sources */,
 				0A1E3EFC23C3D001001B09B0 /* CommentTableViewCell.swift in Sources */,
+				0AE13C8523CE588100D53554 /* SearchViewController.swift in Sources */,
 				0A1E3EFE23C3EE83001B09B0 /* Comment.swift in Sources */,
 				0A589F3A23C2982B000D6C9F /* DictionaryCoder.swift in Sources */,
 				0A04377423C519750099F3C7 /* CommentApi.swift in Sources */,

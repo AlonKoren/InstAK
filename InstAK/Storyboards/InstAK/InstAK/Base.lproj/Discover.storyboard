@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,11 +17,109 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Byt-KG-9AC"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Discover" id="EuK-wG-5mL"/>
+                    <navigationItem key="navigationItem" title="Discover" id="EuK-wG-5mL">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="zmm-UG-UyZ">
+                            <connections>
+                                <segue destination="zGz-ns-J2V" kind="show" id="QJT-pP-vZv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C0D-Re-1ww" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2194" y="704"/>
+        </scene>
+        <!--Search View Controller-->
+        <scene sceneID="1eW-Yf-qZT">
+            <objects>
+                <viewController id="zGz-ns-J2V" customClass="SearchViewController" customModule="InstAK" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZT1-7O-muN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="A1O-jE-Hlc">
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PeopleTableViewCell" rowHeight="80" id="745-XH-QR9" customClass="PeopleTableViewCell" customModule="InstAK" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="745-XH-QR9" id="aGN-t0-9EQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N35-Dj-o06">
+                                                    <rect key="frame" x="15" y="10" width="60" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="60" id="NLC-Yb-OCS"/>
+                                                        <constraint firstAttribute="width" constant="60" id="d3W-iy-IiU"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="30"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F6c-Hp-oct">
+                                                    <rect key="frame" x="90" y="31" width="39" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LKs-Dh-J4q">
+                                                    <rect key="frame" x="299" y="25.666666666666671" width="100" height="29"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="bhN-Cf-bt3"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                    <state key="normal" title="Follow">
+                                                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                            <integer key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="F6c-Hp-oct" firstAttribute="leading" secondItem="N35-Dj-o06" secondAttribute="trailing" constant="15" id="7H7-6U-6hJ"/>
+                                                <constraint firstItem="N35-Dj-o06" firstAttribute="leading" secondItem="aGN-t0-9EQ" secondAttribute="leading" constant="15" id="960-bL-9Ti"/>
+                                                <constraint firstAttribute="trailing" secondItem="LKs-Dh-J4q" secondAttribute="trailing" constant="15" id="MZe-hK-j7Q"/>
+                                                <constraint firstItem="LKs-Dh-J4q" firstAttribute="centerY" secondItem="N35-Dj-o06" secondAttribute="centerY" id="RYb-cQ-6wo"/>
+                                                <constraint firstItem="F6c-Hp-oct" firstAttribute="centerY" secondItem="N35-Dj-o06" secondAttribute="centerY" id="aZG-TS-5hh"/>
+                                                <constraint firstItem="LKs-Dh-J4q" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="F6c-Hp-oct" secondAttribute="trailing" constant="8" symbolic="YES" id="ccM-tN-RJQ"/>
+                                                <constraint firstItem="N35-Dj-o06" firstAttribute="top" secondItem="aGN-t0-9EQ" secondAttribute="top" constant="10" id="dSF-1D-6HY"/>
+                                                <constraint firstAttribute="bottom" secondItem="N35-Dj-o06" secondAttribute="bottom" constant="10" id="onp-qw-C6p"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="followButton" destination="LKs-Dh-J4q" id="56T-O3-u9h"/>
+                                            <outlet property="nameLabel" destination="F6c-Hp-oct" id="vci-A9-Ty1"/>
+                                            <outlet property="profileImage" destination="N35-Dj-o06" id="VWY-U2-ssU"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="A1O-jE-Hlc" secondAttribute="bottom" id="dQC-FH-1FO"/>
+                            <constraint firstItem="A1O-jE-Hlc" firstAttribute="top" secondItem="ZT1-7O-muN" secondAttribute="top" constant="20" symbolic="YES" id="hbh-1g-Ok2"/>
+                            <constraint firstItem="A1O-jE-Hlc" firstAttribute="leading" secondItem="8HU-QK-Dtf" secondAttribute="leading" id="v4F-Jf-d1D"/>
+                            <constraint firstItem="A1O-jE-Hlc" firstAttribute="trailing" secondItem="8HU-QK-Dtf" secondAttribute="trailing" id="zfy-he-IDG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8HU-QK-Dtf"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="xmJ-fZ-yde"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dl2-EZ-a61" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1442.0289855072465" y="706.79347826086962"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="okf-nw-o2U">
