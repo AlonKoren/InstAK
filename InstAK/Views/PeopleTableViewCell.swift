@@ -52,11 +52,14 @@ class PeopleTableViewCell: UITableViewCell {
     func updateFollowView(){
         
         self.followButton.layer.borderColor = #colorLiteral(red: 0.8862745098, green: 0.8941176471, blue: 0.9098039216, alpha: 1)
+        
         if isFollowing!.getBool(){
-            configureUnFollowButton()
+            self.configureUnFollowButton()
         }else{
-            configureFollowButton()
+            self.configureFollowButton()
         }
+        
+        
     }
     
     func configureFollowButton(){
@@ -88,13 +91,14 @@ class PeopleTableViewCell: UITableViewCell {
         if !AuthService.isSignIn(){
             return
         }
-        
-        Api.Follow.followAction(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid!, onCompletion: {
-            self.isFollowing!.setBool(bool: true)
-            print("success follow")
-            self.configureUnFollowButton()
-        }) { (error) in
-            ProgressHUD.showError(error.localizedDescription)
+        if self.isFollowing!.getBool() == false{
+            Api.Follow.followAction(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid!, onCompletion: {
+                self.isFollowing!.setBool(bool: true)
+                print("success follow")
+                self.configureUnFollowButton()
+            }) { (error) in
+                ProgressHUD.showError(error.localizedDescription)
+            }
         }
     }
     
@@ -102,13 +106,14 @@ class PeopleTableViewCell: UITableViewCell {
         if !AuthService.isSignIn(){
             return
         }
-        
-        Api.Follow.unFollowAction(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid!, onCompletion: {
-            self.isFollowing!.setBool(bool: false)
-            print("success unfollow")
-            self.configureFollowButton()
-        }) { (error) in
-            ProgressHUD.showError(error.localizedDescription)
+        if self.isFollowing!.getBool() == true{
+            Api.Follow.unFollowAction(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid!, onCompletion: {
+                self.isFollowing!.setBool(bool: false)
+                print("success unfollow")
+                self.configureFollowButton()
+            }) { (error) in
+                ProgressHUD.showError(error.localizedDescription)
+            }
         }
     }
     

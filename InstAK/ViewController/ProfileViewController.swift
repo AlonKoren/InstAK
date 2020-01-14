@@ -42,7 +42,7 @@ class ProfileViewController: UIViewController {
         }
         Api.User.observeUser(withId: currentUserId, onCompletion: { (user:User) in
             self.user = user
-            self.title = user.username
+            self.navigationItem.title = user.username
             self.collectionView.reloadData()
         }) { (err) in
             print(err)
