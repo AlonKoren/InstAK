@@ -26,16 +26,7 @@ class PeopleTableViewCell: UITableViewCell {
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    
     
     func updateView(){
         self.nameLabel.text = user!.username
@@ -46,6 +37,60 @@ class PeopleTableViewCell: UITableViewCell {
         }else{
             print("profileImageUrlString does not exist")
         }
+        
+        
+        followButton.addTarget(self, action: #selector(self.followAction), for: .touchUpInside)
+        followButton.addTarget(self, action: #selector(self.unfollowAction), for: .touchUpInside)
+    }
+    
+    
+    @objc func followAction(){
+        
+        if !AuthService.isSignIn(){
+            return
+        }
+        
+        Api.Follow.followerAfterUser(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid!, onCompletion: {
+            
+        }) { (error) in
+            ProgressHUD.showError(error.localizedDescription)
+        }
+        Api.Follow.followingAfterUser(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid!, onCompletion: {
+            
+        }) { (error) in
+            ProgressHUD.showError(error.localizedDescription)
+        }
+    }
+    
+    @objc func unfollowAction(){
+        if !AuthService.isSignIn(){
+            return
+        }
+        
+        Api.Follow.unfollowerAfterUser(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid!, onCompletion: {
+            
+        }) { (error) in
+            ProgressHUD.showError(error.localizedDescription)
+        }
+        Api.Follow.unfollowingAfterUser(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid!, onCompletion: {
+            
+        }) { (error) in
+            ProgressHUD.showError(error.localizedDescription)
+        }
+        
+    }
+    
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
     }
 
 }

@@ -9,8 +9,9 @@
 import Foundation
 
 struct Api{
-    static var User = UserApi()
-    static var Post = PostApi()
-    static var Comment = CommentApi()
-    static var MyPosts = MyPostsApi()
+    static let User = UserApi()
+    static let Post = PostApi()
+    static let Comment = CommentApi()
+    static let MyPosts = MyPostsApi()
+    static let Follow = FollowApi()
 }

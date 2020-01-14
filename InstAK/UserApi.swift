@@ -89,59 +89,7 @@ class UserApi {
     }
     
     
-    // followerUserId want to follow after followingUserId
-    func followingAfterUser(followerUserId: String, followingUserId: String, onCompletion: @escaping () -> Void, onError : @escaping (Error)-> Void) {
-        let followingsCollection = COLLECTION_USERS.document(followerUserId).collection("followings")
-        followingsCollection.document(followingUserId).setData([followingUserId : true]){
-           (error : Error?) in
-            if let err = error{
-                onError(err)
-                return
-            }
-            
-            onCompletion()
-        }
-    }
     
-    // followingUserId want to follow by followerUserId
-    func followerAfterUser(followerUserId: String, followingUserId: String, onCompletion: @escaping () -> Void, onError : @escaping (Error)-> Void) {
-        let followersCollection = COLLECTION_USERS.document(followingUserId).collection("followers")
-        followersCollection.document(followerUserId).setData([followerUserId : true]){
-           (error : Error?) in
-            if let err = error{
-                onError(err)
-                return
-            }
-            onCompletion()
-        }
-    }
-    
-    // followerUserId don't want to follow after followingUserId
-    func unfollowingAfterUser(followerUserId: String, followingUserId: String, onCompletion: @escaping () -> Void, onError : @escaping (Error)-> Void) {
-        let followingsCollection = COLLECTION_USERS.document(followerUserId).collection("followings")
-        followingsCollection.document(followingUserId).delete(){
-           (error : Error?) in
-            if let err = error{
-                onError(err)
-                return
-            }
-            
-            onCompletion()
-        }
-    }
-    
-    // followingUserId don't want to follow by followerUserId
-    func unfollowerAfterUser(followerUserId: String, followingUserId: String, onCompletion: @escaping () -> Void, onError : @escaping (Error)-> Void) {
-        let followersCollection = COLLECTION_USERS.document(followingUserId).collection("followers")
-        followersCollection.document(followerUserId).delete(){
-           (error : Error?) in
-            if let err = error{
-                onError(err)
-                return
-            }
-            onCompletion()
-        }
-    }
     
 
     
