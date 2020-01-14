@@ -21,4 +21,11 @@ class User : Codable{
         self.username = username
         self.uid = uid
     }
+    
+    func setData(user: User){
+        self.email = user.email
+        self.prifileImage = user.prifileImage
+        self.username = user.username
+        self.uid = user.uid
+    }
 }
