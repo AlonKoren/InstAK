@@ -111,8 +111,13 @@ class CameraViewController: UIViewController {
         
         
         Api.Post.addPostToDatabase(caption: caption, photoUrl: photoUrl, uid: currentUserId, onCompletion: { (post : Post) in
-            ProgressHUD.showSuccess("Success")
-            self.tabBarController?.selectedIndex = 0
+            Api.MyPosts.connectUserToPost(userId: currentUserId, postId: post.postId!, onCompletion: { () in
+                ProgressHUD.showSuccess("Success")
+                self.tabBarController?.selectedIndex = 0
+            }) { (err) in
+                ProgressHUD.showError(err.localizedDescription)
+            }
+            
         }) { (error) in
             ProgressHUD.showError(error.localizedDescription)
         }

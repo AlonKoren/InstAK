@@ -12,8 +12,10 @@ import FirebaseFirestore
 class PostApi {
     private var COLLECTION_POSTS = Firestore.firestore().collection("posts")
     
-    func observePosts(onAdded: @escaping (Post)-> Void , onModified: @escaping (Post)-> Void , onRemoved: @escaping (Post)-> Void, onError : @escaping (Error)-> Void){
-        COLLECTION_POSTS.addSnapshotListener { (querySnapshot, error) in
+    func observePosts(onAdded: @escaping (Post)-> Void , onModified: @escaping (Post)-> Void , onRemoved: @escaping (Post)-> Void, onError : @escaping (Error)-> Void) ->Listener{
+        
+        let listener:Listener = Listener()
+        listener.firestoreListener = COLLECTION_POSTS.addSnapshotListener { (querySnapshot, error) in
             guard let snapshot = querySnapshot else {
                 onError(error!)
                 return
@@ -34,6 +36,7 @@ class PostApi {
                 }
             }
         }
+        return listener
     }
     
     func addPostToDatabase(caption: String, photoUrl: String, uid: String , onCompletion: @escaping (Post)-> Void, onError : @escaping (Error)-> Void){
@@ -117,4 +120,32 @@ class PostApi {
             }
         }
     }
+    
+    func observeSpecificPosts(postsIds : [String] ,onAdded: @escaping (Post)-> Void , onModified: @escaping (Post)-> Void , onRemoved: @escaping (Post)-> Void, onError : @escaping (Error)-> Void) ->Listener{
+        
+        let listener:Listener = Listener()
+        listener.firestoreListener = COLLECTION_POSTS.whereField("postId", in: postsIds).addSnapshotListener { (querySnapshot, error) in
+            guard let snapshot = querySnapshot else {
+                onError(error!)
+                return
+            }
+            for diff in snapshot.documentChanges{
+                let post:Post = try! DictionaryDecoder().decode(Post.self, from: diff.document.data())
+                if (diff.type == .added) {
+                    print("New Post : \(post)")
+                    onAdded(post)
+                }
+                if (diff.type == .modified) {
+                    print("Modified Post : \(post)")
+                    onModified(post)
+                }
+                if (diff.type == .removed) {
+                    print("Removed Post : \(post)")
+                    onRemoved(post)
+                }
+            }
+        }
+        return listener
+    }
+    
 }

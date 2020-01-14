@@ -30,7 +30,7 @@ class HomeViewController: UIViewController {
     func loadPosts() {
         activityIndicatorView.startAnimating()
         
-        Api.Post.observePosts(onAdded: { (addedPost) in
+        _ = Api.Post.observePosts(onAdded: { (addedPost) in
             Api.User.observeUser(withId: addedPost.uid!, onCompletion: { (user:User) in
                 self.posts.append(addedPost)
                 self.users.updateValue(user, forKey: addedPost.postId!)
