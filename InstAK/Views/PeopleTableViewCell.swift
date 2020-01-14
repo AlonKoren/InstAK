@@ -93,6 +93,13 @@ class PeopleTableViewCell: UITableViewCell {
         }
         if self.isFollowing!.getBool() == false{
             Api.Follow.followAction(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid!, onCompletion: {
+                Api.MyPosts.getUserPosts(userId: self.user!.uid!, onCompletion: { (postsIds) in
+                    
+                    Api.Feed.addPostsToFeed(userId: AuthService.getCurrentUserId()!, postsIds: postsIds)
+                    
+                }) { (error) in
+                    ProgressHUD.showError(error.localizedDescription)
+                }
                 self.isFollowing!.setBool(bool: true)
                 print("success follow")
                 self.configureUnFollowButton()
@@ -108,6 +115,12 @@ class PeopleTableViewCell: UITableViewCell {
         }
         if self.isFollowing!.getBool() == true{
             Api.Follow.unFollowAction(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid!, onCompletion: {
+                Api.MyPosts.getUserPosts(userId: self.user!.uid!, onCompletion: { (postsIds) in
+                    Api.Feed.removePostsToFeed(userId: AuthService.getCurrentUserId()!, postsIds: postsIds)
+                }) { (error) in
+                    ProgressHUD.showError(error.localizedDescription)
+                }
+                
                 self.isFollowing!.setBool(bool: false)
                 print("success unfollow")
                 self.configureFollowButton()

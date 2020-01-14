@@ -112,8 +112,23 @@ class CameraViewController: UIViewController {
         
         Api.Post.addPostToDatabase(caption: caption, photoUrl: photoUrl, uid: currentUserId, onCompletion: { (post : Post) in
             Api.MyPosts.connectUserToPost(userId: currentUserId, postId: post.postId!, onCompletion: { () in
-                ProgressHUD.showSuccess("Success")
-                self.tabBarController?.selectedIndex = 0
+
+                Api.Feed.addPostToFeed(userId: currentUserId, postId: post.postId!)
+                
+                
+                Api.Follow.getAllFollowers(followingUserId: currentUserId, onCompletion: { (usersIds) in
+                    
+                    usersIds.forEach { (userId) in
+                        Api.Feed.addPostToFeed(userId: userId, postId: post.postId!)
+                    }
+                    
+                    ProgressHUD.showSuccess("Success")
+                    self.tabBarController?.selectedIndex = 0
+                }) { (e) in
+                    ProgressHUD.showError(e.localizedDescription)
+                }
+                  
+                
             }) { (err) in
                 ProgressHUD.showError(err.localizedDescription)
             }

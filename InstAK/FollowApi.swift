@@ -15,8 +15,6 @@ class FollowApi {
     private let FOLLOWINGS  = "followings"
     private let FOLLOWERS   = "followers"
     
-    
-    
     func followAction(followerUserId: String, followingUserId: String, onCompletion: @escaping () -> Void, onError : @escaping (Error)-> Void){
         self.followerAfterUser(followerUserId: followerUserId, followingUserId: followingUserId, onCompletion: {
             self.followingAfterUser(followerUserId: followerUserId, followingUserId: followingUserId, onCompletion: {

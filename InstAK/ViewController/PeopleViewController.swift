@@ -26,6 +26,8 @@ class PeopleViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         listen?.disconnected()
+        users.removeAll()
+        followingUsers.removeAll()
     }
     
     

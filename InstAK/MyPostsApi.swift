@@ -37,7 +37,7 @@ class MyPostsApi {
         }
     }
     
-    func getTotalPosts(userId: String, onCompletion: @escaping ([String])-> Void, onError : @escaping (Error)-> Void){
+    func getUserPosts(userId: String, onCompletion: @escaping ([String])-> Void, onError : @escaping (Error)-> Void){
         let postsCollection = COLLECTION_MY_POSTS.document(userId).collection("posts")
         postsCollection.getDocuments { (querySnapshot, error) in
             if let err = error {

@@ -14,4 +14,5 @@ struct Api{
     static let Comment = CommentApi()
     static let MyPosts = MyPostsApi()
     static let Follow = FollowApi()
+    static let Feed = FeedApi()
 }

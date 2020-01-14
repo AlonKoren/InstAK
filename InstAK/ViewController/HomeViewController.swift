@@ -17,6 +17,8 @@ class HomeViewController: UIViewController {
     var posts = [Post]()
     var users = [String: User]()
     
+    var listeners = [String : Listener]()
+    
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
     override func viewDidLoad() {
@@ -29,8 +31,39 @@ class HomeViewController: UIViewController {
     
     func loadPosts() {
         activityIndicatorView.startAnimating()
+        if !AuthService.isSignIn(){
+            return
+        }
         
-        _ = Api.Post.observePosts(onAdded: { (addedPost) in
+        _ = Api.Feed.observePostsFromFeed(userId: AuthService.getCurrentUserId()!, onAdded: { (addedPostId) in
+            
+            self.listeners[addedPostId] = self.observePost(postId: addedPostId)
+            
+        }, onModified: { (modifiedPostId) in
+            print("someway the post id change to \(modifiedPostId)")
+            // support this anyway
+            self.listeners[modifiedPostId] = self.observePost(postId: modifiedPostId)
+            
+            
+        }, onRemoved: { (removedPostId) in
+            
+            self.posts.removeAll { (oldPost) -> Bool in
+                return oldPost.postId == removedPostId
+            }
+            self.users.removeValue(forKey: removedPostId)
+            print(self.posts)
+            self.tableView.reloadData()
+            
+            self.listeners[removedPostId]?.disconnected()
+            self.listeners.removeValue(forKey: removedPostId)
+        }) { (error) in
+            ProgressHUD.showError(error.localizedDescription)
+        }
+    }
+    
+    
+    func observePost(postId : String) -> Listener{
+        return Api.Post.observePost(postId: postId, onAdded: { (addedPost) in
             Api.User.observeUser(withId: addedPost.uid!, onCompletion: { (user:User) in
                 self.posts.append(addedPost)
                 self.users.updateValue(user, forKey: addedPost.postId!)
@@ -40,26 +73,24 @@ class HomeViewController: UIViewController {
             }) { (error) in
                 print(error.localizedDescription)
             }
-        }, onModified: { (modifiedpost) in
-            
+        }, onModified: { (modifiedPost) in
             self.posts.forEach { (oldPost) in
-                if oldPost.postId == modifiedpost.postId {
-                    oldPost.setData(post: modifiedpost)
+                if oldPost.postId == modifiedPost.postId {
+                    oldPost.setData(post: modifiedPost)
                 }
             }
             print(self.posts)
             self.tableView.reloadData()
         }, onRemoved: { (removedPost) in
-            
             self.posts.removeAll { (oldPost) -> Bool in
                 return oldPost.postId == removedPost.postId
             }
             self.users.removeValue(forKey: removedPost.postId!)
             print(self.posts)
             self.tableView.reloadData()
-        }) { (error) in
-            print(error.localizedDescription)
-        }
+        }, onError: { (err) in
+            ProgressHUD.showError(err.localizedDescription)
+        })
     }
     
     @IBAction func button_TouchUpInside(_ sender: Any) {

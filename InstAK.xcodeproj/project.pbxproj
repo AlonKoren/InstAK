@@ -34,6 +34,7 @@
 		0A91A99A23B7D58400AE21FB /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A91A99923B7D58400AE21FB /* Camera.storyboard */; };
 		0A91A99D23B7D5EB00AE21FB /* Activity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A91A99B23B7D5EB00AE21FB /* Activity.storyboard */; };
 		0A91A99F23B7D64900AE21FB /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A91A99E23B7D64900AE21FB /* Profile.storyboard */; };
+		0A9FF21623CE2D9600E8739A /* FeedApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9FF21523CE2D9600E8739A /* FeedApi.swift */; };
 		0AAC99FC23A9012200A60A90 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC99FB23A9012200A60A90 /* SignInViewController.swift */; };
 		0AAC99FE23A9125D00A60A90 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC99FD23A9125C00A60A90 /* SignUpViewController.swift */; };
 		0AB36E9A23A284D000FE9CD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB36E9923A284D000FE9CD5 /* AppDelegate.swift */; };
@@ -101,6 +102,7 @@
 		0A91A99923B7D58400AE21FB /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
 		0A91A99C23B7D5EB00AE21FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = InstAK/InstAK/Base.lproj/Activity.storyboard; sourceTree = "<group>"; };
 		0A91A99E23B7D64900AE21FB /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		0A9FF21523CE2D9600E8739A /* FeedApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FeedApi.swift; path = /Users/alonkoren/Desktop/InstAK/InstAK/FeedApi.swift; sourceTree = "<absolute>"; };
 		0AAC99FB23A9012200A60A90 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		0AAC99FD23A9125C00A60A90 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		0AB36E9623A284D000FE9CD5 /* InstAK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstAK.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -248,6 +250,7 @@
 				0A04377323C519750099F3C7 /* CommentApi.swift */,
 				0AF790C023CCF9850062CA22 /* MyPostsApi.swift */,
 				0AE6E3D423CE008A00D7FECD /* FollowApi.swift */,
+				0A9FF21523CE2D9600E8739A /* FeedApi.swift */,
 				0A589F3623C266BD000D6C9F /* Model */,
 				0A6B485C23C354E200FBC41F /* Views */,
 				0A2D5CBC23B8E24F0026F64E /* ViewController */,
@@ -611,6 +614,7 @@
 				0AF790C123CCF9850062CA22 /* MyPostsApi.swift in Sources */,
 				0A013D7123AE8BCA00838A21 /* ProfileViewController.swift in Sources */,
 				0A04376E23C511F70099F3C7 /* PostApi.swift in Sources */,
+				0A9FF21623CE2D9600E8739A /* FeedApi.swift in Sources */,
 				0AF790BF23CCE77A0062CA22 /* HeaderProfileCollectionReusableView.swift in Sources */,
 				0A5EB7A123BE63AE007A1BEF /* AuthService.swift in Sources */,
 				0AE2931623C79E7300803787 /* Listener.swift in Sources */,

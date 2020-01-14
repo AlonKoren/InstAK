@@ -54,7 +54,7 @@ class ProfileViewController: UIViewController {
             return
         }
         
-        Api.MyPosts.getTotalPosts(userId: currentUserId, onCompletion: { (postIds : [String]) in
+        Api.MyPosts.getUserPosts(userId: currentUserId, onCompletion: { (postIds : [String]) in
             self.lisener?.disconnected()
             self.posts.removeAll()
             self.lisener = Api.Post.observeSpecificPosts(postsIds: postIds, onAdded: { (addedPost) in
