@@ -12,6 +12,7 @@ class PeopleViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     var users = [User]()
+    var followingUsers : [String : BooleanObject] = [:]
     var listen : Listener?
     
     override func viewDidLoad() {
@@ -39,8 +40,12 @@ class PeopleViewController: UIViewController {
             if currentUserId == addedUser.uid {
                 return
             }
-            self.users.append(addedUser)
-            self.tableView.reloadData()
+            self.isFollowing(user: addedUser) { (isFollowing) in
+                self.users.append(addedUser)
+                self.followingUsers[addedUser.uid!] = BooleanObject.init(bool: isFollowing)
+                self.tableView.reloadData()
+            }
+            
         }, onModified: { (modifiedUser) in
             if currentUserId == modifiedUser.uid {
                 return
@@ -58,9 +63,20 @@ class PeopleViewController: UIViewController {
             self.users.removeAll { (user) -> Bool in
                 return user.uid == removedUser.uid
             }
+            self.followingUsers.removeValue(forKey: removedUser.uid!)
             self.tableView.reloadData()
         }) { (error) in
             
+        }
+    }
+    
+    func isFollowing(user: User,onCompletion :@escaping (Bool) -> Void){
+        if !AuthService.isSignIn(){
+            return
+        }
+        
+        Api.Follow.isFollowingAfterUser(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user.uid!, onCompletion: onCompletion) { (error) in
+            print(error.localizedDescription)
         }
     }
 
@@ -76,6 +92,25 @@ extension PeopleViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PeopleTableViewCell", for: indexPath) as! PeopleTableViewCell
         let user = users[indexPath.row]
         cell.user = user
+        cell.isFollowing = self.followingUsers[user.uid!]
+        
+
         return cell
+    }
+}
+
+
+class BooleanObject {
+    var bool : Bool
+    
+    init(bool : Bool) {
+        self.bool = bool
+    }
+    
+    func getBool() -> Bool {
+        return self.bool
+    }
+    func setBool(bool : Bool){
+        self.bool = bool
     }
 }

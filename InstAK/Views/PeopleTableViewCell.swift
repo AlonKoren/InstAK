@@ -26,6 +26,15 @@ class PeopleTableViewCell: UITableViewCell {
         }
     }
     
+    var isFollowing:BooleanObject? {
+        didSet{
+            if isFollowing==nil{
+                return
+            }
+            updateFollowView()
+        }
+    }
+    
     
     
     func updateView(){
@@ -37,12 +46,42 @@ class PeopleTableViewCell: UITableViewCell {
         }else{
             print("profileImageUrlString does not exist")
         }
-        
-        
-        followButton.addTarget(self, action: #selector(self.followAction), for: .touchUpInside)
-        followButton.addTarget(self, action: #selector(self.unfollowAction), for: .touchUpInside)
     }
     
+    
+    func updateFollowView(){
+        
+        self.followButton.layer.borderColor = #colorLiteral(red: 0.8862745098, green: 0.8941176471, blue: 0.9098039216, alpha: 1)
+        if isFollowing!.getBool(){
+            configureUnFollowButton()
+        }else{
+            configureFollowButton()
+        }
+    }
+    
+    func configureFollowButton(){
+//        self.followButton.layer.borderWidth = 1
+//        self.followButton.layer.borderColor = #colorLiteral(red: 0.8862745098, green: 0.8941176471, blue: 0.9098039216, alpha: 1)
+//        self.followButton.layer.cornerRadius = 5
+//        self.followButton.clipsToBounds = true
+        
+        self.followButton.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+        self.followButton.backgroundColor = #colorLiteral(red: 0.2705882353, green: 0.5568627451, blue: 1, alpha: 1)
+        self.followButton.setTitle("Follow", for: .normal)
+        self.followButton.addTarget(self, action: #selector(self.followAction), for: .touchUpInside)
+    }
+
+    func configureUnFollowButton(){
+//        self.followButton.layer.borderWidth = 1
+//        self.followButton.layer.borderColor = #colorLiteral(red: 0.8862745098, green: 0.8941176471, blue: 0.9098039216, alpha: 1)
+//        self.followButton.layer.cornerRadius = 5
+//        self.followButton.clipsToBounds = true
+        
+        self.followButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+        self.followButton.backgroundColor = UIColor.clear
+        self.followButton.setTitle("Following", for: .normal)
+        self.followButton.addTarget(self, action: #selector(self.unfollowAction), for: .touchUpInside)
+    }
     
     @objc func followAction(){
         
@@ -50,13 +89,10 @@ class PeopleTableViewCell: UITableViewCell {
             return
         }
         
-        Api.Follow.followerAfterUser(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid!, onCompletion: {
-            
-        }) { (error) in
-            ProgressHUD.showError(error.localizedDescription)
-        }
-        Api.Follow.followingAfterUser(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid!, onCompletion: {
-            
+        Api.Follow.followAction(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid!, onCompletion: {
+            self.isFollowing!.setBool(bool: true)
+            print("success follow")
+            self.configureUnFollowButton()
         }) { (error) in
             ProgressHUD.showError(error.localizedDescription)
         }
@@ -67,17 +103,13 @@ class PeopleTableViewCell: UITableViewCell {
             return
         }
         
-        Api.Follow.unfollowerAfterUser(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid!, onCompletion: {
-            
+        Api.Follow.unFollowAction(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid!, onCompletion: {
+            self.isFollowing!.setBool(bool: false)
+            print("success unfollow")
+            self.configureFollowButton()
         }) { (error) in
             ProgressHUD.showError(error.localizedDescription)
         }
-        Api.Follow.unfollowingAfterUser(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid!, onCompletion: {
-            
-        }) { (error) in
-            ProgressHUD.showError(error.localizedDescription)
-        }
-        
     }
     
     

@@ -15,6 +15,32 @@ class FollowApi {
     private let FOLLOWINGS  = "followings"
     private let FOLLOWERS   = "followers"
     
+    
+    
+    func followAction(followerUserId: String, followingUserId: String, onCompletion: @escaping () -> Void, onError : @escaping (Error)-> Void){
+        self.followerAfterUser(followerUserId: followerUserId, followingUserId: followingUserId, onCompletion: {
+            self.followingAfterUser(followerUserId: followerUserId, followingUserId: followingUserId, onCompletion: {
+                onCompletion()
+            }) { (error) in
+                onError(error)
+            }
+        }) { (error) in
+            onError(error)
+        }
+    }
+    
+    func unFollowAction(followerUserId: String, followingUserId: String, onCompletion: @escaping () -> Void, onError : @escaping (Error)-> Void){
+        self.unFollowerAfterUser(followerUserId: followerUserId, followingUserId: followingUserId, onCompletion: {
+            self.unFollowingAfterUser(followerUserId: followerUserId, followingUserId: followingUserId, onCompletion: {
+                onCompletion()
+            }) { (error) in
+                onError(error)
+            }
+        }) { (error) in
+            onError(error)
+        }
+    }
+    
     // followerUserId want to follow after followingUserId
     func followingAfterUser(followerUserId: String, followingUserId: String, onCompletion: @escaping () -> Void, onError : @escaping (Error)-> Void) {
         let followingsCollection = COLLECTION_FOLLOWS.document(followerUserId).collection(FOLLOWINGS)
@@ -43,7 +69,7 @@ class FollowApi {
     }
     
     // followerUserId don't want to follow after followingUserId
-    func unfollowingAfterUser(followerUserId: String, followingUserId: String, onCompletion: @escaping () -> Void, onError : @escaping (Error)-> Void) {
+    func unFollowingAfterUser(followerUserId: String, followingUserId: String, onCompletion: @escaping () -> Void, onError : @escaping (Error)-> Void) {
         let followingsCollection = COLLECTION_FOLLOWS.document(followerUserId).collection(FOLLOWINGS)
         followingsCollection.document(followingUserId).delete(){
            (error : Error?) in
@@ -57,7 +83,7 @@ class FollowApi {
     }
     
     // followingUserId don't want to follow by followerUserId
-    func unfollowerAfterUser(followerUserId: String, followingUserId: String, onCompletion: @escaping () -> Void, onError : @escaping (Error)-> Void) {
+    func unFollowerAfterUser(followerUserId: String, followingUserId: String, onCompletion: @escaping () -> Void, onError : @escaping (Error)-> Void) {
         let followersCollection = COLLECTION_FOLLOWS.document(followingUserId).collection(FOLLOWERS)
         followersCollection.document(followerUserId).delete(){
            (error : Error?) in
