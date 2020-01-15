@@ -103,6 +103,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="zGz-ns-J2V" id="wNZ-jx-Cr5"/>
+                                    <outlet property="delegate" destination="zGz-ns-J2V" id="tfb-KD-W5U"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -116,6 +120,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="xmJ-fZ-yde"/>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="A1O-jE-Hlc" id="l3m-va-gUD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dl2-EZ-a61" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

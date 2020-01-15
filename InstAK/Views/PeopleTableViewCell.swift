@@ -51,6 +51,14 @@ class PeopleTableViewCell: UITableViewCell {
     
     func updateFollowView(){
         
+        if let currentUserId = AuthService.getCurrentUserId(){
+            if currentUserId == user?.uid{
+                self.followButton.isHidden = true
+                self.followButton.isEnabled = false
+            }
+        }
+        
+        
         self.followButton.layer.borderColor = #colorLiteral(red: 0.8862745098, green: 0.8941176471, blue: 0.9098039216, alpha: 1)
         
         if isFollowing!.getBool(){

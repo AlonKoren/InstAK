@@ -68,7 +68,7 @@ class PeopleViewController: UIViewController {
             self.followingUsers.removeValue(forKey: removedUser.uid!)
             self.tableView.reloadData()
         }) { (error) in
-            
+            print(error.localizedDescription)
         }
     }
     

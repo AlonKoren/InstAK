@@ -88,9 +88,30 @@ class UserApi {
         return listener
     }
     
-    
-    
-    
-
-    
+    func queryUsers(withText text: String, onAdded: @escaping (User)-> Void , onModified: @escaping (User)-> Void , onRemoved: @escaping (User)-> Void, onError : @escaping (Error)-> Void) ->Listener {
+        let text = text.lowercased()
+        let listener:Listener = Listener()
+        listener.firestoreListener = COLLECTION_USERS.order(by: "username_lowercase").start(at: [text]).end(at: [text+"\u{f8ff}"]).limit(to: 10).addSnapshotListener { (querySnapshot, error) in
+            guard let snapshot = querySnapshot else {
+                onError(error!)
+                return
+            }
+            for diff in snapshot.documentChanges{
+                let user: User = try! DictionaryDecoder().decode(User.self, from: diff.document.data())
+                if (diff.type == .added) {
+                    print("New User : \(user)")
+                    onAdded(user)
+                }
+                if (diff.type == .modified) {
+                    print("Modified User : \(user)")
+                    onModified(user)
+                }
+                if (diff.type == .removed) {
+                    print("Removed User : \(user)")
+                    onRemoved(user)
+                }
+            }
+        }
+        return listener
+    }
 }

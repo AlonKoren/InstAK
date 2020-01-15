@@ -21,7 +21,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
-        collectionView?.delegate = self
+        collectionView.delegate = self
         fechUser()
         
     }
@@ -57,6 +57,9 @@ class ProfileViewController: UIViewController {
         Api.MyPosts.getUserPosts(userId: currentUserId, onCompletion: { (postIds : [String]) in
             self.lisener?.disconnected()
             self.posts.removeAll()
+            if postIds.isEmpty{
+                return
+            }
             self.lisener = Api.Post.observeSpecificPosts(postsIds: postIds, onAdded: { (addedPost) in
                 self.posts.append(addedPost)
                 self.collectionView.reloadData()
