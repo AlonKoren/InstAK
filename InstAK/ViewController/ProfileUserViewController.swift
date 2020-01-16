@@ -28,8 +28,8 @@ class ProfileUserViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         fechUser()
@@ -47,7 +47,6 @@ class ProfileUserViewController: UIViewController {
 
     func fechUser() {
 
-        
         Api.User.getUser(withId: userId, onCompletion: { (user:User) in
             Api.Follow.isFollowingAfterUser(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user.uid, onCompletion: { (isFollowing) in
                 self.user = user
@@ -93,6 +92,7 @@ class ProfileUserViewController: UIViewController {
             print(error.localizedDescription)
         }
     }
+    
 
 }
 

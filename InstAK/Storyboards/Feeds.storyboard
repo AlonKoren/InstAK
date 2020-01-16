@@ -156,13 +156,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SHq-Vb-beB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="InstAK" id="FZU-tT-Tsr">
-                        <barButtonItem key="leftBarButtonItem" title="LogOut" id="gc4-lD-3ey">
-                            <connections>
-                                <action selector="logout_TouchUpInside:" destination="Bm3-eL-W91" id="50X-4K-ckS"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="InstAK" id="FZU-tT-Tsr"/>
                     <connections>
                         <outlet property="activityIndicatorView" destination="hWz-G9-NOv" id="0c9-bZ-znz"/>
                         <outlet property="tableView" destination="SDi-Uk-rc0" id="BL9-4c-gyH"/>

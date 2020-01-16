@@ -28,6 +28,7 @@ class CommentViewController: UIViewController {
         super.viewDidLoad()
         print("CommentViewController viewDidLoad")
         title = "Comment"
+        commentTextField.delegate = self
         tableView.estimatedRowHeight = 77
         tableView.rowHeight = UITableView.automaticDimension
         self.tableView.dataSource = self
@@ -191,6 +192,10 @@ extension CommentViewController: CommentTableViewCellDelegate{
     func goToProfileUserViewController(userId: String) {
         self.performSegue(withIdentifier: "Comment_ProfileSegue", sender: userId)
     }
-    
-    
+}
+extension CommentViewController: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

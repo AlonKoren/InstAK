@@ -179,3 +179,4 @@ extension CameraViewController: UITextViewDelegate{
         return captionTextView.text.isEmpty || captionTextView.text == "Description" && captionTextView.textColor == UIColor.lightGray
     }
 }
+

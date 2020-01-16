@@ -17,8 +17,10 @@ class HomeViewController: UIViewController {
     var posts = [Post]()
     var users = [String: User]()
     
-    var listeners = [String : Listener]()
+    var listenersPosts :  [ String : Listener ] = [:]
     
+    var Listener : Listener?
+
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
     override func viewDidLoad() {
@@ -26,7 +28,16 @@ class HomeViewController: UIViewController {
         tableView.estimatedRowHeight = 520
         tableView.rowHeight = UITableView.automaticDimension
         tableView.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadPosts()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        Listener?.disconnected()
     }
     
     func loadPosts() {
@@ -35,14 +46,14 @@ class HomeViewController: UIViewController {
             return
         }
         
-        _ = Api.Feed.observePostsFromFeed(userId: AuthService.getCurrentUserId()!, onAdded: { (addedPostId) in
+        Listener = Api.Feed.observePostsFromFeed(userId: AuthService.getCurrentUserId()!, onAdded: { (addedPostId) in
             
-            self.listeners[addedPostId] = self.observePost(postId: addedPostId)
+            self.listenersPosts[addedPostId] = self.observePost(postId: addedPostId)
             
         }, onModified: { (modifiedPostId) in
             print("someway the post id change to \(modifiedPostId)")
             // support this anyway
-            self.listeners[modifiedPostId] = self.observePost(postId: modifiedPostId)
+            self.listenersPosts[modifiedPostId] = self.observePost(postId: modifiedPostId)
             
             
         }, onRemoved: { (removedPostId) in
@@ -54,8 +65,8 @@ class HomeViewController: UIViewController {
             print(self.posts)
             self.tableView.reloadData()
             
-            self.listeners[removedPostId]?.disconnected()
-            self.listeners.removeValue(forKey: removedPostId)
+            self.listenersPosts[removedPostId]?.disconnected()
+            self.listenersPosts.removeValue(forKey: removedPostId)
         }) { (error) in
             ProgressHUD.showError(error.localizedDescription)
         }
@@ -64,6 +75,7 @@ class HomeViewController: UIViewController {
     
     func observePost(postId : String) -> Listener{
         return Api.Post.observePost(postId: postId, onAdded: { (addedPost) in
+            
             Api.User.getUser(withId: addedPost.uid!, onCompletion: { (user:User) in
                 self.posts.append(addedPost)
                 self.users.updateValue(user, forKey: addedPost.postId!)
@@ -85,7 +97,9 @@ class HomeViewController: UIViewController {
             self.posts.removeAll { (oldPost) -> Bool in
                 return oldPost.postId == removedPost.postId
             }
+                    
             self.users.removeValue(forKey: removedPost.postId!)
+            
             print(self.posts)
             self.tableView.reloadData()
         }, onError: { (err) in
@@ -98,17 +112,6 @@ class HomeViewController: UIViewController {
     }
     
     
-    @IBAction func logout_TouchUpInside(_ sender: Any) {
-        AuthService.signOut(onSuccess: {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let signInVC = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
-            signInVC.modalPresentationStyle = .fullScreen
-            self.present(signInVC, animated: true, completion: nil)
-        }) { (error) in
-            ProgressHUD.showError(error.localizedDescription)
-            print(error)
-        }
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("segue.identifier =\(String(describing: segue.identifier))")

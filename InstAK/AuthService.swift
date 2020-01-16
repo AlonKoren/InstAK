@@ -67,5 +67,14 @@ class AuthService  {
             print("Error writing document: \(err)")
         }
     }
-
+    
+    static func updateEmail(newEmail : String, onCompletion: @escaping ()-> Void , onError : @escaping (Error)-> Void){
+        Auth.auth().currentUser?.updateEmail(to: newEmail, completion: { (error) in
+            if let err = error{
+                onError(err)
+                return
+            }
+            onCompletion()
+        })
+    }
 }

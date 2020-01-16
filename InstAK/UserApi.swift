@@ -23,6 +23,19 @@ class UserApi {
         }
     }
     
+    func observeUser(withId uid: String ,onCompletion: @escaping (User)-> Void , onError : @escaping (Error)-> Void) ->Listener{
+        let listener:Listener = Listener()
+        listener.firestoreListener = COLLECTION_USERS.document(uid).addSnapshotListener { (documentSnapshot, error) in
+            if let userDocument = documentSnapshot, userDocument.exists{
+                let user: User = try! DictionaryDecoder().decode(User.self, from: userDocument.data()!)
+                onCompletion(user)
+            }else{
+                onError(error!)
+            }
+        }
+        return listener
+    }
+    
     func addUserToDatabase(profileImageUrl: String, username: String, email:String,uid: String, onSuccess: @escaping (User) -> Void, onError : @escaping (Error)-> Void){
         let user: User = User(email: email, prifileImage: profileImageUrl, username: username, uid: uid)
         COLLECTION_USERS.document(uid).setData(try! DictionaryEncoder().encode(user)) { err in
@@ -113,5 +126,16 @@ class UserApi {
             }
         }
         return listener
+    }
+    
+    
+    func updateUserInformation(user : User, onCompletion: @escaping ()-> Void , onError : @escaping (Error)-> Void){
+        COLLECTION_USERS.document(user.uid).updateData(try! DictionaryEncoder().encode(user)) { (error) in
+            if let err = error{
+                onError(err)
+                return
+            }
+            onCompletion()
+        }
     }
 }

@@ -28,6 +28,11 @@ class SignUpViewController: UIViewController {
         profileImage.layer.cornerRadius = 31
         profileImage.clipsToBounds = true
         
+        usernameTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleSelectProfileImageView))
         profileImage.addGestureRecognizer(tapGesture)
         profileImage.isUserInteractionEnabled = true
@@ -87,5 +92,11 @@ extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationCon
             textFieldDidChange()
         };
         dismiss(animated: true, completion: nil)
+    }
+}
+extension SignUpViewController: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

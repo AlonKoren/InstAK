@@ -24,11 +24,25 @@ class User : Codable{
         self.username_lowercase = username.lowercased()
     }
     
+    init(user: User) {
+        self.email = user.email
+        self.prifileImage = user.prifileImage
+        self.username = user.username
+        self.uid = user.uid
+        self.username_lowercase = user.username_lowercase
+    }
+    
     func setData(user: User){
         self.email = user.email
         self.prifileImage = user.prifileImage
         self.username = user.username
         self.uid = user.uid
         self.username_lowercase = user.username_lowercase
+    }
+    func setData(email: String, prifileImage: String, username: String) {
+        self.email = email
+        self.prifileImage = prifileImage
+        self.username = username
+        self.username_lowercase =  username.lowercased()
     }
 }
