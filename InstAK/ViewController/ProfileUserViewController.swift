@@ -16,6 +16,8 @@ class ProfileUserViewController: UIViewController {
     var posts = [Post]()
     var lisener :Listener?
 
+    var cellListeners = [Listener]()
+    
     var userId : String = ""
     var isFollowing : Bool = false
        
@@ -37,6 +39,10 @@ class ProfileUserViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         lisener?.disconnected()
+        
+        cellListeners.forEach { (listener) in
+            listener.disconnected()
+        }
     }
 
     func fechUser() {
@@ -105,6 +111,7 @@ extension ProfileUserViewController:UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerViewCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderProfileCollectionReusableView", for: indexPath) as! HeaderProfileCollectionReusableView
+        headerViewCell.delegate = self
         if let user = self.user{
             headerViewCell.user = user
             headerViewCell.isFollowing = BooleanObject.init(bool: isFollowing)
@@ -133,3 +140,11 @@ extension ProfileUserViewController: UICollectionViewDelegateFlowLayout{
     }
 }
 
+
+extension ProfileUserViewController : HeaderProfileCollectionReusableViewDelegate{
+    
+    func closeListeners(listeners: [Listener]) {
+        cellListeners.append(contentsOf: listeners)
+    }
+    
+}

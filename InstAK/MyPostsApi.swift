@@ -55,6 +55,18 @@ class MyPostsApi {
         }
     }
     
+    func getCountUserPosts(userId: String, onCompletion: @escaping (Int)-> Void, onError : @escaping (Error)-> Void){
+        let postsCollection = COLLECTION_MY_POSTS.document(userId).collection("posts")
+        postsCollection.getDocuments { (querySnapshot, error) in
+            if let err = error {
+                onError(err)
+                return
+            }
+            
+            onCompletion(querySnapshot!.documents.count)
+        }
+    }
+    
     func observeUserPosts(userId:String, onAdded: @escaping (String)-> Void , onModified: @escaping (String)-> Void , onRemoved: @escaping (String)-> Void, onError : @escaping (Error)-> Void) ->Listener{
         let listener:Listener = Listener()
         listener.firestoreListener = COLLECTION_MY_POSTS.document(userId).collection("posts")

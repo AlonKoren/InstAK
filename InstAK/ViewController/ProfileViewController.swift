@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController {
     
     var lisener :Listener?
     
+    var cellListeners = [Listener]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,12 @@ class ProfileViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
         lisener?.disconnected()
+        
+        cellListeners.forEach { (listener) in
+            listener.disconnected()
+        }
     }
     
     func fechUser() {
@@ -98,8 +104,11 @@ extension ProfileViewController:UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerViewCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderProfileCollectionReusableView", for: indexPath) as! HeaderProfileCollectionReusableView
+        headerViewCell.delegate = self
         if let user = self.user{
+            
             headerViewCell.user = user
+            
         }
         return headerViewCell
     }
@@ -125,3 +134,10 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout{
     }
 }
 
+extension ProfileViewController : HeaderProfileCollectionReusableViewDelegate{
+    
+    func closeListeners(listeners: [Listener]) {
+        cellListeners.append(contentsOf: listeners)
+    }
+    
+}

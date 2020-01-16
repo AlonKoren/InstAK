@@ -157,4 +157,34 @@ class FollowApi {
                 onCompletion(userIds)
             }
     }
+    
+    // get Count of all Followings user that the followerUserId follow
+    func getAllFollowingsCount(followerUserId: String,onCompletion: @escaping (Int) -> Void, onError : @escaping (Error)-> Void) -> Listener{
+        
+        let listener:Listener = Listener()
+        listener.firestoreListener = COLLECTION_FOLLOWS.document(followerUserId).collection(FOLLOWINGS)
+            .addSnapshotListener({ (querySnapshot, error) in
+                if let err = error {
+                    onError(err)
+                    return
+                }
+                
+                onCompletion(querySnapshot!.documents.count)
+            })
+        return listener
+    }
+    
+    // get Count of all Followers user that the follow followingUserId
+    func getAllFollowersCount(followingUserId: String,onCompletion: @escaping (Int) -> Void, onError : @escaping (Error)-> Void) -> Listener{
+        let listener:Listener = Listener()
+        listener.firestoreListener = COLLECTION_FOLLOWS.document(followingUserId).collection(FOLLOWERS).addSnapshotListener({ (querySnapshot, error) in
+            if let err = error {
+                onError(err)
+                return
+            }
+            
+            onCompletion(querySnapshot!.documents.count)
+        })
+        return listener
+    }
 }

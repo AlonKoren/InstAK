@@ -8,9 +8,13 @@
 
 import UIKit
 
+
+protocol HeaderProfileCollectionReusableViewDelegate {
+    func closeListeners(listeners : [Listener])
+}
+
 class HeaderProfileCollectionReusableView: UICollectionReusableView {
-    
-    
+
     @IBOutlet weak var profileImage: UIImageView!
     
     @IBOutlet weak var nameLabel: UILabel!
@@ -22,6 +26,9 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
     @IBOutlet weak var followersCountLabel: UILabel!
     
     @IBOutlet weak var followButton: UIButton!
+    
+    
+    var delegate : HeaderProfileCollectionReusableViewDelegate?
     
     var user : User?{
         didSet{
@@ -41,6 +48,8 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
         }
     }
     
+    
+    
     func updateView() {
         self.nameLabel.text = user!.username
         let profileImageUrlString = user!.prifileImage
@@ -48,10 +57,33 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
         let placeholder = #imageLiteral(resourceName: "placeholder-avatar-profile")
         self.profileImage.kf.setImage(with: profileImageUrl, placeholder: placeholder, options: [])
         
+        Api.MyPosts.getCountUserPosts(userId: user!.uid, onCompletion: { (numOfPosts) in
+            self.myPostsCountLabel.text = "\(numOfPosts)"
+        }) { (err) in
+            print(err.localizedDescription)
+        }
+        
+        
+        //  TODO TODO TODO Liseners notification
+        print("TODO TODO TODO Liseners notification")
+        var followingListener , followerListener :Listener
+        followingListener = Api.Follow.getAllFollowingsCount(followerUserId: user!.uid, onCompletion: { (followingCount) in
+            self.followingCountLabel.text = "\(followingCount)"
+        }) { (err) in
+            print(err.localizedDescription)
+        }
+        
+        followerListener = Api.Follow.getAllFollowersCount(followingUserId: user!.uid, onCompletion: { (followersCount) in
+            self.followersCountLabel.text = "\(followersCount)"
+        }) { (err) in
+            print(err.localizedDescription)
+        }
         
         if user?.uid == AuthService.getCurrentUserId(){
             self.followButton.setTitle("Edit Profile", for: .normal)
         }
+        
+        delegate?.closeListeners(listeners: [followingListener , followerListener])
     }
     
     func updateViewFollowButton(){
@@ -115,6 +147,7 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
                     }) { (error) in
                         ProgressHUD.showError(error.localizedDescription)
                     }
+                                        
                     self.isFollowing!.setBool(bool: true)
                     print("success follow")
                     self.configureUnFollowButton()
