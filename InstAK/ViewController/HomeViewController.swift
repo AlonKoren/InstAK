@@ -64,7 +64,7 @@ class HomeViewController: UIViewController {
     
     func observePost(postId : String) -> Listener{
         return Api.Post.observePost(postId: postId, onAdded: { (addedPost) in
-            Api.User.observeUser(withId: addedPost.uid!, onCompletion: { (user:User) in
+            Api.User.getUser(withId: addedPost.uid!, onCompletion: { (user:User) in
                 self.posts.append(addedPost)
                 self.users.updateValue(user, forKey: addedPost.postId!)
                 print(self.posts)

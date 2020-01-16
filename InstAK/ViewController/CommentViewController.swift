@@ -44,27 +44,31 @@ class CommentViewController: UIViewController {
         super.viewWillAppear(animated)
         print("CommentViewController viewWillAppear")
         self.tabBarController?.tabBar.isHidden = true
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("CommentViewController viewDidAppear")
+        
         empty()
         loadComments()
     }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        print("CommentViewController viewDidAppear")
+//
+//    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         print("CommentViewController viewWillDisappear")
         self.tabBarController?.tabBar.isHidden = false
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        print("CommentViewController viewDidDisappear")
+        
         listener?.disconnected()
         comments.removeAll()
     }
+    
+//    override func viewDidDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        print("CommentViewController viewDidDisappear")
+//        
+//    }
     
     @objc func hideKeyboard() {
         view.endEditing(true)
@@ -106,7 +110,7 @@ class CommentViewController: UIViewController {
         listener = Api.Comment.observeComments(postId: postId, onAdded: { (addComment) in
             self.comments.append(addComment)
             
-            Api.User.observeUser(withId: addComment.uid! , onCompletion: { (user) in
+            Api.User.getUser(withId: addComment.uid! , onCompletion: { (user) in
                 self.users.updateValue(user, forKey: addComment.commnetId!)
                 self.tableView.reloadData()
             }) { (error) in

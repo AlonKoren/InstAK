@@ -1,33 +1,35 @@
 //
-//  ProfileViewController.swift
+//  ProfileUserViewController.swift
 //  InstAK
 //
-//  Created by alon koren on 21/12/2019.
-//  Copyright © 2019 Alon Koren. All rights reserved.
+//  Created by alon koren on 16/01/2020.
+//  Copyright © 2020 Alon Koren. All rights reserved.
 //
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileUserViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
     var user: User!
     var posts = [Post]()
-    
     var lisener :Listener?
-    
+
+    var userId : String = ""
+       
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("user id= \(userId)")
         collectionView.dataSource = self
         collectionView.delegate = self
-        fechUser()
+        
         
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        fechUser()
         fechMyPosts()
     }
     
@@ -35,12 +37,11 @@ class ProfileViewController: UIViewController {
         super.viewDidDisappear(animated)
         lisener?.disconnected()
     }
-    
+
     func fechUser() {
-        guard let currentUserId = AuthService.getCurrentUserId() else {
-            return
-        }
-        Api.User.getUser(withId: currentUserId, onCompletion: { (user:User) in
+
+        
+        Api.User.getUser(withId: userId, onCompletion: { (user:User) in
             self.user = user
             self.navigationItem.title = user.username
             self.collectionView.reloadData()
@@ -50,11 +51,8 @@ class ProfileViewController: UIViewController {
     }
     
     func fechMyPosts(){
-        guard let currentUserId = AuthService.getCurrentUserId() else {
-            return
-        }
         
-        Api.MyPosts.getUserPosts(userId: currentUserId, onCompletion: { (postIds : [String]) in
+        Api.MyPosts.getUserPosts(userId: userId, onCompletion: { (postIds : [String]) in
             self.lisener?.disconnected()
             self.posts.removeAll()
             if postIds.isEmpty{
@@ -82,9 +80,11 @@ class ProfileViewController: UIViewController {
             print(error.localizedDescription)
         }
     }
+
 }
 
-extension ProfileViewController:UICollectionViewDataSource{
+
+extension ProfileUserViewController:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.count
     }
@@ -107,7 +107,7 @@ extension ProfileViewController:UICollectionViewDataSource{
     
 }
 
-extension ProfileViewController: UICollectionViewDelegateFlowLayout{
+extension ProfileUserViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {

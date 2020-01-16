@@ -30,12 +30,12 @@ class SearchViewController: UIViewController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         doSearch()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         listener?.disconnected()
     }
     

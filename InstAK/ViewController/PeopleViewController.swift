@@ -20,11 +20,11 @@ class PeopleViewController: UIViewController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         loadUsers()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         listen?.disconnected()
         users.removeAll()
         followingUsers.removeAll()
@@ -81,6 +81,17 @@ class PeopleViewController: UIViewController {
             print(error.localizedDescription)
         }
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("segue.identifier =\(String(describing: segue.identifier))")
+        if segue.identifier == "ProfileSegue"{
+            let profileUserViewController = segue.destination as! ProfileUserViewController
+            let userId = sender as! String
+            profileUserViewController.userId = userId
+            print("userId=\(userId)")
+        }
+    }
 
 }
 
@@ -96,8 +107,16 @@ extension PeopleViewController: UITableViewDataSource {
         cell.user = user
         cell.isFollowing = self.followingUsers[user.uid!]
         
+        cell.delegate = self
 
         return cell
+    }
+}
+
+
+extension PeopleViewController: PeopleTableViewCellDelegate{
+    func goToProfileUserViewController(userId: String) {
+         self.performSegue(withIdentifier: "ProfileSegue", sender: userId)
     }
 }
 

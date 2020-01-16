@@ -8,6 +8,11 @@
 
 import UIKit
 
+
+protocol PeopleTableViewCellDelegate {
+    func goToProfileUserViewController(userId: String)
+}
+
 class PeopleTableViewCell: UITableViewCell {
 
     @IBOutlet weak var profileImage: UIImageView!
@@ -16,6 +21,7 @@ class PeopleTableViewCell: UITableViewCell {
     
     @IBOutlet weak var followButton: UIButton!
     
+    var delegate : PeopleTableViewCellDelegate?
     
     var user:User?{
         didSet{
@@ -146,12 +152,28 @@ class PeopleTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        let tapGestureForNameLabel = UITapGestureRecognizer(target: self, action: #selector(self.nameLabel_TouchUpInside))
+        nameLabel.addGestureRecognizer(tapGestureForNameLabel)
+        nameLabel.isUserInteractionEnabled = true
+        
+        let tapGestureForProfileImage = UITapGestureRecognizer(target: self, action: #selector(self.profileImage_TouchUpInside))
+        profileImage.addGestureRecognizer(tapGestureForProfileImage)
+        profileImage.isUserInteractionEnabled = true
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    @objc func nameLabel_TouchUpInside(){
+        goToProfileUserViewController()
+    }
+    
+    @objc func profileImage_TouchUpInside(){
+        goToProfileUserViewController()
+    }
+    
+    func goToProfileUserViewController(){
+        if let userId = user?.uid{
+            delegate?.goToProfileUserViewController(userId: userId)
+        }
     }
 
 }
