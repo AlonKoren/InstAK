@@ -55,6 +55,9 @@ class PeopleTableViewCell: UITableViewCell {
             if currentUserId == user?.uid{
                 self.followButton.isHidden = true
                 self.followButton.isEnabled = false
+            }else{
+                self.followButton.isHidden = false
+                self.followButton.isEnabled = true
             }
         }
         

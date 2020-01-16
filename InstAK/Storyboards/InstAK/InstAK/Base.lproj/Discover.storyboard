@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,7 +15,51 @@
                     <view key="view" contentMode="scaleToFill" id="x0W-2H-pMe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="02r-zq-OAf">
+                                <rect key="frame" x="0.0" y="20" width="414" height="696"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PlA-Jo-1Ea">
+                                    <size key="itemSize" width="131" height="121"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DiscoverCollectionViewCell" id="w5D-fy-DpD" customClass="PhotoCollectionViewCell" customModule="InstAK" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="U5I-yn-vNf">
+                                            <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gh9-9s-TDO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="gh9-9s-TDO" firstAttribute="top" secondItem="U5I-yn-vNf" secondAttribute="top" id="TCj-3r-1mL"/>
+                                                <constraint firstAttribute="bottom" secondItem="gh9-9s-TDO" secondAttribute="bottom" id="XBU-os-bMc"/>
+                                                <constraint firstAttribute="trailing" secondItem="gh9-9s-TDO" secondAttribute="trailing" id="XDX-c7-VY3"/>
+                                                <constraint firstItem="gh9-9s-TDO" firstAttribute="leading" secondItem="U5I-yn-vNf" secondAttribute="leading" id="trh-tp-qrb"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <size key="customSize" width="130" height="130"/>
+                                        <connections>
+                                            <outlet property="photo" destination="gh9-9s-TDO" id="MQq-6l-lBv"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="02r-zq-OAf" firstAttribute="leading" secondItem="Byt-KG-9AC" secondAttribute="leading" id="dZ1-JO-ngo"/>
+                            <constraint firstItem="02r-zq-OAf" firstAttribute="trailing" secondItem="Byt-KG-9AC" secondAttribute="trailing" id="h3T-U5-jJa"/>
+                            <constraint firstAttribute="bottom" secondItem="02r-zq-OAf" secondAttribute="bottom" constant="20" symbolic="YES" id="mbM-3F-SJr"/>
+                            <constraint firstItem="02r-zq-OAf" firstAttribute="top" secondItem="x0W-2H-pMe" secondAttribute="top" constant="20" symbolic="YES" id="txt-0E-HF4"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Byt-KG-9AC"/>
                     </view>
                     <navigationItem key="navigationItem" title="Discover" id="EuK-wG-5mL">
@@ -24,10 +69,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="02r-zq-OAf" id="dI8-PY-Dvw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C0D-Re-1ww" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2194" y="704"/>
+            <point key="canvasLocation" x="-2194.202898550725" y="703.53260869565224"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="1eW-Yf-qZT">

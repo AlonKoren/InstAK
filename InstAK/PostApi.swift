@@ -189,4 +189,19 @@ class PostApi {
         return listener
     }
     
+    func getTopPosts(onCompletion: @escaping ([Post])-> Void, onError : @escaping (Error)-> Void){
+        COLLECTION_POSTS.order(by: "likeCount", descending: true).getDocuments { (querySnapshot, error) in
+            guard let snapshot = querySnapshot else {
+                onError(error!)
+                return
+            }
+            var posts = [Post]()
+            for diff in snapshot.documentChanges{
+                let post:Post = try! DictionaryDecoder().decode(Post.self, from: diff.document.data())
+                posts.append(post)
+            }
+            onCompletion(posts)
+        }
+    }
+    
 }
