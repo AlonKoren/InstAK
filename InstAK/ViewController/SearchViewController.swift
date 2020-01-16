@@ -91,6 +91,17 @@ class SearchViewController: UIViewController {
     }
     
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("segue.identifier =\(String(describing: segue.identifier))")
+        
+        if segue.identifier == "Search_ProfileSegue"{
+            let profileUserViewController = segue.destination as! ProfileUserViewController
+            let userId = sender as! String
+            profileUserViewController.userId = userId
+            print("userId=\(userId)")
+        }
+    }
+    
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -117,8 +128,14 @@ extension SearchViewController: UITableViewDataSource {
         let user = users[indexPath.row]
         cell.user = user
         cell.isFollowing = self.followingUsers[user.uid!]
-        
+        cell.delegate = self
 
         return cell
+    }
+}
+
+extension SearchViewController: PeopleTableViewCellDelegate{
+    func goToProfileUserViewController(userId: String) {
+         self.performSegue(withIdentifier: "Search_ProfileSegue", sender: userId)
     }
 }

@@ -325,7 +325,7 @@
         <!--Profile User View Controller-->
         <scene sceneID="lFM-wZ-Ztg">
             <objects>
-                <viewController id="8y7-EE-Id6" customClass="ProfileUserViewController" customModule="InstAK" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileUserViewController" id="8y7-EE-Id6" customClass="ProfileUserViewController" customModule="InstAK" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9cX-aB-yFJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -167,6 +167,7 @@
                         <outlet property="activityIndicatorView" destination="hWz-G9-NOv" id="0c9-bZ-znz"/>
                         <outlet property="tableView" destination="SDi-Uk-rc0" id="BL9-4c-gyH"/>
                         <segue destination="AmX-3g-PjT" kind="show" identifier="CommentSegue" id="fNo-UF-Mzf"/>
+                        <segue destination="gBA-zO-uik" kind="show" identifier="Feed_ProfileSegue" id="BG8-Os-hrS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uHJ-pG-ddc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -301,11 +302,22 @@
                         <outlet property="constraintToBottom" destination="Boc-mC-hdT" id="dWQ-sI-NUT"/>
                         <outlet property="sendButton" destination="JIM-ee-ew3" id="dH7-Rl-oos"/>
                         <outlet property="tableView" destination="95V-Ng-JZx" id="39w-Jv-H6z"/>
+                        <segue destination="gBA-zO-uik" kind="show" identifier="Comment_ProfileSegue" id="T98-w6-hVg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4bJ-xf-0Rf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2314.4927536231885" y="703.53260869565224"/>
+        </scene>
+        <!--ProfileUserViewController-->
+        <scene sceneID="IBd-dX-vat">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileUserViewController" id="gBA-zO-uik" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="NcC-Ap-1JQ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="af7-EG-0UE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2720" y="1216"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EK6-6N-OZj">
@@ -338,4 +350,7 @@
         <image name="like" width="46" height="41"/>
         <image name="share" width="37" height="41"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="BG8-Os-hrS"/>
+    </inferredMetricsTieBreakers>
 </document>

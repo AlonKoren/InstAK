@@ -12,6 +12,7 @@ import Kingfisher
 
 protocol HomeTableViewCellDelegate {
     func goToCommentViewController(postId : String)
+    func goToProfileUserViewController(userId: String)
 }
 
 class HomeTableViewCell: UITableViewCell {
@@ -110,7 +111,30 @@ class HomeTableViewCell: UITableViewCell {
         likeImageView.isUserInteractionEnabled = true
         
         
+        let tapGestureForNameLabel = UITapGestureRecognizer(target: self, action: #selector(self.nameLabel_TouchUpInside))
+        nameLabel.addGestureRecognizer(tapGestureForNameLabel)
+        nameLabel.isUserInteractionEnabled = true
         
+        let tapGestureForProfileImage = UITapGestureRecognizer(target: self, action: #selector(self.profileImage_TouchUpInside))
+        profileImageView.addGestureRecognizer(tapGestureForProfileImage)
+        profileImageView.isUserInteractionEnabled = true
+        
+        
+    }
+    
+    
+    @objc func nameLabel_TouchUpInside(){
+        goToProfileUserViewController()
+    }
+    
+    @objc func profileImage_TouchUpInside(){
+        goToProfileUserViewController()
+    }
+    
+    func goToProfileUserViewController(){
+        if let userId = user?.uid{
+            delegate?.goToProfileUserViewController(userId: userId)
+        }
     }
     
     @objc func commentImageView_TouchUpInside(){

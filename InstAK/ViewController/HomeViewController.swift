@@ -118,6 +118,13 @@ class HomeViewController: UIViewController {
             commentViewController.postId = postId
             print("postId=\(postId)")
         }
+        
+        if segue.identifier == "Feed_ProfileSegue"{
+            let profileUserViewController = segue.destination as! ProfileUserViewController
+            let userId = sender as! String
+            profileUserViewController.userId = userId
+            print("userId=\(userId)")
+        }
     }
     
 }
@@ -140,7 +147,12 @@ extension HomeViewController: UITableViewDataSource {
 }
 
 extension HomeViewController: HomeTableViewCellDelegate{
+    
     func goToCommentViewController(postId: String) {
         self.performSegue(withIdentifier: "CommentSegue", sender: postId)
+    }
+    
+    func goToProfileUserViewController(userId: String) {
+        self.performSegue(withIdentifier: "Feed_ProfileSegue", sender: userId)
     }
 }

@@ -77,6 +77,16 @@
             </objects>
             <point key="canvasLocation" x="-2194.202898550725" y="703.53260869565224"/>
         </scene>
+        <!--ProfileUserViewController-->
+        <scene sceneID="KFf-Ka-yGV">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileUserViewController" id="MgQ-Vx-kav" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Cpl-qb-aV9"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xJq-hG-N1D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-794" y="707"/>
+        </scene>
         <!--Search View Controller-->
         <scene sceneID="1eW-Yf-qZT">
             <objects>
@@ -170,6 +180,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="A1O-jE-Hlc" id="l3m-va-gUD"/>
+                        <segue destination="MgQ-Vx-kav" kind="show" identifier="Search_ProfileSegue" id="nO6-5i-qBg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dl2-EZ-a61" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

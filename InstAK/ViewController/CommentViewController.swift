@@ -157,6 +157,18 @@ class CommentViewController: UIViewController {
         self.commentTextField.text = ""
         textFieldDidChange()
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("segue.identifier =\(String(describing: segue.identifier))")
+        
+        if segue.identifier == "Comment_ProfileSegue"{
+            let profileUserViewController = segue.destination as! ProfileUserViewController
+            let userId = sender as! String
+            profileUserViewController.userId = userId
+            print("userId=\(userId)")
+        }
+    }
 }
 
 extension CommentViewController: UITableViewDataSource {
@@ -170,6 +182,15 @@ extension CommentViewController: UITableViewDataSource {
         let comment: Comment = self.comments[indexPath.row]
         cell.comment = comment
         cell.user = users[comment.commnetId!]
+        cell.delegate = self
         return cell
     }
+}
+
+extension CommentViewController: CommentTableViewCellDelegate{
+    func goToProfileUserViewController(userId: String) {
+        self.performSegue(withIdentifier: "Comment_ProfileSegue", sender: userId)
+    }
+    
+    
 }

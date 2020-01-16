@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CommentTableViewCellDelegate {
+    func goToProfileUserViewController(userId: String)
+}
+
 class CommentTableViewCell: UITableViewCell {
 
     
@@ -16,6 +20,8 @@ class CommentTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var commentLabel: UILabel!
+    
+    var delegate: CommentTableViewCellDelegate?
     
     var comment: Comment? {
         didSet{
@@ -30,6 +36,8 @@ class CommentTableViewCell: UITableViewCell {
       }
     
     
+    
+    
     func updateView() {
         commentLabel.text = comment?.commentText
     }
@@ -40,7 +48,7 @@ class CommentTableViewCell: UITableViewCell {
             if let profileImageUrlString = user.prifileImage {
                 let profileImageUrl = URL(string: profileImageUrlString)
                 let placeholder = #imageLiteral(resourceName: "placeholder-avatar-profile")
-                self.profileImageView.kf.setImage(with: profileImageUrl, placeholder: placeholder, options: [.forceRefresh])
+                self.profileImageView.kf.setImage(with: profileImageUrl, placeholder: placeholder, options: [])
             }else{
                 print("profileImageUrlString does not exist")
             }
@@ -51,6 +59,15 @@ class CommentTableViewCell: UITableViewCell {
         super.awakeFromNib()
         nameLabel.text = ""
         commentLabel.text = ""
+        
+        
+        let tapGestureForNameLabel = UITapGestureRecognizer(target: self, action: #selector(self.nameLabel_TouchUpInside))
+        nameLabel.addGestureRecognizer(tapGestureForNameLabel)
+        nameLabel.isUserInteractionEnabled = true
+        
+        let tapGestureForProfileImage = UITapGestureRecognizer(target: self, action: #selector(self.profileImage_TouchUpInside))
+        profileImageView.addGestureRecognizer(tapGestureForProfileImage)
+        profileImageView.isUserInteractionEnabled = true
     }
     
     override func prepareForReuse() {
@@ -61,6 +78,21 @@ class CommentTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
+    }
+    
+    
+    @objc func nameLabel_TouchUpInside(){
+        goToProfileUserViewController()
+    }
+    
+    @objc func profileImage_TouchUpInside(){
+        goToProfileUserViewController()
+    }
+    
+    func goToProfileUserViewController(){
+        if let userId = user?.uid{
+            delegate?.goToProfileUserViewController(userId: userId)
+        }
     }
 
 }
