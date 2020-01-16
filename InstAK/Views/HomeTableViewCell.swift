@@ -87,13 +87,11 @@ class HomeTableViewCell: UITableViewCell {
     func setupUserInfo() {
         if let user = user{
             self.nameLabel.text = user.username
-            if let profileImageUrlString = user.prifileImage {
-                let profileImageUrl = URL(string: profileImageUrlString)
-                let placeholder = #imageLiteral(resourceName: "placeholder-avatar-profile")
-                self.profileImageView.kf.setImage(with: profileImageUrl, placeholder: placeholder, options: [])
-            }else{
-                print("profileImageUrlString does not exist")
-            }
+            let profileImageUrlString = user.prifileImage
+            let profileImageUrl = URL(string: profileImageUrlString)
+            let placeholder = #imageLiteral(resourceName: "placeholder-avatar-profile")
+            self.profileImageView.kf.setImage(with: profileImageUrl, placeholder: placeholder, options: [])
+            
         }
     }
     

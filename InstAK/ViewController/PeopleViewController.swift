@@ -44,7 +44,7 @@ class PeopleViewController: UIViewController {
             }
             self.isFollowing(user: addedUser) { (isFollowing) in
                 self.users.append(addedUser)
-                self.followingUsers[addedUser.uid!] = BooleanObject.init(bool: isFollowing)
+                self.followingUsers[addedUser.uid] = BooleanObject.init(bool: isFollowing)
                 self.tableView.reloadData()
             }
             
@@ -65,7 +65,7 @@ class PeopleViewController: UIViewController {
             self.users.removeAll { (user) -> Bool in
                 return user.uid == removedUser.uid
             }
-            self.followingUsers.removeValue(forKey: removedUser.uid!)
+            self.followingUsers.removeValue(forKey: removedUser.uid)
             self.tableView.reloadData()
         }) { (error) in
             print(error.localizedDescription)
@@ -77,7 +77,7 @@ class PeopleViewController: UIViewController {
             return
         }
         
-        Api.Follow.isFollowingAfterUser(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user.uid!, onCompletion: onCompletion) { (error) in
+        Api.Follow.isFollowingAfterUser(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user.uid, onCompletion: onCompletion) { (error) in
             print(error.localizedDescription)
         }
     }
@@ -87,7 +87,8 @@ class PeopleViewController: UIViewController {
         print("segue.identifier =\(String(describing: segue.identifier))")
         if segue.identifier == "ProfileSegue"{
             let profileUserViewController = segue.destination as! ProfileUserViewController
-            let userId = sender as! String
+            let userId  = sender as! String
+            
             profileUserViewController.userId = userId
             print("userId=\(userId)")
         }
@@ -105,7 +106,7 @@ extension PeopleViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PeopleTableViewCell", for: indexPath) as! PeopleTableViewCell
         let user = users[indexPath.row]
         cell.user = user
-        cell.isFollowing = self.followingUsers[user.uid!]
+        cell.isFollowing = self.followingUsers[user.uid]
         
         cell.delegate = self
 

@@ -49,7 +49,7 @@ class SearchViewController: UIViewController {
                 
                 self.isFollowing(user: addedUser) { (isFollowing) in
                     self.users.append(addedUser)
-                    self.followingUsers[addedUser.uid!] = BooleanObject.init(bool: isFollowing)
+                    self.followingUsers[addedUser.uid] = BooleanObject.init(bool: isFollowing)
                     self.tableView.reloadData()
                 }
                 
@@ -66,7 +66,7 @@ class SearchViewController: UIViewController {
                 self.users.removeAll { (user) -> Bool in
                     return user.uid == removedUser.uid
                 }
-                self.followingUsers.removeValue(forKey: removedUser.uid!)
+                self.followingUsers.removeValue(forKey: removedUser.uid)
                 self.tableView.reloadData()
             }) { (error) in
                 print(error.localizedDescription)
@@ -85,7 +85,7 @@ class SearchViewController: UIViewController {
             return
         }
         
-        Api.Follow.isFollowingAfterUser(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user.uid!, onCompletion: onCompletion) { (error) in
+        Api.Follow.isFollowingAfterUser(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user.uid , onCompletion: onCompletion) { (error) in
             print(error.localizedDescription)
         }
     }
@@ -127,7 +127,7 @@ extension SearchViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PeopleTableViewCell", for: indexPath) as! PeopleTableViewCell
         let user = users[indexPath.row]
         cell.user = user
-        cell.isFollowing = self.followingUsers[user.uid!]
+        cell.isFollowing = self.followingUsers[user.uid]
         cell.delegate = self
 
         return cell
@@ -137,5 +137,7 @@ extension SearchViewController: UITableViewDataSource {
 extension SearchViewController: PeopleTableViewCellDelegate{
     func goToProfileUserViewController(userId: String) {
          self.performSegue(withIdentifier: "Search_ProfileSegue", sender: userId)
+
     }
+
 }

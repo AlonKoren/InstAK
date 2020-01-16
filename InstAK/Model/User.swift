@@ -10,11 +10,11 @@ import Foundation
 
 class User : Codable{
     
-    var email: String?
-    var prifileImage: String?
-    var username: String?
-    var uid: String?
-    var username_lowercase: String?
+    var email: String
+    var prifileImage: String
+    var username: String
+    var uid: String
+    var username_lowercase: String
     
     init(email: String, prifileImage: String, username: String, uid: String) {
         self.email = email

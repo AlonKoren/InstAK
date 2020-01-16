@@ -17,6 +17,7 @@ class ProfileUserViewController: UIViewController {
     var lisener :Listener?
 
     var userId : String = ""
+    var isFollowing : Bool = false
        
     
     override func viewDidLoad() {
@@ -42,9 +43,15 @@ class ProfileUserViewController: UIViewController {
 
         
         Api.User.getUser(withId: userId, onCompletion: { (user:User) in
-            self.user = user
-            self.navigationItem.title = user.username
-            self.collectionView.reloadData()
+            Api.Follow.isFollowingAfterUser(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user.uid, onCompletion: { (isFollowing) in
+                self.user = user
+                self.isFollowing = isFollowing
+                self.navigationItem.title = user.username
+                self.collectionView.reloadData()
+            }) { (err) in
+                print(err)
+            }
+            
         }) { (err) in
             print(err)
         }
@@ -100,6 +107,7 @@ extension ProfileUserViewController:UICollectionViewDataSource{
         let headerViewCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderProfileCollectionReusableView", for: indexPath) as! HeaderProfileCollectionReusableView
         if let user = self.user{
             headerViewCell.user = user
+            headerViewCell.isFollowing = BooleanObject.init(bool: isFollowing)
         }
         return headerViewCell
     }

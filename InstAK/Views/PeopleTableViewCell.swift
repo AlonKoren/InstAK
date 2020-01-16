@@ -45,13 +45,11 @@ class PeopleTableViewCell: UITableViewCell {
     
     func updateView(){
         self.nameLabel.text = user!.username
-        if let profileImageUrlString = user!.prifileImage {
-            let profileImageUrl = URL(string: profileImageUrlString)
-            let placeholder = #imageLiteral(resourceName: "placeholder-avatar-profile")
-            self.profileImage.kf.setImage(with: profileImageUrl, placeholder: placeholder, options: [])
-        }else{
-            print("profileImageUrlString does not exist")
-        }
+        let profileImageUrlString = user!.prifileImage
+        let profileImageUrl = URL(string: profileImageUrlString)
+        let placeholder = #imageLiteral(resourceName: "placeholder-avatar-profile")
+        self.profileImage.kf.setImage(with: profileImageUrl, placeholder: placeholder, options: [])
+        
     }
     
     
@@ -109,8 +107,8 @@ class PeopleTableViewCell: UITableViewCell {
             return
         }
         if self.isFollowing!.getBool() == false{
-            Api.Follow.followAction(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid!, onCompletion: {
-                Api.MyPosts.getUserPosts(userId: self.user!.uid!, onCompletion: { (postsIds) in
+            Api.Follow.followAction(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid, onCompletion: {
+                Api.MyPosts.getUserPosts(userId: self.user!.uid , onCompletion: { (postsIds) in
                     
                     Api.Feed.addPostsToFeed(userId: AuthService.getCurrentUserId()!, postsIds: postsIds)
                     
@@ -131,8 +129,8 @@ class PeopleTableViewCell: UITableViewCell {
             return
         }
         if self.isFollowing!.getBool() == true{
-            Api.Follow.unFollowAction(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid!, onCompletion: {
-                Api.MyPosts.getUserPosts(userId: self.user!.uid!, onCompletion: { (postsIds) in
+            Api.Follow.unFollowAction(followerUserId: AuthService.getCurrentUserId()!, followingUserId: user!.uid, onCompletion: {
+                Api.MyPosts.getUserPosts(userId: self.user!.uid , onCompletion: { (postsIds) in
                     Api.Feed.removePostsToFeed(userId: AuthService.getCurrentUserId()!, postsIds: postsIds)
                 }) { (error) in
                     ProgressHUD.showError(error.localizedDescription)

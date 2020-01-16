@@ -171,6 +171,7 @@
                                         <constraint firstItem="5SH-7y-kuy" firstAttribute="leading" secondItem="8uz-ie-6Rv" secondAttribute="leading" id="yXG-ym-oep"/>
                                     </constraints>
                                     <connections>
+                                        <outlet property="followButton" destination="C7z-TV-a3K" id="p6y-lv-hmm"/>
                                         <outlet property="followersCountLabel" destination="43O-II-qkT" id="IH4-5H-kW6"/>
                                         <outlet property="followingCountLabel" destination="eH4-qh-d84" id="SjJ-va-GFt"/>
                                         <outlet property="myPostsCountLabel" destination="frV-Dw-OAt" id="XCB-K7-kH1"/>
@@ -381,8 +382,8 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alon" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8M-do-eqM">
-                                            <rect key="frame" x="15" y="130" width="32.333333333333336" height="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8M-do-eqM">
+                                            <rect key="frame" x="15" y="130" width="71" height="18"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -390,14 +391,14 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6MM-Eo-YWF">
                                             <rect key="frame" x="130" y="15" width="269" height="100"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NtQ-8K-VYV">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NtQ-8K-VYV">
                                                     <rect key="frame" x="20" y="51" width="229" height="30"/>
                                                     <color key="backgroundColor" red="0.8862745098" green="0.89411764709999997" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="Wbl-8B-LsY"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                    <state key="normal" title="Edit Profile">
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                    <state key="normal" title="Loading...">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
@@ -485,6 +486,7 @@
                                         <constraint firstItem="c8M-do-eqM" firstAttribute="leading" secondItem="dAs-bM-RHp" secondAttribute="leading" id="z7i-lv-sL7"/>
                                     </constraints>
                                     <connections>
+                                        <outlet property="followButton" destination="NtQ-8K-VYV" id="EpC-pP-EJL"/>
                                         <outlet property="followersCountLabel" destination="X78-af-k6Z" id="OFg-8k-NB7"/>
                                         <outlet property="followingCountLabel" destination="fch-g0-dCB" id="aMB-AB-My8"/>
                                         <outlet property="myPostsCountLabel" destination="EUB-iS-YOq" id="5fG-mm-S1z"/>
