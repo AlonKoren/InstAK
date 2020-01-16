@@ -115,6 +115,7 @@ extension ProfileUserViewController:UICollectionViewDataSource{
         if let user = self.user{
             headerViewCell.user = user
             headerViewCell.isFollowing = BooleanObject.init(bool: isFollowing)
+            headerViewCell.delegateSetting = self
         }
         return headerViewCell
     }
@@ -145,6 +146,14 @@ extension ProfileUserViewController : HeaderProfileCollectionReusableViewDelegat
     
     func closeListeners(listeners: [Listener]) {
         cellListeners.append(contentsOf: listeners)
+    }
+    
+}
+
+extension ProfileUserViewController : HeaderProfileCollectionReusableViewDelegateSwitchSettingViewController{
+    
+    func goToSettingViewController() {
+        self.performSegue(withIdentifier: "ProfileUser_SettingSegue", sender: nil)
     }
     
 }

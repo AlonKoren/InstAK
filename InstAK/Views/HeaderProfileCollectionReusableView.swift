@@ -13,6 +13,11 @@ protocol HeaderProfileCollectionReusableViewDelegate {
     func closeListeners(listeners : [Listener])
 }
 
+protocol HeaderProfileCollectionReusableViewDelegateSwitchSettingViewController {
+    func goToSettingViewController()
+}
+
+//Profile_SettingSeague
 class HeaderProfileCollectionReusableView: UICollectionReusableView {
 
     @IBOutlet weak var profileImage: UIImageView!
@@ -29,6 +34,7 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
     
     
     var delegate : HeaderProfileCollectionReusableViewDelegate?
+    var delegateSetting : HeaderProfileCollectionReusableViewDelegateSwitchSettingViewController?
     
     var user : User?{
         didSet{
@@ -63,9 +69,7 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
             print(err.localizedDescription)
         }
         
-        
-        //  TODO TODO TODO Liseners notification
-        print("TODO TODO TODO Liseners notification")
+    
         var followingListener , followerListener :Listener
         followingListener = Api.Follow.getAllFollowingsCount(followerUserId: user!.uid, onCompletion: { (followingCount) in
             self.followingCountLabel.text = "\(followingCount)"
@@ -81,9 +85,15 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
         
         if user?.uid == AuthService.getCurrentUserId(){
             self.followButton.setTitle("Edit Profile", for: .normal)
+            self.followButton.addTarget(self, action: #selector(self.goToSettingViewController), for: .touchUpInside)
         }
         
         delegate?.closeListeners(listeners: [followingListener , followerListener])
+    }
+    
+    
+    @objc func goToSettingViewController(){
+        delegateSetting?.goToSettingViewController()
     }
     
     func updateViewFollowButton(){

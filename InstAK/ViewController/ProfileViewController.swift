@@ -88,6 +88,7 @@ class ProfileViewController: UIViewController {
             print(error.localizedDescription)
         }
     }
+    
 }
 
 extension ProfileViewController:UICollectionViewDataSource{
@@ -106,9 +107,8 @@ extension ProfileViewController:UICollectionViewDataSource{
         let headerViewCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderProfileCollectionReusableView", for: indexPath) as! HeaderProfileCollectionReusableView
         headerViewCell.delegate = self
         if let user = self.user{
-            
             headerViewCell.user = user
-            
+            headerViewCell.delegateSetting = self
         }
         return headerViewCell
     }
@@ -138,6 +138,14 @@ extension ProfileViewController : HeaderProfileCollectionReusableViewDelegate{
     
     func closeListeners(listeners: [Listener]) {
         cellListeners.append(contentsOf: listeners)
+    }
+    
+}
+
+extension ProfileViewController : HeaderProfileCollectionReusableViewDelegateSwitchSettingViewController{
+    
+    func goToSettingViewController() {
+        self.performSegue(withIdentifier: "Profile_SettingSegue", sender: nil)
     }
     
 }
