@@ -15,13 +15,15 @@ class Post : Codable{
     var photoUrl: String?
     var uid: String?
     var likeCount: Int?
+    var ratio : CGFloat?
     
-    init(captionText: String, photoUrlString: String, uid: String,postId: String) {
+    init(captionText: String, photoUrlString: String, uid: String,postId: String,ratio : CGFloat) {
         self.caption = captionText
         self.photoUrl = photoUrlString
         self.uid = uid
         self.postId = postId
         self.likeCount = 0
+        self.ratio = ratio
     }
     
     func setData(post: Post){
@@ -30,5 +32,6 @@ class Post : Codable{
         self.uid = post.uid
         self.postId = post.postId
         self.likeCount = post.likeCount
+        self.ratio = post.ratio
     }
 }

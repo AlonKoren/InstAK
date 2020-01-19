@@ -84,12 +84,12 @@ class CameraViewController: UIViewController {
     @IBAction func shareButton_TouchUpInside(_ sender: Any) {
         view.endEditing(true)
         ProgressHUD.show("Waiting...", interaction: false)
-        if let imageData = self.selectedImage!.jpegData(compressionQuality: 0.9) {
-            
+        if let profileImg = self.selectedImage, let imageData = profileImg.jpegData(compressionQuality: 0.9) {
+            let ratio = profileImg.size.width / profileImg.size.height
             let photoIdString = NSUUID().uuidString
             StorageService.addPostImage(postId: photoIdString, imageData: imageData, onSuccess: { (url : URL) in
                 let photoUrl = url.absoluteString
-                self.sendDataToDatabase(photoUrl: photoUrl)
+                self.sendDataToDatabase(photoUrl: photoUrl, ratio : ratio)
                 
             }) { (error) in
                 ProgressHUD.showError(error.localizedDescription)
@@ -97,7 +97,7 @@ class CameraViewController: UIViewController {
         }
     }
     
-    func sendDataToDatabase(photoUrl : String) {
+    func sendDataToDatabase(photoUrl : String , ratio : CGFloat) {
         
         
         var caption : String = ""
@@ -110,7 +110,7 @@ class CameraViewController: UIViewController {
         }
         
         
-        Api.Post.addPostToDatabase(caption: caption, photoUrl: photoUrl, uid: currentUserId, onCompletion: { (post : Post) in
+        Api.Post.addPostToDatabase(caption: caption, photoUrl: photoUrl, uid: currentUserId, ratio : ratio ,onCompletion: { (post : Post) in
             Api.MyPosts.connectUserToPost(userId: currentUserId, postId: post.postId!, onCompletion: { () in
 
                 Api.Feed.addPostToFeed(userId: currentUserId, postId: post.postId!)

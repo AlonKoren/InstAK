@@ -34,6 +34,9 @@ class HomeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var captionLabel: UILabel!
     
+    @IBOutlet weak var heightConstraintPhoto: NSLayoutConstraint!
+    
+    
     var delegate : HomeTableViewCellDelegate?
     
     var post: Post? {
@@ -59,6 +62,13 @@ class HomeTableViewCell: UITableViewCell {
     
     func updateView() {
         captionLabel.text = post?.caption
+        print("ratio: \(post?.ratio)")
+        if let ratio = post?.ratio {
+            print(self.heightConstraintPhoto.constant)
+            self.heightConstraintPhoto.constant = UIScreen.main.bounds.size.width / ratio
+            print(self.heightConstraintPhoto.constant)
+            
+        }
         if let photoUrlString = post?.photoUrl {
             let photoUrl = URL(string: photoUrlString)
             postImageView.kf.setImage(with: photoUrl)
@@ -74,10 +84,8 @@ class HomeTableViewCell: UITableViewCell {
             Api.Post.isLiked(postId: postId, userId: userId, onCompletion: { (isLiked : Bool) in
                 if isLiked{
                     self.likeImageView.image = #imageLiteral(resourceName: "likeSelected")
-                    print("like")
                 }else{
                     self.likeImageView.image = #imageLiteral(resourceName: "like")
-                    print("unlike")
                 }
             }) { (err) in
                 print("error: \(err)")
@@ -173,10 +181,8 @@ class HomeTableViewCell: UITableViewCell {
         Api.Post.incrementLike(postId: postid, userId: userId, onCompletion: { (isLiked) in
             if isLiked{
                 self.likeImageView.image = #imageLiteral(resourceName: "likeSelected")
-                print("like")
             }else{
                 self.likeImageView.image = #imageLiteral(resourceName: "like")
-                print("unlike")
             }
         }) { (error) in
             ProgressHUD.showError(error.localizedDescription)

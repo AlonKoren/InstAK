@@ -18,7 +18,9 @@ class UserApi {
                 let user: User = try! DictionaryDecoder().decode(User.self, from: userDocument.data()!)
                 onCompletion(user)
             }else{
-                onError(error!)
+                if let error = error{
+                    onError(error)
+                }
             }
         }
     }
