@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import AVFoundation
 
 
 protocol HomeTableViewCellDelegate {
@@ -38,6 +39,8 @@ class HomeTableViewCell: UITableViewCell {
     
     
     var delegate : HomeTableViewCellDelegate?
+    var player: AVPlayer?
+    var playerLayer : AVPlayerLayer?
     
     var post: Post? {
         didSet{
@@ -63,17 +66,27 @@ class HomeTableViewCell: UITableViewCell {
     func updateView() {
         captionLabel.text = post?.caption
         if let ratio = post?.ratio {
-            print(self.heightConstraintPhoto.constant)
             self.heightConstraintPhoto.constant = UIScreen.main.bounds.size.width / ratio
-            print(self.heightConstraintPhoto.constant)
-            
+            layoutIfNeeded()
         }
         if let photoUrlString = post?.photoUrl {
             let photoUrl = URL(string: photoUrlString)
             postImageView.kf.setImage(with: photoUrl)
         }
-        
-        
+        if let videoUrlString = post?.videoUrl , let videoUrl = URL(string: videoUrlString){
+            player = AVPlayer(url: videoUrl)
+            playerLayer = AVPlayerLayer(player: player)
+            playerLayer?.frame = postImageView.frame
+            playerLayer?.frame.size.width = UIScreen.main.bounds.width
+            if let ratio = post?.ratio {
+                playerLayer?.frame.size.height = UIScreen.main.bounds.size.width / ratio
+            }
+            layoutIfNeeded()
+            self.contentView.layer.addSublayer(playerLayer!)
+            layoutIfNeeded()
+            player?.play()
+        }
+
         updateLike(post: post!)
     }
     
@@ -163,6 +176,8 @@ class HomeTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         profileImageView.image = #imageLiteral(resourceName: "placeholder-avatar-profile")
+        playerLayer?.removeFromSuperlayer()
+        player?.pause()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

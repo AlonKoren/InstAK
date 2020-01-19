@@ -91,11 +91,9 @@ class CameraViewController: UIViewController {
             let photoIdString = NSUUID().uuidString
             
             if let localVideoUrl = self.videoUrl{
-                print("i choose video!")
                 if let videoData = NSData(contentsOf: localVideoUrl) as Data? {
                     StorageService.addPostVideo(postId: photoIdString, videoData: videoData, onSuccess: { (remoteVideoUrl) in
                         let remoteVideoUrl = remoteVideoUrl.absoluteString
-                        print("and now image!")
                         StorageService.addPostImage(postId: photoIdString, imageData: imageData, onSuccess: { (url : URL) in
                             let photoUrl = url.absoluteString
                             self.sendDataToDatabase(photoUrl: photoUrl, ratio : ratio , remoteVideoUrl: remoteVideoUrl)
