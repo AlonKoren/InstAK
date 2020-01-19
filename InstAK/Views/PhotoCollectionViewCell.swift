@@ -8,6 +8,11 @@
 
 import UIKit
 
+
+protocol PhotoCollectionViewCellDelegate {
+    func goToDetailViewController(postId: String)
+}
+
 class PhotoCollectionViewCell: UICollectionViewCell {
     
     
@@ -21,6 +26,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
             updateView()
         }
     }
+    var delegate : PhotoCollectionViewCellDelegate?
     
     func updateView(){
         print("updateView")
@@ -28,6 +34,16 @@ class PhotoCollectionViewCell: UICollectionViewCell {
             print("photoUrlString")
            let photoUrl = URL(string: photoUrlString)
            photo.kf.setImage(with: photoUrl)
+        }
+        
+        let tapGestureForLikeImage = UITapGestureRecognizer(target: self, action: #selector(self.photo_TouchUpInside))
+        photo.addGestureRecognizer(tapGestureForLikeImage)
+        photo.isUserInteractionEnabled = true
+    }
+    
+    @objc func photo_TouchUpInside(){
+        if let id = post?.postId{
+            delegate?.goToDetailViewController(postId: id)
         }
     }
 }
