@@ -190,6 +190,7 @@
 				0A013D6E23AE8B9B00838A21 /* ActivityViewController.swift */,
 				0A013D6C23AE8AEA00838A21 /* CameraViewController.swift */,
 				0A1E3EF923C3CFCA001B09B0 /* CommentViewController.swift */,
+				0AD5FA5E23D4D25400435562 /* DetailViewController.swift */,
 				0A013D6A23AE8AA500838A21 /* DiscoverViewController.swift */,
 				0A013D6823AE8A2D00838A21 /* HomeViewController.swift */,
 				0A08696D23CDF24E005FA46E /* PeopleViewController.swift */,
@@ -199,7 +200,6 @@
 				0A63B4E923D0B51B001A793B /* SettingTableViewController.swift */,
 				0AAC99FB23A9012200A60A90 /* SignInViewController.swift */,
 				0AAC99FD23A9125C00A60A90 /* SignUpViewController.swift */,
-				0AD5FA5E23D4D25400435562 /* DetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -207,11 +207,11 @@
 		0A589F3623C266BD000D6C9F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0A589F3723C26709000D6C9F /* Post.swift */,
-				0A589F3923C2982B000D6C9F /* DictionaryCoder.swift */,
-				0A1E3EF723C39E71001B09B0 /* User.swift */,
 				0A1E3EFD23C3EE83001B09B0 /* Comment.swift */,
+				0A589F3923C2982B000D6C9F /* DictionaryCoder.swift */,
 				0AE2931523C79E7300803787 /* Listener.swift */,
+				0A589F3723C26709000D6C9F /* Post.swift */,
+				0A1E3EF723C39E71001B09B0 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -219,11 +219,11 @@
 		0A6B485C23C354E200FBC41F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0A6B485A23C354BE00FBC41F /* HomeTableViewCell.swift */,
 				0A1E3EFB23C3D001001B09B0 /* CommentTableViewCell.swift */,
 				0AF790BE23CCE77A0062CA22 /* HeaderProfileCollectionReusableView.swift */,
-				0AF790C223CD12D50062CA22 /* PhotoCollectionViewCell.swift */,
+				0A6B485A23C354BE00FBC41F /* HomeTableViewCell.swift */,
 				0A08696F23CDF2BB005FA46E /* PeopleTableViewCell.swift */,
+				0AF790C223CD12D50062CA22 /* PhotoCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

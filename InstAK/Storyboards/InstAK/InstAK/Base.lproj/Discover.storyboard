@@ -218,6 +218,9 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="o6z-7Z-mUd" id="PAO-RF-5Kd"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -230,10 +233,35 @@
                         <viewLayoutGuide key="safeArea" id="PWN-zt-Vf4"/>
                     </view>
                     <navigationItem key="navigationItem" id="DyD-ht-g7J"/>
+                    <connections>
+                        <outlet property="tableView" destination="oJX-cj-kHM" id="9Um-SX-z7t"/>
+                        <segue destination="UOb-E0-b9f" kind="show" identifier="Detail_CommentSegue" id="F46-65-1TO"/>
+                        <segue destination="XLJ-WC-j0g" kind="show" identifier="Detail_ProfileSegue" id="Oej-CD-A9b"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MJq-QQ-4jz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2194.202898550725" y="1418.4782608695652"/>
+        </scene>
+        <!--ProfileUserViewController-->
+        <scene sceneID="BPV-rU-v1V">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileUserViewController" id="XLJ-WC-j0g" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ZF6-aP-SE1"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ngz-Ht-De8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2191" y="1847"/>
+        </scene>
+        <!--CommentViewController-->
+        <scene sceneID="i3A-Mm-OIN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Feeds" referencedIdentifier="CommentViewController" id="UOb-E0-b9f" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="2YY-nQ-asE"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9pQ-8l-9SV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1509" y="1418"/>
         </scene>
         <!--ProfileUserViewController-->
         <scene sceneID="KFf-Ka-yGV">

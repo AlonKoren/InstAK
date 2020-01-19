@@ -38,12 +38,20 @@ class HomeTableViewCell: UITableViewCell {
     
     var post: Post? {
         didSet{
+            if post == nil{
+                print("post is nil")
+                return
+            }
             updateView()
         }
     }
     
     var user: User? {
           didSet{
+            if user == nil{
+                print("user is nil")
+                return
+            }
               setupUserInfo()
           }
       }

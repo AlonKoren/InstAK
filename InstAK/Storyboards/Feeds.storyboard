@@ -171,7 +171,7 @@
         <!--Comment View Controller-->
         <scene sceneID="oKF-cH-pIL">
             <objects>
-                <viewController id="AmX-3g-PjT" customClass="CommentViewController" customModule="InstAK" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CommentViewController" id="AmX-3g-PjT" customClass="CommentViewController" customModule="InstAK" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="q2P-v8-2Q7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -345,6 +345,6 @@
         <image name="share" width="37" height="41"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BG8-Os-hrS"/>
+        <segue reference="T98-w6-hVg"/>
     </inferredMetricsTieBreakers>
 </document>
