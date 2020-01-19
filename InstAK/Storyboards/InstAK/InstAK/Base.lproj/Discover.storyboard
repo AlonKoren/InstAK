@@ -86,7 +86,7 @@
         <!--Detail View Controller-->
         <scene sceneID="Nat-AA-J79">
             <objects>
-                <viewController id="o6z-7Z-mUd" customClass="DetailViewController" customModule="InstAK" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" id="o6z-7Z-mUd" customClass="DetailViewController" customModule="InstAK" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WGd-3t-yTj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

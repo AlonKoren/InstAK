@@ -200,11 +200,22 @@
                     <connections>
                         <outlet property="collectionView" destination="s0j-m1-QPP" id="mLY-wx-ZF4"/>
                         <segue destination="JJp-KG-6nq" kind="show" identifier="Profile_SettingSegue" id="qSg-bV-AZi"/>
+                        <segue destination="9vG-F2-f0M" kind="show" identifier="Profile_DetailSegue" id="G1x-CQ-eOJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GI4-wi-lc8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="995.65217391304361" y="703.53260869565224"/>
+        </scene>
+        <!--DetailViewController-->
+        <scene sceneID="xE6-86-auG">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Discover" referencedIdentifier="DetailViewController" id="9vG-F2-f0M" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="aFG-EC-MhS"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hUf-wb-P57" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1793" y="197"/>
         </scene>
         <!--People View Controller-->
         <scene sceneID="38V-eQ-Vl3">
@@ -688,6 +699,7 @@
                     <connections>
                         <outlet property="collectionView" destination="xre-2q-yhg" id="9nU-nU-HuI"/>
                         <segue destination="JJp-KG-6nq" kind="show" identifier="ProfileUser_SettingSegue" id="oIS-s5-c3l"/>
+                        <segue destination="9vG-F2-f0M" kind="show" identifier="ProfileUser_DetailSegue" id="xPH-eg-9D0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gqf-VT-WIY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -702,6 +714,7 @@
         <image name="placeholder-avatar-profile" width="1024" height="1024"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qSg-bV-AZi"/>
+        <segue reference="oIS-s5-c3l"/>
+        <segue reference="xPH-eg-9D0"/>
     </inferredMetricsTieBreakers>
 </document>
