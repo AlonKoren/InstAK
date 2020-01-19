@@ -38,6 +38,8 @@ class HomeViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         Listener?.disconnected()
+        posts.removeAll()
+        users.removeAll()
     }
     
     func loadPosts() {
