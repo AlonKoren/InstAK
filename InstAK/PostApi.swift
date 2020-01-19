@@ -80,12 +80,12 @@ class PostApi {
         return listener
     }
     
-    func addPostToDatabase(caption: String, photoUrl: String, uid: String , ratio : CGFloat ,onCompletion: @escaping (Post)-> Void, onError : @escaping (Error)-> Void){
+    func addPostToDatabase(caption: String, photoUrl: String, uid: String , ratio : CGFloat, videoUrl:String? ,onCompletion: @escaping (Post)-> Void, onError : @escaping (Error)-> Void){
         let postsCollection = COLLECTION_POSTS
         let newPostDocument = postsCollection.document()
         let newPostId =  newPostDocument.documentID
         
-        let post:Post = Post(captionText: caption, photoUrlString: photoUrl, uid: uid, postId: newPostId, ratio: ratio)
+        let post:Post = Post(captionText: caption, photoUrlString: photoUrl, uid: uid, postId: newPostId, ratio: ratio,videoUrl: videoUrl)
         
         newPostDocument.setData(try! DictionaryEncoder().encode(post)){ err in
            if let err = err {

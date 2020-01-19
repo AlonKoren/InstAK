@@ -35,11 +35,32 @@ class StorageService {
     }
     
     static func addPostImage(postId : String, imageData : Data , onSuccess: @escaping (URL) -> Void, onError : @escaping (Error)-> Void){
-        let storageRef = STORAGE_POST_REF.child(postId)
+        let storageRef = STORAGE_POST_REF.child("images").child(postId)
 
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
         storageRef.putData(imageData, metadata: metadata) { (metadata, error) in
+            if error != nil{
+                onError(error!)
+                return
+            }
+            storageRef.downloadURL(completion: { (url, error) in
+                if error != nil {
+                    onError(error!)
+                    return
+                }
+                
+                onSuccess(url!)
+            })
+        }
+    }
+    
+    static func addPostVideo(postId : String, videoData : Data , onSuccess: @escaping (URL) -> Void, onError : @escaping (Error)-> Void){
+        let storageRef = STORAGE_POST_REF.child("videos").child(postId)
+
+        let metadata = StorageMetadata()
+        metadata.contentType = "video/mp4"
+        storageRef.putData(videoData, metadata: metadata) { (metadata, error) in
             if error != nil{
                 onError(error!)
                 return
