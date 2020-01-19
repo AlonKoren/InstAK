@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import AVFoundation
 
 class CameraViewController: UIViewController {
 
@@ -20,6 +20,7 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     var selectedImage: UIImage?
+    var videoUrl : URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,7 @@ class CameraViewController: UIViewController {
         
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
+        pickerController.mediaTypes = ["public.image", "public.movie"]
         present(pickerController, animated: true, completion: nil)
     }
     
@@ -146,8 +148,29 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
             selectedImage = image
             photo.image = image
             postDidChange()
-        };
+        }
+        else if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL.self] as? URL{
+            if let thumbnailImage = self.thumbnailImageForFileUrl(videoUrl){
+                self.videoUrl = videoUrl
+                selectedImage = thumbnailImage
+                photo.image = thumbnailImage
+                postDidChange()
+            }
+        }
         dismiss(animated: true, completion: nil)
+    }
+    
+    func thumbnailImageForFileUrl(_ fileUrl : URL) -> UIImage?{
+        let asset = AVAsset(url: fileUrl)
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        do{
+            let thumbnailCGImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 10), actualTime: nil)
+            return UIImage(cgImage: thumbnailCGImage)
+        }catch let err{
+            print(err)
+        }
+        
+        return nil
     }
 }
 
