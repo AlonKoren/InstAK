@@ -21,6 +21,7 @@
 		0A08696E23CDF24E005FA46E /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A08696D23CDF24E005FA46E /* PeopleViewController.swift */; };
 		0A08697023CDF2BB005FA46E /* PeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A08696F23CDF2BB005FA46E /* PeopleTableViewCell.swift */; };
 		0A0DC0A723D5C9A800E14916 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0DC0A623D5C9A800E14916 /* FilterViewController.swift */; };
+		0A0DC0A923D5D2F300E14916 /* FilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0DC0A823D5D2F300E14916 /* FilterCollectionViewCell.swift */; };
 		0A1E3EF823C39E71001B09B0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E3EF723C39E71001B09B0 /* User.swift */; };
 		0A1E3EFA23C3CFCA001B09B0 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E3EF923C3CFCA001B09B0 /* CommentViewController.swift */; };
 		0A1E3EFC23C3D001001B09B0 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E3EFB23C3D001001B09B0 /* CommentTableViewCell.swift */; };
@@ -93,6 +94,7 @@
 		0A08696D23CDF24E005FA46E /* PeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; };
 		0A08696F23CDF2BB005FA46E /* PeopleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTableViewCell.swift; sourceTree = "<group>"; };
 		0A0DC0A623D5C9A800E14916 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		0A0DC0A823D5D2F300E14916 /* FilterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A1E3EF723C39E71001B09B0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0A1E3EF923C3CFCA001B09B0 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		0A1E3EFB23C3D001001B09B0 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				0A6B485A23C354BE00FBC41F /* HomeTableViewCell.swift */,
 				0A08696F23CDF2BB005FA46E /* PeopleTableViewCell.swift */,
 				0AF790C223CD12D50062CA22 /* PhotoCollectionViewCell.swift */,
+				0A0DC0A823D5D2F300E14916 /* FilterCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -616,6 +619,7 @@
 				0A013D6F23AE8B9B00838A21 /* ActivityViewController.swift in Sources */,
 				0A1E3EFC23C3D001001B09B0 /* CommentTableViewCell.swift in Sources */,
 				0AE13C8523CE588100D53554 /* SearchViewController.swift in Sources */,
+				0A0DC0A923D5D2F300E14916 /* FilterCollectionViewCell.swift in Sources */,
 				0A1E3EFE23C3EE83001B09B0 /* Comment.swift in Sources */,
 				0A589F3A23C2982B000D6C9F /* DictionaryCoder.swift in Sources */,
 				0A04377423C519750099F3C7 /* CommentApi.swift in Sources */,

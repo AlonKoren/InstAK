@@ -167,6 +167,9 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
             self.videoUrl = nil
             selectedImage = image
             photo.image = image
+            dismiss(animated: true, completion: {
+                self.performSegue(withIdentifier: "Filter_Segue", sender: nil)
+            })
             postDidChange()
         }
         else if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL.self] as? URL{
@@ -176,8 +179,9 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
                 photo.image = thumbnailImage
                 postDidChange()
             }
+            dismiss(animated: true, completion: nil)
         }
-        dismiss(animated: true, completion: nil)
+        
     }
     
     func thumbnailImageForFileUrl(_ fileUrl : URL) -> UIImage?{
