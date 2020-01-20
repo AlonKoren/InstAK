@@ -46,6 +46,16 @@ class ActivityViewController: UIViewController {
             print(error.localizedDescription)
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("segue.identifier =\(String(describing: segue.identifier))")
+        if segue.identifier == "Activity_DetailSegue"{
+            let detailViewController = segue.destination as! DetailViewController
+            let postId = sender as! String
+            detailViewController.postId = postId
+            print("postId=\(postId)")
+        }
+    }
 }
 
 extension ActivityViewController: UITableViewDataSource {
@@ -58,6 +68,15 @@ extension ActivityViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityTableViewCell", for: indexPath) as! ActivityTableViewCell
         cell.user = self.users[notifications[indexPath.item].notificationId!]!
         cell.notification = self.notifications[indexPath.item]
+        cell.delegate = self
         return cell
     }
+}
+extension ActivityViewController: ActivityTableViewCellDelegate{
+    func goToDetailViewController(postId: String) {
+        self.performSegue(withIdentifier: "Activity_DetailSegue", sender: postId)
+
+    }
+    
+    
 }

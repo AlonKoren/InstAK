@@ -7,6 +7,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--DetailViewController-->
+        <scene sceneID="tCZ-kN-If3">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Discover" referencedIdentifier="DetailViewController" id="gNL-EO-ka9" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="4TV-05-YNR"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tWh-WW-EPF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-728" y="686"/>
+        </scene>
         <!--Activity-->
         <scene sceneID="cD8-9z-rQ9">
             <objects>
@@ -15,7 +25,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wkg-Xk-0dD">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wkg-Xk-0dD">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
@@ -32,32 +42,49 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OgW-gh-NoD">
-                                                    <rect key="frame" x="40.333333333333336" y="20" width="40.000000000000007" height="40"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OgW-gh-NoD">
+                                                    <rect key="frame" x="40.333333333333343" y="15" width="50" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="FPJ-cF-79v"/>
-                                                        <constraint firstAttribute="height" constant="40" id="jIp-vD-3NC"/>
+                                                        <constraint firstAttribute="width" constant="50" id="FPJ-cF-79v"/>
+                                                        <constraint firstAttribute="height" constant="50" id="jIp-vD-3NC"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="25"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YjG-pz-SoF">
-                                                    <rect key="frame" x="88.333333333333329" y="20" width="71.999999999999986" height="18"/>
+                                                    <rect key="frame" x="98.333333333333314" y="15" width="72" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLg-dO-Yr4">
-                                                    <rect key="frame" x="88.333333333333329" y="41" width="35.333333333333329" height="17"/>
+                                                    <rect key="frame" x="98.333333333333329" y="36" width="35.333333333333329" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lL3-0u-oC9">
-                                                    <rect key="frame" x="359" y="20" width="40" height="40"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lL3-0u-oC9">
+                                                    <rect key="frame" x="349" y="15" width="50" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="HHu-wg-SQX"/>
-                                                        <constraint firstAttribute="height" constant="40" id="gG6-7K-OHJ"/>
+                                                        <constraint firstAttribute="width" constant="50" id="HHu-wg-SQX"/>
+                                                        <constraint firstAttribute="height" constant="50" id="gG6-7K-OHJ"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="15"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="euY-Tc-DXJ">
+                                                    <rect key="frame" x="40" y="79" width="354" height="1"/>
+                                                    <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="rUY-fW-8i2"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="CLg-dO-Yr4" firstAttribute="leading" secondItem="YjG-pz-SoF" secondAttribute="leading" id="1QU-tg-qmV"/>
@@ -68,10 +95,14 @@
                                                 <constraint firstItem="OgW-gh-NoD" firstAttribute="leading" secondItem="Oby-Zr-s7o" secondAttribute="trailing" constant="15" id="EYK-o5-p11"/>
                                                 <constraint firstItem="YjG-pz-SoF" firstAttribute="top" secondItem="OgW-gh-NoD" secondAttribute="top" id="IqX-ph-Xwe"/>
                                                 <constraint firstItem="lL3-0u-oC9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YjG-pz-SoF" secondAttribute="trailing" constant="8" symbolic="YES" id="KFU-iG-voE"/>
+                                                <constraint firstAttribute="bottom" secondItem="euY-Tc-DXJ" secondAttribute="bottom" id="WCe-tO-rGp"/>
                                                 <constraint firstAttribute="trailing" secondItem="lL3-0u-oC9" secondAttribute="trailing" constant="15" id="We7-Rl-Ipx"/>
+                                                <constraint firstAttribute="trailing" secondItem="euY-Tc-DXJ" secondAttribute="trailing" constant="20" symbolic="YES" id="b0d-Lb-hbL"/>
+                                                <constraint firstItem="OgW-gh-NoD" firstAttribute="centerY" secondItem="OEh-Yq-VF3" secondAttribute="centerY" id="bRP-vX-8cG"/>
                                                 <constraint firstItem="Oby-Zr-s7o" firstAttribute="leading" secondItem="OEh-Yq-VF3" secondAttribute="leading" constant="8" id="nOj-cH-xU1"/>
                                                 <constraint firstItem="OgW-gh-NoD" firstAttribute="centerY" secondItem="Oby-Zr-s7o" secondAttribute="centerY" id="oUp-ng-awJ"/>
                                                 <constraint firstItem="YjG-pz-SoF" firstAttribute="leading" secondItem="OgW-gh-NoD" secondAttribute="trailing" constant="8" id="rfL-hi-ClO"/>
+                                                <constraint firstItem="euY-Tc-DXJ" firstAttribute="leading" secondItem="OEh-Yq-VF3" secondAttribute="leading" constant="40" id="s2I-Ec-HQh"/>
                                                 <constraint firstItem="CLg-dO-Yr4" firstAttribute="top" secondItem="YjG-pz-SoF" secondAttribute="bottom" constant="3" id="tIP-v6-XOJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -102,6 +133,7 @@
                     <navigationItem key="navigationItem" title="Activity" id="QJi-4G-3yn"/>
                     <connections>
                         <outlet property="tableView" destination="Wkg-Xk-0dD" id="dVG-ir-CJS"/>
+                        <segue destination="gNL-EO-ka9" kind="show" identifier="Activity_DetailSegue" id="u2G-3I-nZL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5u-Zb-8i4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
