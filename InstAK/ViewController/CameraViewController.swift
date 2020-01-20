@@ -21,6 +21,7 @@ class CameraViewController: UIViewController {
     
     var selectedImage: UIImage?
     var videoUrl : URL?
+    var isComeFromFillter = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,10 @@ class CameraViewController: UIViewController {
     }
     
     func resetView(){
+        if isComeFromFillter{
+            isComeFromFillter = false
+            return
+        }
         view.endEditing(true)
         self.initPlaceHolder()
         self.photo.image = UIImage(named: "uploadPic_logo")
@@ -157,8 +162,19 @@ class CameraViewController: UIViewController {
         }) { (error) in
             ProgressHUD.showError(error.localizedDescription)
         }
-
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("segue.identifier =\(String(describing: segue.identifier))")
+        if segue.identifier == "Filter_Segue"{
+            let filterViewController = segue.destination as! FilterViewController
+            filterViewController.selectedImage = self.selectedImage
+            filterViewController.delegate = self
+            self.isComeFromFillter = true
+        }
+    }
+    
+    
 }
 extension CameraViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -227,3 +243,9 @@ extension CameraViewController: UITextViewDelegate{
     }
 }
 
+extension CameraViewController: FilterViewControllerDelegate{
+    func updatePhoto(image: UIImage) {
+        self.photo.image = image
+        self.isComeFromFillter = true
+    }
+}
