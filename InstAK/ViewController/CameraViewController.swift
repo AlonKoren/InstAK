@@ -147,8 +147,7 @@ class CameraViewController: UIViewController {
                     
                     usersIds.forEach { (userId) in
                         Api.Feed.addPostToFeed(userId: userId, postId: post.postId!)
-                        let notification : Notification = Notification(userId: userId, fromId: currentUserId, type: "feed", objectId: post.postId!, timestamp: timestamp)
-                        Api.Notifiaction.addNewNotification(notification: notification)
+                        Api.Notifiaction.addNewNotification(userId: userId, fromId: currentUserId, type: "feed", objectId: post.postId!, timestamp: timestamp)
                     }
                     
                     ProgressHUD.showSuccess("Success")

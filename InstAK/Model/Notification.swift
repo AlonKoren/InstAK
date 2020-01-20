@@ -14,8 +14,10 @@ class Notification : Codable{
     var type : String?
     var objectId : String?
     var timestamp : Int?
+    var notificationId : String?
     
-    init(userId : String , fromId : String , type : String, objectId : String, timestamp : Int) {
+    init(notificationId : String, userId : String , fromId : String , type : String, objectId : String, timestamp : Int) {
+        self.notificationId = notificationId
         self.userId = userId
         self.fromId = fromId
         self.type = type
@@ -24,6 +26,7 @@ class Notification : Codable{
     }
     
     func setData(notification: Notification){
+        self.notificationId = notification.notificationId
         self.userId = notification.userId
         self.fromId = notification.fromId
         self.type = notification.type

@@ -20,15 +20,36 @@ class ActivityTableViewCell: UITableViewCell {
     
     @IBOutlet weak var photo: UIImageView!
     
+    
+    var notification: Notification?{
+        didSet{
+            updateView()
+        }
+    }
+    
+    var user : User?{
+        didSet{
+            setUpUserInfo()
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func updateView(){
+        
+    }
+    
+    
+    func setUpUserInfo() {
+        if let user = user{
+            nameLabel.text = user.username
+            let profileImageUrlString = user.prifileImage
+            let profileImageUrl = URL(string: profileImageUrlString)
+            self.profileImage.kf.setImage(with: profileImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile"), options: [])
+        }
     }
 
 }
