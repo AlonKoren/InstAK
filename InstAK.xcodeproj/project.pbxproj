@@ -54,6 +54,8 @@
 		0AE2931823C7A61300803787 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE2931723C7A61300803787 /* StorageService.swift */; };
 		0AE38D1023D629F000BA0D2B /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE38D0F23D629F000BA0D2B /* ActivityTableViewCell.swift */; };
 		0AE6E3D523CE008A00D7FECD /* FollowApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6E3D423CE008A00D7FECD /* FollowApi.swift */; };
+		0AF562DA23D62EEE005FAC60 /* NotificationApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF562D923D62EEE005FAC60 /* NotificationApi.swift */; };
+		0AF562DC23D631D3005FAC60 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF562DB23D631D3005FAC60 /* Notification.swift */; };
 		0AF790BF23CCE77A0062CA22 /* HeaderProfileCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF790BE23CCE77A0062CA22 /* HeaderProfileCollectionReusableView.swift */; };
 		0AF790C123CCF9850062CA22 /* MyPostsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF790C023CCF9850062CA22 /* MyPostsApi.swift */; };
 		0AF790C323CD12D50062CA22 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF790C223CD12D50062CA22 /* PhotoCollectionViewCell.swift */; };
@@ -135,6 +137,8 @@
 		0AE2931723C7A61300803787 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		0AE38D0F23D629F000BA0D2B /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		0AE6E3D423CE008A00D7FECD /* FollowApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowApi.swift; sourceTree = "<group>"; };
+		0AF562D923D62EEE005FAC60 /* NotificationApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationApi.swift; sourceTree = "<group>"; };
+		0AF562DB23D631D3005FAC60 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		0AF790BE23CCE77A0062CA22 /* HeaderProfileCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProfileCollectionReusableView.swift; sourceTree = "<group>"; };
 		0AF790C023CCF9850062CA22 /* MyPostsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsApi.swift; sourceTree = "<group>"; };
 		0AF790C223CD12D50062CA22 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -219,6 +223,7 @@
 				0AE2931523C79E7300803787 /* Listener.swift */,
 				0A589F3723C26709000D6C9F /* Post.swift */,
 				0A1E3EF723C39E71001B09B0 /* User.swift */,
+				0AF562DB23D631D3005FAC60 /* Notification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -272,6 +277,7 @@
 				0AF790C023CCF9850062CA22 /* MyPostsApi.swift */,
 				0AE6E3D423CE008A00D7FECD /* FollowApi.swift */,
 				0A9FF21523CE2D9600E8739A /* FeedApi.swift */,
+				0AF562D923D62EEE005FAC60 /* NotificationApi.swift */,
 				0A589F3623C266BD000D6C9F /* Model */,
 				0A6B485C23C354E200FBC41F /* Views */,
 				0A2D5CBC23B8E24F0026F64E /* ViewController */,
@@ -623,6 +629,7 @@
 				0A1E3EFC23C3D001001B09B0 /* CommentTableViewCell.swift in Sources */,
 				0AE13C8523CE588100D53554 /* SearchViewController.swift in Sources */,
 				0A0DC0A923D5D2F300E14916 /* FilterCollectionViewCell.swift in Sources */,
+				0AF562DA23D62EEE005FAC60 /* NotificationApi.swift in Sources */,
 				0A1E3EFE23C3EE83001B09B0 /* Comment.swift in Sources */,
 				0A589F3A23C2982B000D6C9F /* DictionaryCoder.swift in Sources */,
 				0A04377423C519750099F3C7 /* CommentApi.swift in Sources */,
@@ -646,6 +653,7 @@
 				0A0DC0A723D5C9A800E14916 /* FilterViewController.swift in Sources */,
 				0AE2931623C79E7300803787 /* Listener.swift in Sources */,
 				0A63B4EA23D0B51B001A793B /* SettingTableViewController.swift in Sources */,
+				0AF562DC23D631D3005FAC60 /* Notification.swift in Sources */,
 				0AAC99FE23A9125D00A60A90 /* SignUpViewController.swift in Sources */,
 				0AAC99FC23A9012200A60A90 /* SignInViewController.swift in Sources */,
 				0AE6E3D523CE008A00D7FECD /* FollowApi.swift in Sources */,

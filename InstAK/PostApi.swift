@@ -80,12 +80,11 @@ class PostApi {
         return listener
     }
     
-    func addPostToDatabase(caption: String, photoUrl: String, uid: String , ratio : CGFloat, videoUrl:String? ,onCompletion: @escaping (Post)-> Void, onError : @escaping (Error)-> Void){
+    func addPostToDatabase(caption: String, photoUrl: String, uid: String , ratio : CGFloat, videoUrl:String?, timestamp : Int ,onCompletion: @escaping (Post)-> Void, onError : @escaping (Error)-> Void){
         let postsCollection = COLLECTION_POSTS
         let newPostDocument = postsCollection.document()
         let newPostId =  newPostDocument.documentID
         
-        let timestamp = Int(Date().timeIntervalSince1970)
         
         let post:Post = Post(captionText: caption, photoUrlString: photoUrl, uid: uid, postId: newPostId, ratio: ratio,videoUrl: videoUrl,timestamp: timestamp)
         

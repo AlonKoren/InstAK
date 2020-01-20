@@ -15,4 +15,5 @@ struct Api{
     static let MyPosts = MyPostsApi()
     static let Follow = FollowApi()
     static let Feed = FeedApi()
+    static let Notifiaction = NotificationApi()
 }

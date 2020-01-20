@@ -135,8 +135,9 @@ class CameraViewController: UIViewController {
             return
         }
         
-        
-        Api.Post.addPostToDatabase(caption: caption, photoUrl: photoUrl, uid: currentUserId, ratio : ratio, videoUrl: remoteVideoUrl ,onCompletion: { (post : Post) in
+        let timestamp = Int(Date().timeIntervalSince1970)
+
+        Api.Post.addPostToDatabase(caption: caption, photoUrl: photoUrl, uid: currentUserId, ratio : ratio, videoUrl: remoteVideoUrl , timestamp: timestamp ,onCompletion: { (post : Post) in
             Api.MyPosts.connectUserToPost(userId: currentUserId, postId: post.postId!, onCompletion: { () in
 
                 Api.Feed.addPostToFeed(userId: currentUserId, postId: post.postId!)
@@ -146,6 +147,8 @@ class CameraViewController: UIViewController {
                     
                     usersIds.forEach { (userId) in
                         Api.Feed.addPostToFeed(userId: userId, postId: post.postId!)
+                        let notification : Notification = Notification(userId: userId, fromId: currentUserId, type: "feed", objectId: post.postId!, timestamp: timestamp)
+                        Api.Notifiaction.addNewNotification(notification: notification)
                     }
                     
                     ProgressHUD.showSuccess("Success")
