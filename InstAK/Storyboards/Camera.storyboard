@@ -104,10 +104,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uFj-z7-OBz">
                                         <rect key="frame" x="15" y="17" width="48" height="30"/>
                                         <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="cancelBtn_TouchUpInside:" destination="W12-ao-EY2" eventType="touchUpInside" id="dba-t6-1ax"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yhX-xG-Ay0">
                                         <rect key="frame" x="367" y="17" width="32" height="30"/>
                                         <state key="normal" title="Next"/>
+                                        <connections>
+                                            <action selector="nextBtn_TouchUpInside:" destination="W12-ao-EY2" eventType="touchUpInside" id="kwu-vh-R6y"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -147,6 +153,10 @@
                                         </collectionViewCellContentView>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="W12-ao-EY2" id="fee-Fb-Di4"/>
+                                    <outlet property="delegate" destination="W12-ao-EY2" id="grV-TS-GeQ"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -163,6 +173,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pnD-Ix-L33"/>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="SuO-SZ-tRr" id="hYE-Ou-hOd"/>
+                        <outlet property="filterPhoto" destination="Kj2-Eb-gfY" id="h42-Ns-JBe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OHT-IQ-dGG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
