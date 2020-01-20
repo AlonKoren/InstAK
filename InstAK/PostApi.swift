@@ -85,7 +85,9 @@ class PostApi {
         let newPostDocument = postsCollection.document()
         let newPostId =  newPostDocument.documentID
         
-        let post:Post = Post(captionText: caption, photoUrlString: photoUrl, uid: uid, postId: newPostId, ratio: ratio,videoUrl: videoUrl)
+        let timestamp = Int(Date().timeIntervalSince1970)
+        
+        let post:Post = Post(captionText: caption, photoUrlString: photoUrl, uid: uid, postId: newPostId, ratio: ratio,videoUrl: videoUrl,timestamp: timestamp)
         
         newPostDocument.setData(try! DictionaryEncoder().encode(post)){ err in
            if let err = err {

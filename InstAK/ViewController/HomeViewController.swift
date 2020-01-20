@@ -79,10 +79,13 @@ class HomeViewController: UIViewController {
         return Api.Post.observePost(postId: postId, onAdded: { (addedPost) in
             
             Api.User.getUser(withId: addedPost.uid!, onCompletion: { (user:User) in
-                self.posts.append(addedPost)
+                self.posts.insert(addedPost, at: 0)
                 self.users.updateValue(user, forKey: addedPost.postId!)
                 print(self.posts)
                 self.activityIndicatorView.stopAnimating()
+                self.posts.sort { (aPost, bPost) -> Bool in
+                    return aPost.timestamp ?? 0 > bPost.timestamp ?? 0
+                }
                 self.tableView.reloadData()
             }) { (error) in
                 print(error.localizedDescription)
