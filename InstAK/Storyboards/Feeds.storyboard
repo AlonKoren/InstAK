@@ -98,6 +98,34 @@
                                                         <constraint firstAttribute="width" constant="26" id="rJd-ER-E9E"/>
                                                     </constraints>
                                                 </imageView>
+                                                <view hidden="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MJ8-V9-UaB">
+                                                    <rect key="frame" x="10" y="436" width="24" height="24"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wzu-1k-hOB">
+                                                            <rect key="frame" x="6" y="6" width="12" height="12"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="12" id="NHz-Kd-JJB"/>
+                                                                <constraint firstAttribute="height" constant="12" id="Sw2-A8-GS4"/>
+                                                            </constraints>
+                                                            <state key="normal" image="Icon_Mute"/>
+                                                            <connections>
+                                                                <action selector="volumeButton_TochUpInside:" destination="5L1-7N-0tW" eventType="touchUpInside" id="CvY-yM-VJW"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="2Ts-Y5-x34"/>
+                                                        <constraint firstItem="Wzu-1k-hOB" firstAttribute="centerY" secondItem="MJ8-V9-UaB" secondAttribute="centerY" id="QrQ-FA-poz"/>
+                                                        <constraint firstItem="Wzu-1k-hOB" firstAttribute="centerX" secondItem="MJ8-V9-UaB" secondAttribute="centerX" id="vpZ-qQ-Hjl"/>
+                                                        <constraint firstAttribute="width" constant="24" id="yE3-EG-75n"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="12"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="6YR-Y1-sRa" firstAttribute="leading" secondItem="8PG-N2-J5p" secondAttribute="leading" constant="16" id="38U-cB-Cq0"/>
@@ -118,6 +146,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="vQn-Gw-FyV" secondAttribute="bottom" constant="21" id="bqr-zk-RK1"/>
                                                 <constraint firstAttribute="trailing" secondItem="jR3-Hl-DZy" secondAttribute="trailing" id="cFq-2G-PXd"/>
                                                 <constraint firstItem="O0W-9r-ooj" firstAttribute="centerY" secondItem="6YR-Y1-sRa" secondAttribute="centerY" id="dtj-g6-mzL"/>
+                                                <constraint firstItem="MJ8-V9-UaB" firstAttribute="bottom" secondItem="jR3-Hl-DZy" secondAttribute="bottom" constant="-10" id="h4m-l8-Gh4"/>
                                                 <constraint firstItem="AZx-1O-K6Q" firstAttribute="centerY" secondItem="ubh-SU-kSW" secondAttribute="centerY" id="ha2-Wt-dUZ"/>
                                                 <constraint firstItem="jR3-Hl-DZy" firstAttribute="firstBaseline" secondItem="6YR-Y1-sRa" secondAttribute="baseline" constant="8" symbolType="layoutAnchor" id="hr2-Ie-ngb"/>
                                                 <constraint firstItem="FnV-Oj-6YY" firstAttribute="leading" secondItem="reR-Iv-7fJ" secondAttribute="leading" id="iZi-63-84D"/>
@@ -125,6 +154,7 @@
                                                 <constraint firstItem="vQn-Gw-FyV" firstAttribute="leading" secondItem="8PG-N2-J5p" secondAttribute="leading" constant="16" id="jlf-rG-MjK"/>
                                                 <constraint firstItem="FnV-Oj-6YY" firstAttribute="top" secondItem="ubh-SU-kSW" secondAttribute="bottom" constant="11" id="mcT-qz-ipj"/>
                                                 <constraint firstItem="ubh-SU-kSW" firstAttribute="leading" secondItem="8PG-N2-J5p" secondAttribute="leading" constant="15" id="ozJ-3d-p3W"/>
+                                                <constraint firstItem="MJ8-V9-UaB" firstAttribute="leading" secondItem="jR3-Hl-DZy" secondAttribute="leading" constant="10" id="sil-Fn-x3r"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -137,6 +167,8 @@
                                             <outlet property="postImageView" destination="jR3-Hl-DZy" id="Okj-1L-bpI"/>
                                             <outlet property="profileImageView" destination="6YR-Y1-sRa" id="40k-gR-RoH"/>
                                             <outlet property="shareImageView" destination="ZTq-z5-VUn" id="LVT-nx-eOE"/>
+                                            <outlet property="volumeButton" destination="Wzu-1k-hOB" id="EmM-sf-BI8"/>
+                                            <outlet property="volumeView" destination="MJ8-V9-UaB" id="YhX-XB-zn2"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -341,6 +373,7 @@
         <image name="Comment" width="43" height="41"/>
         <image name="Home" width="21" height="23"/>
         <image name="Home_Selected" width="21" height="23"/>
+        <image name="Icon_Mute" width="25" height="25"/>
         <image name="like" width="46" height="41"/>
         <image name="share" width="37" height="41"/>
     </resources>

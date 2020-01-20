@@ -327,7 +327,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="180"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-avatar-profile" translatesAutoresizingMaskIntoConstraints="NO" id="Zye-wc-bOm">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-avatar-profile" translatesAutoresizingMaskIntoConstraints="NO" id="Zye-wc-bOm">
                                     <rect key="frame" x="167" y="50" width="80" height="80"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="80" id="HsG-j6-2MN"/>
@@ -714,7 +714,7 @@
         <image name="placeholder-avatar-profile" width="1024" height="1024"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oIS-s5-c3l"/>
-        <segue reference="xPH-eg-9D0"/>
+        <segue reference="qSg-bV-AZi"/>
+        <segue reference="G1x-CQ-eOJ"/>
     </inferredMetricsTieBreakers>
 </document>

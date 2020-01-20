@@ -37,10 +37,16 @@ class HomeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var heightConstraintPhoto: NSLayoutConstraint!
     
+    @IBOutlet weak var volumeView: UIView!
     
+    @IBOutlet weak var volumeButton: UIButton!
+    
+    
+
     var delegate : HomeTableViewCellDelegate?
     var player: AVPlayer?
     var playerLayer : AVPlayerLayer?
+    var isMuted: Bool = true
     
     var post: Post? {
         didSet{
@@ -74,6 +80,7 @@ class HomeTableViewCell: UITableViewCell {
             postImageView.kf.setImage(with: photoUrl)
         }
         if let videoUrlString = post?.videoUrl , let videoUrl = URL(string: videoUrlString){
+            self.volumeView.isHidden = false
             player = AVPlayer(url: videoUrl)
             playerLayer = AVPlayerLayer(player: player)
             playerLayer?.frame = postImageView.frame
@@ -81,13 +88,25 @@ class HomeTableViewCell: UITableViewCell {
             if let ratio = post?.ratio {
                 playerLayer?.frame.size.height = UIScreen.main.bounds.size.width / ratio
             }
-            layoutIfNeeded()
             self.contentView.layer.addSublayer(playerLayer!)
-            layoutIfNeeded()
+            self.volumeView.layer.zPosition = 1
             player?.play()
+            player?.isMuted = isMuted
         }
 
         updateLike(post: post!)
+    }
+    
+    
+    @IBAction func volumeButton_TochUpInside(_ sender: Any) {
+        if isMuted{
+            self.isMuted = !isMuted
+            self.volumeButton.setImage(#imageLiteral(resourceName: "Icon_Volume"), for: .normal)
+        }else{
+            self.isMuted = !isMuted
+            self.volumeButton.setImage(#imageLiteral(resourceName: "Icon_Mute"), for: .normal)
+        }
+        player?.isMuted = isMuted
     }
     
     func updateLike(post : Post) {
@@ -149,6 +168,7 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     
+    
     @objc func nameLabel_TouchUpInside(){
         goToProfileUserViewController()
     }
@@ -175,9 +195,11 @@ class HomeTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        self.volumeView.isHidden = true
         profileImageView.image = #imageLiteral(resourceName: "placeholder-avatar-profile")
         playerLayer?.removeFromSuperlayer()
         player?.pause()
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

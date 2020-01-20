@@ -54,7 +54,10 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
         }
     }
     
-    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        clear()
+    }
     
     func updateView() {
         self.nameLabel.text = user!.username
@@ -90,7 +93,12 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
         
         delegate?.closeListeners(listeners: [followingListener , followerListener])
     }
-    
+    func clear(){
+        self.nameLabel.text = ""
+        self.myPostsCountLabel.text = ""
+        self.followingCountLabel.text = ""
+        self.followersCountLabel.text = ""
+    }
     
     @objc func goToSettingViewController(){
         delegateSetting?.goToSettingViewController()
