@@ -20,6 +20,7 @@
 		0A04377423C519750099F3C7 /* CommentApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A04377323C519750099F3C7 /* CommentApi.swift */; };
 		0A08696E23CDF24E005FA46E /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A08696D23CDF24E005FA46E /* PeopleViewController.swift */; };
 		0A08697023CDF2BB005FA46E /* PeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A08696F23CDF2BB005FA46E /* PeopleTableViewCell.swift */; };
+		0A0DC0A723D5C9A800E14916 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0DC0A623D5C9A800E14916 /* FilterViewController.swift */; };
 		0A1E3EF823C39E71001B09B0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E3EF723C39E71001B09B0 /* User.swift */; };
 		0A1E3EFA23C3CFCA001B09B0 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E3EF923C3CFCA001B09B0 /* CommentViewController.swift */; };
 		0A1E3EFC23C3D001001B09B0 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E3EFB23C3D001001B09B0 /* CommentTableViewCell.swift */; };
@@ -91,6 +92,7 @@
 		0A04377323C519750099F3C7 /* CommentApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentApi.swift; sourceTree = "<group>"; };
 		0A08696D23CDF24E005FA46E /* PeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; };
 		0A08696F23CDF2BB005FA46E /* PeopleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTableViewCell.swift; sourceTree = "<group>"; };
+		0A0DC0A623D5C9A800E14916 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		0A1E3EF723C39E71001B09B0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0A1E3EF923C3CFCA001B09B0 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		0A1E3EFB23C3D001001B09B0 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				0A63B4E923D0B51B001A793B /* SettingTableViewController.swift */,
 				0AAC99FB23A9012200A60A90 /* SignInViewController.swift */,
 				0AAC99FD23A9125C00A60A90 /* SignUpViewController.swift */,
+				0A0DC0A623D5C9A800E14916 /* FilterViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 				0AD5FA5F23D4D25400435562 /* DetailViewController.swift in Sources */,
 				0AF790BF23CCE77A0062CA22 /* HeaderProfileCollectionReusableView.swift in Sources */,
 				0A5EB7A123BE63AE007A1BEF /* AuthService.swift in Sources */,
+				0A0DC0A723D5C9A800E14916 /* FilterViewController.swift in Sources */,
 				0AE2931623C79E7300803787 /* Listener.swift in Sources */,
 				0A63B4EA23D0B51B001A793B /* SettingTableViewController.swift in Sources */,
 				0AAC99FE23A9125D00A60A90 /* SignUpViewController.swift in Sources */,
