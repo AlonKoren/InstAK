@@ -221,6 +221,7 @@ class HomeTableViewCell: UITableViewCell {
     
     @objc func likeImageView_TouchUpInside(){
         incrementLikes()
+        
     }
     
     override func prepareForReuse() {
@@ -245,10 +246,13 @@ class HomeTableViewCell: UITableViewCell {
             return
         }
         Api.Post.incrementLike(postId: postid, userId: userId, onCompletion: { (isLiked) in
+            let timestamp = Int(Date().timeIntervalSince1970)
             if isLiked{
                 self.likeImageView.image = #imageLiteral(resourceName: "likeSelected")
+                Api.Notifiaction.addNewNotification(userId: self.post!.uid!, fromId: userId, type: "like", objectId: postid, timestamp: timestamp)
             }else{
                 self.likeImageView.image = #imageLiteral(resourceName: "like")
+                Api.Notifiaction.removeNotification(userId: self.post!.uid!, fromId: userId, type: "like", objectId: postid)
             }
         }) { (error) in
             ProgressHUD.showError(error.localizedDescription)

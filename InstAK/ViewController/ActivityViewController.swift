@@ -17,9 +17,15 @@ class ActivityViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadNotifications()
     }
     func loadNotifications(){
+        ProgressHUD.show("Loading...", interaction: false)
+        self.notifications.removeAll()
         guard let currentUserId = AuthService.getCurrentUserId() else {
             return
         }
@@ -33,6 +39,7 @@ class ActivityViewController: UIViewController {
                         return aNotification.timestamp ?? 0 > bNotification.timestamp ?? 0
                     }
                     self.tableView.reloadData()
+                    ProgressHUD.dismiss()
                 }
             }
             
@@ -47,13 +54,28 @@ class ActivityViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func refresh_TouchUpInside(_ sender: Any) {
+        loadNotifications()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("segue.identifier =\(String(describing: segue.identifier))")
         if segue.identifier == "Activity_DetailSegue"{
             let detailViewController = segue.destination as! DetailViewController
             let postId = sender as! String
             detailViewController.postId = postId
-            print("postId=\(postId)")
+        }
+        if segue.identifier == "Activity_ProfileSegue" {
+            let profileVC = segue.destination as! ProfileUserViewController
+            let userId = sender  as! String
+            profileVC.userId = userId
+        }
+        
+        if segue.identifier == "Activity_CommentSegue" {
+            let commentVC = segue.destination as! CommentViewController
+            let postId = sender  as! String
+            commentVC.postId = postId
         }
     }
 }
@@ -73,9 +95,17 @@ extension ActivityViewController: UITableViewDataSource {
     }
 }
 extension ActivityViewController: ActivityTableViewCellDelegate{
+    
     func goToDetailViewController(postId: String) {
-        self.performSegue(withIdentifier: "Activity_DetailSegue", sender: postId)
-
+        performSegue(withIdentifier: "Activity_DetailSegue", sender: postId)
+    }
+    
+    func goToProfileViewController(userId: String) {
+        performSegue(withIdentifier: "Activity_ProfileSegue", sender: userId)
+    }
+    
+    func goToCommentViewController(postId: String) {
+        performSegue(withIdentifier: "Activity_CommentSegue", sender: postId)
     }
     
     

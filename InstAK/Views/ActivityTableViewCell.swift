@@ -9,7 +9,8 @@
 import UIKit
 protocol ActivityTableViewCellDelegate {
     func goToDetailViewController(postId: String)
-//    func goToProfileViewController(userId : String)
+    func goToProfileViewController(userId: String)
+    func goToCommentViewController(postId: String)
 }
 class ActivityTableViewCell: UITableViewCell {
 
@@ -52,6 +53,34 @@ class ActivityTableViewCell: UITableViewCell {
             }) { (error) in
                 print(error.localizedDescription)
             }
+        case "like":
+            descripitionLabel.text = "liked your post"
+
+            let objectId = notification!.objectId!
+            Api.Post.getpost(postId: objectId, onCompletion: { (post) in
+                if let photoUrlString = post.photoUrl {
+                    let postImageUrl = URL(string: photoUrlString)
+                    self.photo.kf.setImage(with: postImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile") ,options: [])
+                    
+                }
+            }, onError: { (error) in
+                print(error.localizedDescription)
+            })
+        case "comment":
+            descripitionLabel.text = "left a comment on your post"
+            let objectId = notification!.objectId!
+            Api.Post.getpost(postId: objectId, onCompletion: { (post) in
+                if let photoUrlString = post.photoUrl {
+                    let postImageUrl = URL(string: photoUrlString)
+                    self.photo.kf.setImage(with: postImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile") ,options: [])
+                    
+                }
+            }, onError: { (error) in
+                print(error.localizedDescription)
+            })
+        case "follow":
+            descripitionLabel.text = "started following you"
+            self.photo.isHidden = true
         default:
             print("")
         }
@@ -66,7 +95,13 @@ class ActivityTableViewCell: UITableViewCell {
     
     @objc func cell_TouchUpInside(){
         if let id = notification?.objectId{
-            delegate?.goToDetailViewController(postId: id)
+            if notification!.type! == "follow" {
+                delegate?.goToProfileViewController(userId: id)
+            } else if notification!.type! == "comment" {
+                delegate?.goToCommentViewController(postId: id)
+            } else {
+                delegate?.goToDetailViewController(postId: id)
+            }
         }
     }
     
@@ -101,6 +136,16 @@ class ActivityTableViewCell: UITableViewCell {
         }
         
         timeLabel.text = timeText
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.photo.isHidden = false
+        self.photo.image = nil
+        self.nameLabel.text = ""
+        self.descripitionLabel.text = ""
+        self.timeLabel.text = ""
+        self.profileImage.image = #imageLiteral(resourceName: "placeholder-avatar-profile")
     }
 
 }

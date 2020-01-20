@@ -22,6 +22,8 @@ class FollowApi {
             }) { (error) in
                 onError(error)
             }
+            let timestamp = Int(Date().timeIntervalSince1970)
+            Api.Notifiaction.addNewNotification(userId: followingUserId, fromId: followerUserId, type: "follow", objectId: followerUserId, timestamp: timestamp)
         }) { (error) in
             onError(error)
         }
@@ -34,6 +36,7 @@ class FollowApi {
             }) { (error) in
                 onError(error)
             }
+            Api.Notifiaction.removeNotification(userId: followingUserId, fromId: followerUserId, type: "follow", objectId: followerUserId)
         }) { (error) in
             onError(error)
         }

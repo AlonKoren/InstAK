@@ -15,7 +15,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tWh-WW-EPF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-728" y="686"/>
+            <point key="canvasLocation" x="-404" y="1135"/>
         </scene>
         <!--Activity-->
         <scene sceneID="cD8-9z-rQ9">
@@ -130,10 +130,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cBR-m2-BRe"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Activity" id="QJi-4G-3yn"/>
+                    <navigationItem key="navigationItem" title="Activity" id="QJi-4G-3yn">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="Iaq-Di-eDh">
+                            <connections>
+                                <action selector="refresh_TouchUpInside:" destination="HTJ-7u-6ZC" id="3UY-Wb-tbQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Wkg-Xk-0dD" id="dVG-ir-CJS"/>
                         <segue destination="gNL-EO-ka9" kind="show" identifier="Activity_DetailSegue" id="u2G-3I-nZL"/>
+                        <segue destination="WEa-F2-0Si" kind="show" identifier="Activity_ProfileSegue" id="oTN-7R-1y8"/>
+                        <segue destination="aVg-pk-Whh" kind="show" identifier="Activity_CommentSegue" id="ufI-y5-gxL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5u-Zb-8i4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -159,6 +167,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vyq-2P-bfl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-101" y="-113"/>
+        </scene>
+        <!--ProfileUserViewController-->
+        <scene sceneID="p3B-nR-huh">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileUserViewController" id="WEa-F2-0Si" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="alV-a6-G4J"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tmj-f4-6m5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-101" y="1136"/>
+        </scene>
+        <!--CommentViewController-->
+        <scene sceneID="Ewm-YC-voh">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Feeds" referencedIdentifier="CommentViewController" id="aVg-pk-Whh" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="zCI-yo-0tE"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fEc-jF-8cu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="204" y="1135"/>
         </scene>
     </scenes>
     <resources>

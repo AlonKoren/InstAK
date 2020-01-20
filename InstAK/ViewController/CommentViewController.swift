@@ -147,6 +147,14 @@ class CommentViewController: UIViewController {
        }
         
         Api.Comment.addComment(postId: postId, commentText: commentTextField.text!, userId: currentUserId, onCompletion: { (comment) in
+            Api.Post.getpost(postId: self.postId, onCompletion: { (post) in
+                let timestamp = Int(Date().timeIntervalSince1970)
+                Api.Notifiaction.addNewNotification(userId: post.uid!, fromId: currentUserId, type: "comment", objectId: self.postId, timestamp: timestamp)
+            }) { (error) in
+                print(error.localizedDescription)
+            }
+            
+            
             self.empty()
             self.hideKeyboard()
         }) { (error) in

@@ -20,6 +20,16 @@ class NotificationApi  {
         doc_notification.setData(try! DictionaryEncoder().encode(notification))
     }
     
+    func removeNotification(userId : String , fromId : String , type : String, objectId : String){
+        COLLECTION_NOTIFICATION.document(userId).collection(NOTIFICATION)
+            .whereField("userId", isEqualTo: userId).whereField("fromId", isEqualTo: fromId)
+            .whereField("type", isEqualTo: type).whereField("objectId", isEqualTo: objectId).getDocuments { (querySnapshot, error) in
+                querySnapshot?.documents.forEach({ (queryDocumentSnapshot) in
+                    self.COLLECTION_NOTIFICATION.document(userId).collection(self.NOTIFICATION).document(queryDocumentSnapshot.documentID).delete()
+                })
+        }
+    }
+    
     func getNotifications(userId: String, onCompletion: @escaping ([Notification]) -> Void, onError : @escaping (Error)-> Void){
         self.COLLECTION_NOTIFICATION.document(userId).collection(NOTIFICATION).getDocuments { (querySnapshot, error) in
             if let err = error{
