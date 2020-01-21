@@ -22,6 +22,8 @@
 		0A08697023CDF2BB005FA46E /* PeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A08696F23CDF2BB005FA46E /* PeopleTableViewCell.swift */; };
 		0A0DC0A723D5C9A800E14916 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0DC0A623D5C9A800E14916 /* FilterViewController.swift */; };
 		0A0DC0A923D5D2F300E14916 /* FilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0DC0A823D5D2F300E14916 /* FilterCollectionViewCell.swift */; };
+		0A162A4223D72A5400E4EB39 /* WalkthroughContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A162A4123D72A5400E4EB39 /* WalkthroughContentViewController.swift */; };
+		0A162A4423D72ADF00E4EB39 /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A162A4323D72ADF00E4EB39 /* WalkthroughViewController.swift */; };
 		0A1E3EF823C39E71001B09B0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E3EF723C39E71001B09B0 /* User.swift */; };
 		0A1E3EFA23C3CFCA001B09B0 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E3EF923C3CFCA001B09B0 /* CommentViewController.swift */; };
 		0A1E3EFC23C3D001001B09B0 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E3EFB23C3D001001B09B0 /* CommentTableViewCell.swift */; };
@@ -98,6 +100,8 @@
 		0A08696F23CDF2BB005FA46E /* PeopleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTableViewCell.swift; sourceTree = "<group>"; };
 		0A0DC0A623D5C9A800E14916 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		0A0DC0A823D5D2F300E14916 /* FilterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCollectionViewCell.swift; sourceTree = "<group>"; };
+		0A162A4123D72A5400E4EB39 /* WalkthroughContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughContentViewController.swift; sourceTree = "<group>"; };
+		0A162A4323D72ADF00E4EB39 /* WalkthroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewController.swift; sourceTree = "<group>"; };
 		0A1E3EF723C39E71001B09B0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0A1E3EF923C3CFCA001B09B0 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		0A1E3EFB23C3D001001B09B0 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
@@ -211,6 +215,8 @@
 				0AAC99FB23A9012200A60A90 /* SignInViewController.swift */,
 				0AAC99FD23A9125C00A60A90 /* SignUpViewController.swift */,
 				0A0DC0A623D5C9A800E14916 /* FilterViewController.swift */,
+				0A162A4123D72A5400E4EB39 /* WalkthroughContentViewController.swift */,
+				0A162A4323D72ADF00E4EB39 /* WalkthroughViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -632,6 +638,7 @@
 				0AF562DA23D62EEE005FAC60 /* NotificationApi.swift in Sources */,
 				0A1E3EFE23C3EE83001B09B0 /* Comment.swift in Sources */,
 				0A589F3A23C2982B000D6C9F /* DictionaryCoder.swift in Sources */,
+				0A162A4423D72ADF00E4EB39 /* WalkthroughViewController.swift in Sources */,
 				0A04377423C519750099F3C7 /* CommentApi.swift in Sources */,
 				0A5EB7A323BE7F3B007A1BEF /* Config.swift in Sources */,
 				0AE38D1023D629F000BA0D2B /* ActivityTableViewCell.swift in Sources */,
@@ -647,6 +654,7 @@
 				0A013D7123AE8BCA00838A21 /* ProfileViewController.swift in Sources */,
 				0A04376E23C511F70099F3C7 /* PostApi.swift in Sources */,
 				0A9FF21623CE2D9600E8739A /* FeedApi.swift in Sources */,
+				0A162A4223D72A5400E4EB39 /* WalkthroughContentViewController.swift in Sources */,
 				0AD5FA5F23D4D25400435562 /* DetailViewController.swift in Sources */,
 				0AF790BF23CCE77A0062CA22 /* HeaderProfileCollectionReusableView.swift in Sources */,
 				0A5EB7A123BE63AE007A1BEF /* AuthService.swift in Sources */,

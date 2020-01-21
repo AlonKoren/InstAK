@@ -30,6 +30,16 @@ class SignInViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        let defaults = UserDefaults.standard
+        let hasViewedWalkthrough = defaults.bool(forKey: "hasViewedWalkthrough")
+        
+        if !hasViewedWalkthrough {
+            if let pageViewController = storyboard?.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughViewController {
+                present(pageViewController, animated: true, completion: nil)
+            }
+        }
+       
         if AuthService.isSignIn() {
             self.performSegue(withIdentifier: "signInToTabbarVC", sender: nil)
         }

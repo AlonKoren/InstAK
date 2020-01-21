@@ -1,12 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Walkthrough View Controller-->
+        <scene sceneID="FHk-be-bB5">
+            <objects>
+                <pageViewController storyboardIdentifier="WalkthroughViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Rf0-sZ-YtZ" customClass="WalkthroughViewController" customModule="InstAK" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="drf-vj-WUr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2725" y="271"/>
+        </scene>
+        <!--Walkthrough Content View Controller-->
+        <scene sceneID="cDf-zk-NxH">
+            <objects>
+                <viewController storyboardIdentifier="WalkthroughContentViewController" id="T3a-7m-12g" customClass="WalkthroughContentViewController" customModule="InstAK" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YFa-0K-hGm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_pool" translatesAutoresizingMaskIntoConstraints="NO" id="J0E-JJ-2JQ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="InstAK" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="02J-Dq-BeQ">
+                                <rect key="frame" x="60.333333333333343" y="78" width="293.66666666666663" height="149"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="93"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="InstAK is an IOS application, which was built as part of a final project of the Mobile Operating Systems course." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHH-x8-5g4">
+                                <rect key="frame" x="16" y="534" width="382" height="111"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="111" id="pXN-5k-628"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Georgia-BoldItalic" family="Georgia" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ci-wZ-Ofo">
+                                <rect key="frame" x="367" y="675" width="31" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="31" id="Jza-p8-PFd"/>
+                                </constraints>
+                                <state key="normal" image="arrow"/>
+                                <connections>
+                                    <action selector="nextBtn_TouchUpInside:" destination="T3a-7m-12g" eventType="touchUpInside" id="yR4-p1-oy5"/>
+                                </connections>
+                            </button>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="W2c-9n-wMt">
+                                <rect key="frame" x="187.66666666666666" y="679" width="39" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="39" id="i7v-Po-Wsg"/>
+                                    <constraint firstAttribute="height" constant="37" id="qmL-IH-MRU"/>
+                                </constraints>
+                            </pageControl>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="WQ8-jL-7nW" firstAttribute="bottom" secondItem="5ci-wZ-Ofo" secondAttribute="bottom" constant="16" id="C97-rc-Ce6"/>
+                            <constraint firstItem="J0E-JJ-2JQ" firstAttribute="trailing" secondItem="WQ8-jL-7nW" secondAttribute="trailing" id="Ilg-g9-Hjs"/>
+                            <constraint firstItem="WQ8-jL-7nW" firstAttribute="bottom" secondItem="W2c-9n-wMt" secondAttribute="bottom" constant="20" id="OaM-eb-jpw"/>
+                            <constraint firstItem="WQ8-jL-7nW" firstAttribute="trailing" secondItem="lHH-x8-5g4" secondAttribute="trailing" constant="16" id="YoT-qK-3c5"/>
+                            <constraint firstItem="W2c-9n-wMt" firstAttribute="centerX" secondItem="YFa-0K-hGm" secondAttribute="centerX" id="bdq-go-Waa"/>
+                            <constraint firstItem="J0E-JJ-2JQ" firstAttribute="leading" secondItem="WQ8-jL-7nW" secondAttribute="leading" id="d1J-nX-A9P"/>
+                            <constraint firstItem="lHH-x8-5g4" firstAttribute="leading" secondItem="WQ8-jL-7nW" secondAttribute="leading" constant="16" id="m5k-76-pTo"/>
+                            <constraint firstItem="5ci-wZ-Ofo" firstAttribute="top" secondItem="lHH-x8-5g4" secondAttribute="bottom" constant="30" id="mfJ-pl-iga"/>
+                            <constraint firstItem="02J-Dq-BeQ" firstAttribute="centerX" secondItem="YFa-0K-hGm" secondAttribute="centerX" id="p2I-1j-xCz"/>
+                            <constraint firstItem="J0E-JJ-2JQ" firstAttribute="top" secondItem="WQ8-jL-7nW" secondAttribute="top" id="p59-gn-ovB"/>
+                            <constraint firstItem="5ci-wZ-Ofo" firstAttribute="centerY" secondItem="W2c-9n-wMt" secondAttribute="centerY" id="vml-Cd-OaX"/>
+                            <constraint firstItem="02J-Dq-BeQ" firstAttribute="top" secondItem="WQ8-jL-7nW" secondAttribute="top" constant="78" id="vsC-hp-dzr"/>
+                            <constraint firstItem="WQ8-jL-7nW" firstAttribute="trailing" secondItem="5ci-wZ-Ofo" secondAttribute="trailing" constant="16" id="wE5-2r-Bt8"/>
+                            <constraint firstItem="J0E-JJ-2JQ" firstAttribute="bottom" secondItem="WQ8-jL-7nW" secondAttribute="bottom" id="xUj-aA-FDM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="WQ8-jL-7nW"/>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImg" destination="J0E-JJ-2JQ" id="6yf-1X-qhV"/>
+                        <outlet property="contentLabel" destination="lHH-x8-5g4" id="AUn-7T-ZKw"/>
+                        <outlet property="forwardBtn" destination="5ci-wZ-Ofo" id="Y5g-Kk-w2L"/>
+                        <outlet property="pageControl" destination="W2c-9n-wMt" id="NDX-zB-0PW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dtk-iO-N4x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2042.0289855072465" y="270.6521739130435"/>
+        </scene>
         <!--Sign In View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -216,6 +298,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow" width="24" height="20"/>
+        <image name="my_pool" width="682" height="900"/>
         <image name="placeholder-avatar-profile" width="1024" height="1024"/>
     </resources>
     <inferredMetricsTieBreakers>
