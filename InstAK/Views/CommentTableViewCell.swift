@@ -45,7 +45,7 @@ class CommentTableViewCell: UITableViewCell {
     func setupUserInfo() {
         if let user = user{
             self.nameLabel.text = user.username
-            let profileImageUrlString = user.prifileImage
+            let profileImageUrlString = user.profileImage
             let profileImageUrl = URL(string: profileImageUrlString)
             let placeholder = #imageLiteral(resourceName: "placeholder-avatar-profile")
             self.profileImageView.kf.setImage(with: profileImageUrl, placeholder: placeholder, options: [])

@@ -45,7 +45,7 @@ class PeopleTableViewCell: UITableViewCell {
     
     func updateView(){
         self.nameLabel.text = user!.username
-        let profileImageUrlString = user!.prifileImage
+        let profileImageUrlString = user!.profileImage
         let profileImageUrl = URL(string: profileImageUrlString)
         let placeholder = #imageLiteral(resourceName: "placeholder-avatar-profile")
         self.profileImage.kf.setImage(with: profileImageUrl, placeholder: placeholder, options: [])

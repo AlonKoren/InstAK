@@ -39,7 +39,11 @@ class SignInViewController: UIViewController {
                 present(pageViewController, animated: true, completion: nil)
             }
         }
-       
+//        AuthService.signOut(onSuccess: {
+//
+//        }) { (Error) in
+//
+//        }
         if AuthService.isSignIn() {
             self.performSegue(withIdentifier: "signInToTabbarVC", sender: nil)
         }

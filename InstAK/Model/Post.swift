@@ -29,6 +29,16 @@ class Post : Codable{
         self.videoUrl = videoUrl
         self.timestamp = timestamp
     }
+    init(captionText: String, photoUrlString: String, uid: String,postId: String,likeCount: Int , ratio : CGFloat,videoUrl : String? , timestamp : Int) {
+        self.caption = captionText
+        self.photoUrl = photoUrlString
+        self.uid = uid
+        self.postId = postId
+        self.likeCount = likeCount
+        self.ratio = ratio
+        self.videoUrl = videoUrl
+        self.timestamp = timestamp
+    }
     
     func setData(post: Post){
         self.caption = post.caption

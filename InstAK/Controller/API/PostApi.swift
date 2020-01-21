@@ -39,6 +39,21 @@ class PostApi {
         return listener
     }
     
+    func getAllPosts(onCompletion: @escaping ([Post])-> Void, onError : @escaping (Error)-> Void){
+        COLLECTION_POSTS.getDocuments { (querySnapshot, error) in
+            guard let snapshot = querySnapshot else {
+                onError(error!)
+                return
+            }
+            var posts = [Post]()
+            for diff in snapshot.documentChanges{
+                let post:Post = try! DictionaryDecoder().decode(Post.self, from: diff.document.data())
+                posts.append(post)
+            }
+            onCompletion(posts)
+        }
+    }
+    
     func observePost(postId : String, onCompletion: @escaping (Post)-> Void , onError : @escaping (Error)-> Void) ->Listener{
         
         let listener:Listener = Listener()

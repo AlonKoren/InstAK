@@ -66,7 +66,7 @@ class SettingTableViewController: UITableViewController {
         self.usernameTextField.text = currentUser.username
         self.emailTextField.text = currentUser.email
         
-        if let photoUrl = URL(string: currentUser.prifileImage){
+        if let photoUrl = URL(string: currentUser.profileImage){
             self.profileImageView.kf.setImage(with: photoUrl)
         }
         self.navigationController?.navigationBar.backItem?.title = currentUser.username
@@ -82,7 +82,7 @@ class SettingTableViewController: UITableViewController {
         if let imageData = self.profileImageView.image!.jpegData(compressionQuality: 0.9){
             StorageService.addProfileImage(uid: user.uid, imageData : imageData, onSuccess: { (url : URL) in
                 let profileImageUrl = url.absoluteString
-                user.setData(email: self.emailTextField.text!, prifileImage: profileImageUrl, username: self.usernameTextField.text!)
+                user.setData(email: self.emailTextField.text!, profileImage: profileImageUrl, username: self.usernameTextField.text!)
                 
                 AuthService.updateEmail(newEmail: user.email, onCompletion: {
                     

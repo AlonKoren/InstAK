@@ -109,7 +109,7 @@ class ActivityTableViewCell: UITableViewCell {
     func setUpUserInfo() {
         if let user = user{
             nameLabel.text = user.username
-            let profileImageUrlString = user.prifileImage
+            let profileImageUrlString = user.profileImage
             let profileImageUrl = URL(string: profileImageUrlString)
             self.profileImage.kf.setImage(with: profileImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile"), options: [])
         }

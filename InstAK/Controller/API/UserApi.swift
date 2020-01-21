@@ -39,7 +39,7 @@ class UserApi {
     }
     
     func addUserToDatabase(profileImageUrl: String, username: String, email:String,uid: String, onSuccess: @escaping (User) -> Void, onError : @escaping (Error)-> Void){
-        let user: User = User(email: email, prifileImage: profileImageUrl, username: username, uid: uid)
+        let user: User = User(email: email, profileImage: profileImageUrl, username: username, uid: uid)
         COLLECTION_USERS.document(uid).setData(try! DictionaryEncoder().encode(user)) { err in
             if let err = err {
                 onError(err)

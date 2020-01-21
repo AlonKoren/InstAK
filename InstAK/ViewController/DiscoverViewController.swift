@@ -13,7 +13,7 @@ class DiscoverViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var posts = [Post]()
-
+    var postsListener:NSObjectProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +22,12 @@ class DiscoverViewController: UIViewController {
         
         loadTopPosts()
         
+    }
+    
+    deinit {
+        if let postsListener = self.postsListener{
+            ModelNotification.PostListNotification.remove(observer: postsListener)
+        }
     }
     
     
@@ -33,16 +39,20 @@ class DiscoverViewController: UIViewController {
         ProgressHUD.show("Loading...", interaction: false)
         self.posts.removeAll()
         self.collectionView.reloadData()
-        Api.Post.getTopPosts(onCompletion: { (posts) in
+        
+        
+        
+        Model.instance.getAllPosts()
+        postsListener = ModelNotification.PostListNotification.observe {
+            (data:Any) in
+            print("data get")
+            let myPosts = data as! [Post]
             self.posts.removeAll()
-            posts.forEach { (post) in
-                self.posts.append(post)
-            }
+            self.posts.append(contentsOf: myPosts)
             self.collectionView.reloadData()
             ProgressHUD.dismiss()
-        }) { (error) in
-            print(error.localizedDescription)
         }
+        
     }
     
     

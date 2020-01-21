@@ -36,6 +36,13 @@
 		0A63B4E823D075C4001A793B /* ProfileUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A63B4E723D075C4001A793B /* ProfileUserViewController.swift */; };
 		0A63B4EA23D0B51B001A793B /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A63B4E923D0B51B001A793B /* SettingTableViewController.swift */; };
 		0A6B485B23C354BE00FBC41F /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6B485A23C354BE00FBC41F /* HomeTableViewCell.swift */; };
+		0A78FE0E23D77BCD0022EECA /* ModelSql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A78FE0923D77BCD0022EECA /* ModelSql.swift */; };
+		0A78FE0F23D77BCD0022EECA /* UserSQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A78FE0A23D77BCD0022EECA /* UserSQL.swift */; };
+		0A78FE1023D77BCD0022EECA /* SQLiteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A78FE0B23D77BCD0022EECA /* SQLiteProtocol.swift */; };
+		0A78FE1123D77BCD0022EECA /* LastUpdateDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A78FE0C23D77BCD0022EECA /* LastUpdateDates.swift */; };
+		0A78FE1223D77BCD0022EECA /* PostSQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A78FE0D23D77BCD0022EECA /* PostSQL.swift */; };
+		0A78FE1423D784F40022EECA /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A78FE1323D784F40022EECA /* Model.swift */; };
+		0A78FE1623D78C4B0022EECA /* ModelNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A78FE1523D78C4B0022EECA /* ModelNotification.swift */; };
 		0A91A99823B7D4CB00AE21FB /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A91A99623B7D4CB00AE21FB /* Discover.storyboard */; };
 		0A91A99A23B7D58400AE21FB /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A91A99923B7D58400AE21FB /* Camera.storyboard */; };
 		0A91A99D23B7D5EB00AE21FB /* Activity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A91A99B23B7D5EB00AE21FB /* Activity.storyboard */; };
@@ -115,6 +122,13 @@
 		0A63B4E723D075C4001A793B /* ProfileUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserViewController.swift; sourceTree = "<group>"; };
 		0A63B4E923D0B51B001A793B /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		0A6B485A23C354BE00FBC41F /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		0A78FE0923D77BCD0022EECA /* ModelSql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelSql.swift; sourceTree = "<group>"; };
+		0A78FE0A23D77BCD0022EECA /* UserSQL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSQL.swift; sourceTree = "<group>"; };
+		0A78FE0B23D77BCD0022EECA /* SQLiteProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteProtocol.swift; sourceTree = "<group>"; };
+		0A78FE0C23D77BCD0022EECA /* LastUpdateDates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastUpdateDates.swift; sourceTree = "<group>"; };
+		0A78FE0D23D77BCD0022EECA /* PostSQL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostSQL.swift; sourceTree = "<group>"; };
+		0A78FE1323D784F40022EECA /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		0A78FE1523D78C4B0022EECA /* ModelNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelNotification.swift; sourceTree = "<group>"; };
 		0A91A99723B7D4CB00AE21FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = InstAK/InstAK/Base.lproj/Discover.storyboard; sourceTree = "<group>"; };
 		0A91A99923B7D58400AE21FB /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
 		0A91A99C23B7D5EB00AE21FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = InstAK/InstAK/Base.lproj/Activity.storyboard; sourceTree = "<group>"; };
@@ -251,9 +265,12 @@
 		0A78FDFC23D779DA0022EECA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0A78FE0823D77BCD0022EECA /* SQLite */,
 				0A78FE0123D77ACF0022EECA /* API */,
 				0A5EB7A023BE63AE007A1BEF /* AuthService.swift */,
 				0AE2931723C7A61300803787 /* StorageService.swift */,
+				0A78FE1323D784F40022EECA /* Model.swift */,
+				0A78FE1523D78C4B0022EECA /* ModelNotification.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -271,6 +288,18 @@
 				0AF562D923D62EEE005FAC60 /* NotificationApi.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		0A78FE0823D77BCD0022EECA /* SQLite */ = {
+			isa = PBXGroup;
+			children = (
+				0A78FE0923D77BCD0022EECA /* ModelSql.swift */,
+				0A78FE0B23D77BCD0022EECA /* SQLiteProtocol.swift */,
+				0A78FE0C23D77BCD0022EECA /* LastUpdateDates.swift */,
+				0A78FE0A23D77BCD0022EECA /* UserSQL.swift */,
+				0A78FE0D23D77BCD0022EECA /* PostSQL.swift */,
+			);
+			path = SQLite;
 			sourceTree = "<group>";
 		};
 		0AB36E8D23A284D000FE9CD5 = {
@@ -642,15 +671,18 @@
 				0A013D6923AE8A2D00838A21 /* HomeViewController.swift in Sources */,
 				0A08696E23CDF24E005FA46E /* PeopleViewController.swift in Sources */,
 				0A04377023C516260099F3C7 /* UserApi.swift in Sources */,
+				0A78FE1023D77BCD0022EECA /* SQLiteProtocol.swift in Sources */,
 				0A08697023CDF2BB005FA46E /* PeopleTableViewCell.swift in Sources */,
 				0AB36E9A23A284D000FE9CD5 /* AppDelegate.swift in Sources */,
 				0A6B485B23C354BE00FBC41F /* HomeTableViewCell.swift in Sources */,
 				0AB36E9C23A284D000FE9CD5 /* SceneDelegate.swift in Sources */,
 				0A589F3823C26709000D6C9F /* Post.swift in Sources */,
+				0A78FE1223D77BCD0022EECA /* PostSQL.swift in Sources */,
 				0A013D6F23AE8B9B00838A21 /* ActivityViewController.swift in Sources */,
 				0A1E3EFC23C3D001001B09B0 /* CommentTableViewCell.swift in Sources */,
 				0AE13C8523CE588100D53554 /* SearchViewController.swift in Sources */,
 				0A0DC0A923D5D2F300E14916 /* FilterCollectionViewCell.swift in Sources */,
+				0A78FE1623D78C4B0022EECA /* ModelNotification.swift in Sources */,
 				0AF562DA23D62EEE005FAC60 /* NotificationApi.swift in Sources */,
 				0A1E3EFE23C3EE83001B09B0 /* Comment.swift in Sources */,
 				0A589F3A23C2982B000D6C9F /* DictionaryCoder.swift in Sources */,
@@ -665,15 +697,18 @@
 				0A04377223C518F20099F3C7 /* Api.swift in Sources */,
 				0A1E3EF823C39E71001B09B0 /* User.swift in Sources */,
 				0A013D6B23AE8AA500838A21 /* DiscoverViewController.swift in Sources */,
+				0A78FE0E23D77BCD0022EECA /* ModelSql.swift in Sources */,
 				0A013D6D23AE8AEA00838A21 /* CameraViewController.swift in Sources */,
 				0AF790C123CCF9850062CA22 /* MyPostsApi.swift in Sources */,
 				0A013D7123AE8BCA00838A21 /* ProfileViewController.swift in Sources */,
 				0A04376E23C511F70099F3C7 /* PostApi.swift in Sources */,
 				0A9FF21623CE2D9600E8739A /* FeedApi.swift in Sources */,
 				0A162A4223D72A5400E4EB39 /* WalkthroughContentViewController.swift in Sources */,
+				0A78FE1123D77BCD0022EECA /* LastUpdateDates.swift in Sources */,
 				0AD5FA5F23D4D25400435562 /* DetailViewController.swift in Sources */,
 				0AF790BF23CCE77A0062CA22 /* HeaderProfileCollectionReusableView.swift in Sources */,
 				0A5EB7A123BE63AE007A1BEF /* AuthService.swift in Sources */,
+				0A78FE1423D784F40022EECA /* Model.swift in Sources */,
 				0A0DC0A723D5C9A800E14916 /* FilterViewController.swift in Sources */,
 				0AE2931623C79E7300803787 /* Listener.swift in Sources */,
 				0A63B4EA23D0B51B001A793B /* SettingTableViewController.swift in Sources */,
@@ -681,6 +716,7 @@
 				0AAC99FE23A9125D00A60A90 /* SignUpViewController.swift in Sources */,
 				0AAC99FC23A9012200A60A90 /* SignInViewController.swift in Sources */,
 				0AE6E3D523CE008A00D7FECD /* FollowApi.swift in Sources */,
+				0A78FE0F23D77BCD0022EECA /* UserSQL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
