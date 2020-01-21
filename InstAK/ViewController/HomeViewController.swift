@@ -22,6 +22,8 @@ class HomeViewController: UIViewController {
     var isFromComment = false
     var isFromProfile = false
 //    var Listener : Listener?
+    let refreshControl = UIRefreshControl()
+
 
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
@@ -30,7 +32,13 @@ class HomeViewController: UIViewController {
         tableView.estimatedRowHeight = 520
         tableView.rowHeight = UITableView.automaticDimension
         tableView.dataSource = self
+        
+        refreshControl.addTarget(self, action:#selector(refresh),for: .valueChanged)
+        tableView.addSubview(refreshControl)
+        
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -43,6 +51,10 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func refresh_TouchUpInside(_ sender: Any) {
+        loadPosts()
+    }
+    
+    @objc func refresh() {
         loadPosts()
     }
     
@@ -63,6 +75,9 @@ class HomeViewController: UIViewController {
         Api.Feed.getPostsFromFeed(userId: AuthService.getCurrentUserId()!, onCompletion: { (postsIds) in
             for postId in postsIds{
                 self.listenersPosts[postId] = self.observePost(postId: postId)
+            }
+            if self.refreshControl.isRefreshing {
+                self.refreshControl.endRefreshing()
             }
             ProgressHUD.dismiss()
         }) { (error) in
