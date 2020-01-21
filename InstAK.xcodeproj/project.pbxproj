@@ -248,6 +248,31 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		0A78FDFC23D779DA0022EECA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0A78FE0123D77ACF0022EECA /* API */,
+				0A5EB7A023BE63AE007A1BEF /* AuthService.swift */,
+				0AE2931723C7A61300803787 /* StorageService.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		0A78FE0123D77ACF0022EECA /* API */ = {
+			isa = PBXGroup;
+			children = (
+				0A04377123C518F20099F3C7 /* Api.swift */,
+				0A04376F23C516260099F3C7 /* UserApi.swift */,
+				0A04376D23C511F70099F3C7 /* PostApi.swift */,
+				0A04377323C519750099F3C7 /* CommentApi.swift */,
+				0AF790C023CCF9850062CA22 /* MyPostsApi.swift */,
+				0AE6E3D423CE008A00D7FECD /* FollowApi.swift */,
+				0A9FF21523CE2D9600E8739A /* FeedApi.swift */,
+				0AF562D923D62EEE005FAC60 /* NotificationApi.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		0AB36E8D23A284D000FE9CD5 = {
 			isa = PBXGroup;
 			children = (
@@ -273,17 +298,7 @@
 		0AB36E9823A284D000FE9CD5 /* InstAK */ = {
 			isa = PBXGroup;
 			children = (
-				0AB36E9923A284D000FE9CD5 /* AppDelegate.swift */,
-				0A5EB7A023BE63AE007A1BEF /* AuthService.swift */,
-				0AE2931723C7A61300803787 /* StorageService.swift */,
-				0A04377123C518F20099F3C7 /* Api.swift */,
-				0A04376F23C516260099F3C7 /* UserApi.swift */,
-				0A04376D23C511F70099F3C7 /* PostApi.swift */,
-				0A04377323C519750099F3C7 /* CommentApi.swift */,
-				0AF790C023CCF9850062CA22 /* MyPostsApi.swift */,
-				0AE6E3D423CE008A00D7FECD /* FollowApi.swift */,
-				0A9FF21523CE2D9600E8739A /* FeedApi.swift */,
-				0AF562D923D62EEE005FAC60 /* NotificationApi.swift */,
+				0A78FDFC23D779DA0022EECA /* Controller */,
 				0A589F3623C266BD000D6C9F /* Model */,
 				0A6B485C23C354E200FBC41F /* Views */,
 				0A2D5CBC23B8E24F0026F64E /* ViewController */,
@@ -295,6 +310,7 @@
 				0A589F3223C0ED0C000D6C9F /* InstAK-Bridging-Header.h */,
 				0A5EB7A223BE7F3B007A1BEF /* Config.swift */,
 				0AB36E9B23A284D000FE9CD5 /* SceneDelegate.swift */,
+				0AB36E9923A284D000FE9CD5 /* AppDelegate.swift */,
 			);
 			path = InstAK;
 			sourceTree = "<group>";
