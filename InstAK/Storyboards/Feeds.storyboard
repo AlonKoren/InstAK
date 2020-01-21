@@ -197,7 +197,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SHq-Vb-beB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="InstAK" id="FZU-tT-Tsr"/>
+                    <navigationItem key="navigationItem" title="InstAK" id="FZU-tT-Tsr">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="pbK-j1-xJv">
+                            <connections>
+                                <action selector="refresh_TouchUpInside:" destination="Bm3-eL-W91" id="YnS-hm-DBb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicatorView" destination="hWz-G9-NOv" id="0c9-bZ-znz"/>
                         <outlet property="tableView" destination="SDi-Uk-rc0" id="BL9-4c-gyH"/>

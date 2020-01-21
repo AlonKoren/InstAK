@@ -35,7 +35,9 @@ class PeopleViewController: UIViewController {
         if !AuthService.isSignIn(){
             return
         }
-        
+        listen?.disconnected()
+        users.removeAll()
+        followingUsers.removeAll()
         let currentUserId = AuthService.getCurrentUserId()
         
         listen = Api.User.observeAllUsers(onAdded: { (addedUser) in

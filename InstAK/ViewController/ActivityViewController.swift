@@ -39,9 +39,9 @@ class ActivityViewController: UIViewController {
                         return aNotification.timestamp ?? 0 > bNotification.timestamp ?? 0
                     }
                     self.tableView.reloadData()
-                    ProgressHUD.dismiss()
                 }
             }
+            ProgressHUD.dismiss()
             
         }) { (error) in
             print(error.localizedDescription)

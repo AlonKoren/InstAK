@@ -19,7 +19,9 @@ class HomeViewController: UIViewController {
     
     var listenersPosts :  [ String : Listener ] = [:]
     
-    var Listener : Listener?
+    var isFromComment = false
+    var isFromProfile = false
+//    var Listener : Listener?
 
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
@@ -32,43 +34,37 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if !isFromComment && !isFromProfile{
+            loadPosts()
+        }else{
+            isFromComment = false
+            isFromProfile = false
+        }
+    }
+    
+    @IBAction func refresh_TouchUpInside(_ sender: Any) {
         loadPosts()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        Listener?.disconnected()
+    func loadPosts() {
+        ProgressHUD.show("Loading...", interaction: false)
+        listenersPosts.forEach { (key: String, value: Listener) in
+            value.disconnected()
+        }
+        listenersPosts.removeAll()
+//        Listener?.disconnected()
         posts.removeAll()
         users.removeAll()
-    }
-    
-    func loadPosts() {
-        activityIndicatorView.startAnimating()
+        self.tableView.reloadData()
+//        activityIndicatorView.startAnimating()
         if !AuthService.isSignIn(){
             return
         }
-        
-        Listener = Api.Feed.observePostsFromFeed(userId: AuthService.getCurrentUserId()!, onAdded: { (addedPostId) in
-            
-            self.listenersPosts[addedPostId] = self.observePost(postId: addedPostId)
-            
-        }, onModified: { (modifiedPostId) in
-            print("someway the post id change to \(modifiedPostId)")
-            // support this anyway
-            self.listenersPosts[modifiedPostId] = self.observePost(postId: modifiedPostId)
-            
-            
-        }, onRemoved: { (removedPostId) in
-            
-            self.posts.removeAll { (oldPost) -> Bool in
-                return oldPost.postId == removedPostId
+        Api.Feed.getPostsFromFeed(userId: AuthService.getCurrentUserId()!, onCompletion: { (postsIds) in
+            for postId in postsIds{
+                self.listenersPosts[postId] = self.observePost(postId: postId)
             }
-            self.users.removeValue(forKey: removedPostId)
-            print(self.posts)
-            self.tableView.reloadData()
-            
-            self.listenersPosts[removedPostId]?.disconnected()
-            self.listenersPosts.removeValue(forKey: removedPostId)
+            ProgressHUD.dismiss()
         }) { (error) in
             ProgressHUD.showError(error.localizedDescription)
         }
@@ -79,10 +75,10 @@ class HomeViewController: UIViewController {
         return Api.Post.observePost(postId: postId, onAdded: { (addedPost) in
             
             Api.User.getUser(withId: addedPost.uid!, onCompletion: { (user:User) in
-                self.posts.insert(addedPost, at: 0)
+                self.posts.append(addedPost)
                 self.users.updateValue(user, forKey: addedPost.postId!)
                 print(self.posts)
-                self.activityIndicatorView.stopAnimating()
+//                self.activityIndicatorView.stopAnimating()
                 self.posts.sort { (aPost, bPost) -> Bool in
                     return aPost.timestamp ?? 0 > bPost.timestamp ?? 0
                 }
@@ -125,6 +121,7 @@ class HomeViewController: UIViewController {
             let postId = sender as! String
             commentViewController.postId = postId
             print("postId=\(postId)")
+            isFromComment = true
         }
         
         if segue.identifier == "Feed_ProfileSegue"{
@@ -132,6 +129,7 @@ class HomeViewController: UIViewController {
             let userId = sender as! String
             profileUserViewController.userId = userId
             print("userId=\(userId)")
+            isFromProfile = true
         }
     }
     

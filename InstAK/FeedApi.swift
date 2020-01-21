@@ -52,10 +52,10 @@ class FeedApi {
         }
     }
     
-    func observePostsFromFeed(userId:String, onAdded: @escaping (String)-> Void , onModified: @escaping (String)-> Void , onRemoved: @escaping (String)-> Void, onError : @escaping (Error)-> Void) ->Listener{
+    func observePostsFromFeed(userId:String, onAdded: @escaping (String)-> Void , onModified: @escaping (String)-> Void , onRemoved: @escaping (String)-> Void , onFinish: @escaping ()-> Void, onError : @escaping (Error)-> Void) ->Listener{
         let listener:Listener = Listener()
         listener.firestoreListener = self.COLLECTION_FEED.document(userId).collection(self.FEED)
-                .addSnapshotListener { (querySnapshot, error) in
+            .addSnapshotListener { (querySnapshot, error) in
             guard let snapshot = querySnapshot else {
                 onError(error!)
                 return
@@ -73,6 +73,7 @@ class FeedApi {
                     onRemoved(postId)
                 }
             }
+            onFinish()
         }
         return listener
     }
