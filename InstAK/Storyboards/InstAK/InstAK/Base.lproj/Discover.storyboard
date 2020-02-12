@@ -208,6 +208,16 @@
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jLa-t3-ioF">
+                                                    <rect key="frame" x="359" y="483" width="47" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                    <state key="normal" title="Delete">
+                                                        <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="delete_TouchUpInside:" destination="EeM-1v-Mga" eventType="touchUpInside" id="d8L-Sj-LBr"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7bf-Rc-F3I" secondAttribute="trailing" constant="20" symbolic="YES" id="2Pz-LQ-uM1"/>
@@ -229,10 +239,12 @@
                                                 <constraint firstItem="Mvx-To-LbA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aZY-7n-PfO" secondAttribute="trailing" constant="8" symbolic="YES" id="Jg2-QR-d4x"/>
                                                 <constraint firstItem="7xX-We-tzi" firstAttribute="leading" secondItem="Mdo-zb-VLR" secondAttribute="leading" constant="16" id="Mb2-at-xDV"/>
                                                 <constraint firstItem="2l5-dn-u5v" firstAttribute="trailing" secondItem="gsV-RD-a2Z" secondAttribute="trailing" id="NEB-pN-ns8"/>
+                                                <constraint firstItem="jLa-t3-ioF" firstAttribute="centerX" secondItem="Mvx-To-LbA" secondAttribute="centerX" id="Ogt-y0-hk3"/>
                                                 <constraint firstItem="Pd5-C1-qMZ" firstAttribute="centerY" secondItem="lUP-Ok-bNA" secondAttribute="centerY" id="UAa-GT-BIu"/>
                                                 <constraint firstItem="aZY-7n-PfO" firstAttribute="centerY" secondItem="7xX-We-tzi" secondAttribute="centerY" id="aB8-M5-skb"/>
                                                 <constraint firstAttribute="trailing" secondItem="Mvx-To-LbA" secondAttribute="trailing" constant="15" id="bAv-O0-gnC"/>
                                                 <constraint firstItem="2l5-dn-u5v" firstAttribute="top" secondItem="OKD-za-F6a" secondAttribute="bottom" constant="11" id="cYJ-Ha-0oZ"/>
+                                                <constraint firstItem="jLa-t3-ioF" firstAttribute="centerY" secondItem="OKD-za-F6a" secondAttribute="centerY" id="d7L-bo-MdJ"/>
                                                 <constraint firstItem="7xX-We-tzi" firstAttribute="top" secondItem="Mdo-zb-VLR" secondAttribute="top" constant="8" id="h7G-7Q-y17"/>
                                                 <constraint firstItem="gsV-RD-a2Z" firstAttribute="centerX" secondItem="Mdo-zb-VLR" secondAttribute="centerX" id="h8f-Hh-NCu"/>
                                                 <constraint firstItem="lUP-Ok-bNA" firstAttribute="leading" secondItem="OKD-za-F6a" secondAttribute="trailing" constant="12" id="lMt-NL-nfD"/>
@@ -246,6 +258,7 @@
                                         <connections>
                                             <outlet property="captionLabel" destination="Pex-1g-ojZ" id="9l3-2E-GQu"/>
                                             <outlet property="commentImageView" destination="lUP-Ok-bNA" id="X15-QW-ldi"/>
+                                            <outlet property="deleteButton" destination="jLa-t3-ioF" id="3tO-F6-dfd"/>
                                             <outlet property="heightConstraintPhoto" destination="lYb-Hm-qop" id="ZjT-fu-mbn"/>
                                             <outlet property="likeCountButton" destination="7bf-Rc-F3I" id="Ewy-Hg-Fze"/>
                                             <outlet property="likeImageView" destination="OKD-za-F6a" id="OLJ-NC-R8O"/>

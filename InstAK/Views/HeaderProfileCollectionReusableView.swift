@@ -66,14 +66,14 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
         let placeholder = #imageLiteral(resourceName: "placeholder-avatar-profile")
         self.profileImage.kf.setImage(with: profileImageUrl, placeholder: placeholder, options: [])
         
-        Api.MyPosts.getCountUserPosts(userId: user!.uid, onCompletion: { (numOfPosts) in
+        var followingListener , followerListener, countListener :Listener
+        
+        countListener = Api.MyPosts.observeCountUserPosts(userId: user!.uid, onCompletion: { (numOfPosts) in
             self.myPostsCountLabel.text = "\(numOfPosts)"
         }) { (err) in
             print(err.localizedDescription)
         }
         
-    
-        var followingListener , followerListener :Listener
         followingListener = Api.Follow.getAllFollowingsCount(followerUserId: user!.uid, onCompletion: { (followingCount) in
             self.followingCountLabel.text = "\(followingCount)"
         }) { (err) in
@@ -91,7 +91,7 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
             self.followButton.addTarget(self, action: #selector(self.goToSettingViewController), for: .touchUpInside)
         }
         
-        delegate?.closeListeners(listeners: [followingListener , followerListener])
+        delegate?.closeListeners(listeners: [followingListener , followerListener , countListener])
     }
     func clear(){
         self.nameLabel.text = ""

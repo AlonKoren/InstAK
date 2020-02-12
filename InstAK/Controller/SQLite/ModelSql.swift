@@ -17,6 +17,7 @@ class ModelSql {
         if let dir = FileManager.default.urls(for: .documentDirectory, in:
             .userDomainMask).first{
             let path = dir.appendingPathComponent(dbFileName)
+            print("path to database: \(path.absoluteString) \t \t \(path)")
             if sqlite3_open(path.absoluteString, &database) != SQLITE_OK {
                 print("Failed to open db file: \(path.absoluteString)")
                 return

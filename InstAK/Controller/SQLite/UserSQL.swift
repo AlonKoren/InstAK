@@ -93,7 +93,7 @@ class UserSQL : SQLiteProtocol{
     }
     
     
-    static func getTypeByStmt(sqlite3_stmt: OpaquePointer?)->User{
+    static func getTypeByStmt(sqlite3_stmt: OpaquePointer?)->User?{
         let uid = String(cString:sqlite3_column_text(sqlite3_stmt,0)!)
         let username = String(cString:sqlite3_column_text(sqlite3_stmt,1)!)
         let _ = String(cString:sqlite3_column_text(sqlite3_stmt,2)!)

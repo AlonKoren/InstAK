@@ -22,7 +22,7 @@ protocol SQLiteProtocol {
     static func getLastUpdateDate(database: OpaquePointer?)->Double
     static func setLastUpdateDate(database: OpaquePointer?, date:Double)
     
-    static func getTypeByStmt(sqlite3_stmt: OpaquePointer?)->myType
+    static func getTypeByStmt(sqlite3_stmt: OpaquePointer?)->myType?
 }
 extension SQLiteProtocol{
     
@@ -42,7 +42,11 @@ extension SQLiteProtocol{
         if (sqlite3_prepare_v2(database,"SELECT * from \(TableName);",-1,&sqlite3_stmt,nil)
             == SQLITE_OK){
             while(sqlite3_step(sqlite3_stmt) == SQLITE_ROW){
-                data.append(getTypeByStmt(sqlite3_stmt: sqlite3_stmt))
+                let myType: myType? = getTypeByStmt(sqlite3_stmt: sqlite3_stmt)
+                if let myType = myType{
+                    data.append(myType)
+                }
+                
             }
         }
         sqlite3_finalize(sqlite3_stmt)

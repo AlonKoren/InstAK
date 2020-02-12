@@ -21,7 +21,7 @@ class Model {
 
 
 
-    func getAllPosts() {
+    func getAllPosts() -> Listener{
         print("getAllPosts")
         
         //1. read local users last update date
@@ -29,25 +29,50 @@ class Model {
         lastUpdated += 1;
         
         //2. get updates from firebase and observe
-        Api.Post.getAllPosts(onCompletion: { (posts) in
-            //3. write new records to the local DB
-            print("posts \(posts)")
-            for post in posts {
-                PostSQL.addNew(database: self.modelSql.database, data: post)
-                if (post.timestamp != nil && Double(post.timestamp!) > lastUpdated){
-                    lastUpdated = Double(post.timestamp!)
-                }
-            }
+        let lisener : Listener =  Api.Post.observePosts(onAdded: { (addedPost) in
             
-            //4. update the local users last update date
-            PostSQL.setLastUpdateDate(database: self.modelSql.database, date: lastUpdated)
+            PostSQL.addNew(database: self.modelSql.database, data: addedPost)
+            if (addedPost.timestamp != nil && Double(addedPost.timestamp!) > lastUpdated){
+                lastUpdated = Double(addedPost.timestamp!)
+                //4. update the local users last update date
+                PostSQL.setLastUpdateDate(database: self.modelSql.database, date: lastUpdated)
+            }
+            //5. get the full data
+            let stFullData = PostSQL.getAll(database: self.modelSql.database)
+
+            ModelNotification.PostListNotification.notify(data: stFullData)
+            
+        }, onModified: { (modifedPost) in
+            PostSQL.delete(database: self.modelSql.database, byId: modifedPost.postId)
+            PostSQL.addNew(database: self.modelSql.database, data: modifedPost)
+            if (modifedPost.timestamp != nil && Double(modifedPost.timestamp!) > lastUpdated){
+                lastUpdated = Double(modifedPost.timestamp!)
+                //4. update the local users last update date
+                PostSQL.setLastUpdateDate(database: self.modelSql.database, date: lastUpdated)
+            }
             
             //5. get the full data
             let stFullData = PostSQL.getAll(database: self.modelSql.database)
 
             ModelNotification.PostListNotification.notify(data: stFullData)
-        }) { (error) in
             
+        }, onRemoved: { (removedPost) in
+            
+            PostSQL.delete(database: self.modelSql.database, byId: removedPost.postId)
+            //5. get the full data
+            let stFullData = PostSQL.getAll(database: self.modelSql.database)
+
+            ModelNotification.PostListNotification.notify(data: stFullData)
+            
+        }, onCompletion: {() in
+            let stFullData = PostSQL.getAll(database: self.modelSql.database)
+            ModelNotification.PostListNotification.notify(data: stFullData)
+        } ) { (error) in
+            ProgressHUD.showError(error.localizedDescription)
         }
+        
+        
+        return lisener
+        
     }
 }

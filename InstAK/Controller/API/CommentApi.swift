@@ -54,4 +54,16 @@ class CommentApi {
             onCompletion(comment)
         }
     }
+    
+    func deleteAllComments(postId:String, onError : @escaping (Error)-> Void){
+        COLLECTION_POST_COMMENTS.document(postId).collection("comments").getDocuments { (querySnapshot, error) in
+            if let err = error {
+             onError(err)
+             return
+            }
+            for document in querySnapshot!.documents{
+                self.COLLECTION_POST_COMMENTS.document(postId).collection("comments").document(document.documentID).delete()
+            }
+        }
+    }
 }

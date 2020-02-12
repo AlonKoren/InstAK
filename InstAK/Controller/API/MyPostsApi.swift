@@ -67,6 +67,20 @@ class MyPostsApi {
         }
     }
     
+    func observeCountUserPosts(userId: String, onCompletion: @escaping (Int)-> Void, onError : @escaping (Error)-> Void)  ->Listener{
+        let postsCollection = COLLECTION_MY_POSTS.document(userId).collection("posts")
+        let listener:Listener = Listener()
+        listener.firestoreListener = postsCollection.addSnapshotListener({ (querySnapshot, error) in
+            if let err = error {
+                onError(err)
+                return
+            }
+            
+            onCompletion(querySnapshot!.documents.count)
+        })
+        return listener
+    }
+    
     func observeUserPosts(userId:String, onAdded: @escaping (String)-> Void , onModified: @escaping (String)-> Void , onRemoved: @escaping (String)-> Void, onError : @escaping (Error)-> Void) ->Listener{
         let listener:Listener = Listener()
         listener.firestoreListener = COLLECTION_MY_POSTS.document(userId).collection("posts")
@@ -91,5 +105,16 @@ class MyPostsApi {
         }
         return listener
     }
+    
+    func removePost(userId: String, postId : String,onCompletion: @escaping ()-> Void, onError : @escaping (Error)-> Void){
+        COLLECTION_MY_POSTS.document(userId).collection("posts").document(postId).delete { (error) in
+            if let err = error{
+                onError(err);
+            }else{
+                onCompletion();
+            }
+        }
+    }
+    
     
 }

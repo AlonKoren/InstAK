@@ -30,6 +30,16 @@ class NotificationApi  {
         }
     }
     
+    func removeAllNotification(userId : String , objectId : String){
+        COLLECTION_NOTIFICATION.document(userId).collection(NOTIFICATION)
+            .whereField("userId", isEqualTo: userId).whereField("objectId", isEqualTo: objectId)
+            .getDocuments { (querySnapshot, error) in
+                querySnapshot?.documents.forEach({ (queryDocumentSnapshot) in
+                    self.COLLECTION_NOTIFICATION.document(userId).collection(self.NOTIFICATION).document(queryDocumentSnapshot.documentID).delete()
+                })
+        }
+    }
+    
     func getNotifications(userId: String, onCompletion: @escaping ([Notification]) -> Void, onError : @escaping (Error)-> Void){
         self.COLLECTION_NOTIFICATION.document(userId).collection(NOTIFICATION).getDocuments { (querySnapshot, error) in
             if let err = error{
@@ -41,7 +51,7 @@ class NotificationApi  {
                 let notification : Notification = try! DictionaryDecoder().decode(Notification.self, from: document.data())
                 notifications.append(notification)
             }
-            
+            print("notifications: \(notifications)")
             onCompletion(notifications)
         }
     }

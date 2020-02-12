@@ -15,21 +15,26 @@ class DiscoverViewController: UIViewController {
     var posts = [Post]()
     var postsListener:NSObjectProtocol?
     
+    var listener : Listener?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
-        
-        loadTopPosts()
-        
+
     }
     
-    deinit {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        loadTopPosts()
+    }
+    override func viewDidDisappear(_ animated: Bool) {
         if let postsListener = self.postsListener{
             ModelNotification.PostListNotification.remove(observer: postsListener)
         }
+        listener?.disconnected()
     }
-    
+
     
     @IBAction func refresh_TouchUpInside(_ sender: Any) {
         loadTopPosts()
@@ -42,7 +47,7 @@ class DiscoverViewController: UIViewController {
         
         
         
-        Model.instance.getAllPosts()
+        listener = Model.instance.getAllPosts()
         postsListener = ModelNotification.PostListNotification.observe {
             (data:Any) in
             print("data get")

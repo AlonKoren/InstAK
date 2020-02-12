@@ -14,6 +14,7 @@ import AVFoundation
 protocol HomeTableViewCellDelegate {
     func goToCommentViewController(postId : String)
     func goToProfileUserViewController(userId: String)
+    func onDelete()
 }
 
 class HomeTableViewCell: UITableViewCell {
@@ -43,6 +44,7 @@ class HomeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var timeLabel: UILabel!
     
+    @IBOutlet weak var deleteButton: UIButton!
     
 
     var delegate : HomeTableViewCellDelegate?
@@ -73,6 +75,9 @@ class HomeTableViewCell: UITableViewCell {
     
     func updateView() {
         captionLabel.text = post?.caption
+        let isFromMe = (post?.uid == AuthService.getCurrentUserId())
+        deleteButton.isHidden = !isFromMe
+        deleteButton.isEnabled = isFromMe
         if let ratio = post?.ratio {
             self.heightConstraintPhoto.constant = UIScreen.main.bounds.size.width / ratio
             layoutIfNeeded()
@@ -141,7 +146,8 @@ class HomeTableViewCell: UITableViewCell {
     
     func updateLike(post : Post) {
         
-        if let postId = post.postId, let userId = AuthService.getCurrentUserId(){
+        if let userId = AuthService.getCurrentUserId(){
+            let postId = post.postId
             Api.Post.isLiked(postId: postId, userId: userId, onCompletion: { (isLiked : Bool) in
                 if isLiked{
                     self.likeImageView.image = #imageLiteral(resourceName: "likeSelected")
@@ -172,10 +178,44 @@ class HomeTableViewCell: UITableViewCell {
         }
     }
     
+    @IBAction func delete_TouchUpInside(_ sender: Any) {
+        let thisPostId = post!.postId
+        let postUserId = post!.uid
+        Api.Post.removePost(postId: thisPostId, onCompletion: {
+            
+            Api.Comment.deleteAllComments(postId: thisPostId) { (error) in
+                ProgressHUD.showError(error.localizedDescription)
+            }
+            
+            Api.Follow.getAllFollowers(followingUserId: postUserId, onCompletion: { (usersIds) in
+                for userid in usersIds{
+                    Api.Feed.removePostToFeed(userId: userid, postId: thisPostId)
+                    
+                }
+                
+            }) { (error) in
+                ProgressHUD.showError(error.localizedDescription)
+            }
+            Api.Feed.removePostToFeed(userId: postUserId, postId: thisPostId)
+            Api.MyPosts.removePost(userId: postUserId, postId: thisPostId, onCompletion: {
+                
+            }) { (error) in
+                ProgressHUD.showError(error.localizedDescription)
+            }
+            Api.Notifiaction.removeAllNotification(userId: postUserId, objectId: thisPostId)
+            self.delegate?.onDelete()
+        }) { (error) in
+            ProgressHUD.showError(error.localizedDescription)
+        }
+    }
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         nameLabel.text = ""
         captionLabel.text = ""
+        deleteButton.isHidden = true
+        deleteButton.isEnabled = false
         
         let tapGestureForComment = UITapGestureRecognizer(target: self, action: #selector(self.commentImageView_TouchUpInside))
         commentImageView.addGestureRecognizer(tapGestureForComment)
@@ -227,6 +267,8 @@ class HomeTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.volumeView.isHidden = true
+        self.deleteButton.isHidden = true
+        self.deleteButton.isEnabled = false
         profileImageView.image = #imageLiteral(resourceName: "placeholder-avatar-profile")
         playerLayer?.removeFromSuperlayer()
         player?.pause()
@@ -249,12 +291,13 @@ class HomeTableViewCell: UITableViewCell {
             let timestamp = Int(Date().timeIntervalSince1970)
             if isLiked{
                 self.likeImageView.image = #imageLiteral(resourceName: "likeSelected")
-                Api.Notifiaction.addNewNotification(userId: self.post!.uid!, fromId: userId, type: "like", objectId: postid, timestamp: timestamp)
+                Api.Notifiaction.addNewNotification(userId: self.post!.uid, fromId: userId, type: "like", objectId: postid, timestamp: timestamp)
             }else{
                 self.likeImageView.image = #imageLiteral(resourceName: "like")
-                Api.Notifiaction.removeNotification(userId: self.post!.uid!, fromId: userId, type: "like", objectId: postid)
+                Api.Notifiaction.removeNotification(userId: self.post!.uid, fromId: userId, type: "like", objectId: postid)
             }
         }) { (error) in
+            ProgressHUD.showError("couldn't like this post")
             ProgressHUD.showError(error.localizedDescription)
         }
 

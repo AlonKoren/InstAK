@@ -132,10 +132,21 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nzr-yb-fqb">
+                                                    <rect key="frame" x="360" y="483" width="47" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                    <state key="normal" title="Delete">
+                                                        <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="delete_TouchUpInside:" destination="5L1-7N-0tW" eventType="touchUpInside" id="qIh-j6-6kw"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="6YR-Y1-sRa" firstAttribute="leading" secondItem="8PG-N2-J5p" secondAttribute="leading" constant="16" id="38U-cB-Cq0"/>
                                                 <constraint firstItem="ubh-SU-kSW" firstAttribute="top" secondItem="jR3-Hl-DZy" secondAttribute="bottom" constant="15" id="4Cx-MS-DkS"/>
+                                                <constraint firstItem="nzr-yb-fqb" firstAttribute="centerY" secondItem="ubh-SU-kSW" secondAttribute="centerY" id="6vm-hr-Kl1"/>
                                                 <constraint firstItem="FnV-Oj-6YY" firstAttribute="trailing" secondItem="jR3-Hl-DZy" secondAttribute="trailing" id="8XI-2P-N9G"/>
                                                 <constraint firstItem="jR3-Hl-DZy" firstAttribute="leading" secondItem="8PG-N2-J5p" secondAttribute="leading" id="Aol-pc-Y8p"/>
                                                 <constraint firstItem="reR-Iv-7fJ" firstAttribute="leading" secondItem="8PG-N2-J5p" secondAttribute="leading" constant="16" id="Bk8-Oi-2mf"/>
@@ -151,6 +162,7 @@
                                                 <constraint firstItem="AZx-1O-K6Q" firstAttribute="leading" secondItem="ubh-SU-kSW" secondAttribute="trailing" constant="12" id="TcJ-hV-74t"/>
                                                 <constraint firstItem="ZTq-z5-VUn" firstAttribute="centerY" secondItem="AZx-1O-K6Q" secondAttribute="centerY" id="UD9-Bh-zjj"/>
                                                 <constraint firstAttribute="trailing" secondItem="XUp-GH-Nbl" secondAttribute="trailing" constant="15" id="Ywx-Sl-Kgl"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="nzr-yb-fqb" secondAttribute="trailing" constant="-13" id="aOJ-ut-3Ep"/>
                                                 <constraint firstAttribute="bottom" secondItem="vQn-Gw-FyV" secondAttribute="bottom" constant="21" id="bqr-zk-RK1"/>
                                                 <constraint firstAttribute="trailing" secondItem="jR3-Hl-DZy" secondAttribute="trailing" id="cFq-2G-PXd"/>
                                                 <constraint firstItem="O0W-9r-ooj" firstAttribute="centerY" secondItem="6YR-Y1-sRa" secondAttribute="centerY" id="dtj-g6-mzL"/>
@@ -168,6 +180,7 @@
                                         <connections>
                                             <outlet property="captionLabel" destination="vQn-Gw-FyV" id="sR9-bd-GPC"/>
                                             <outlet property="commentImageView" destination="AZx-1O-K6Q" id="Blr-M5-G4j"/>
+                                            <outlet property="deleteButton" destination="nzr-yb-fqb" id="QEE-zI-w5G"/>
                                             <outlet property="heightConstraintPhoto" destination="ugT-cw-QUK" id="TXp-xJ-jx0"/>
                                             <outlet property="likeCountButton" destination="reR-Iv-7fJ" id="wdb-vT-Hi4"/>
                                             <outlet property="likeImageView" destination="ubh-SU-kSW" id="CpU-i3-ITK"/>

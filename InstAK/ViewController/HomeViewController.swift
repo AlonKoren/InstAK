@@ -89,9 +89,9 @@ class HomeViewController: UIViewController {
     func observePost(postId : String) -> Listener{
         return Api.Post.observePost(postId: postId, onAdded: { (addedPost) in
             
-            Api.User.getUser(withId: addedPost.uid!, onCompletion: { (user:User) in
+            Api.User.getUser(withId: addedPost.uid, onCompletion: { (user:User) in
                 self.posts.append(addedPost)
-                self.users.updateValue(user, forKey: addedPost.postId!)
+                self.users.updateValue(user, forKey: addedPost.postId)
                 print(self.posts)
 //                self.activityIndicatorView.stopAnimating()
                 self.posts.sort { (aPost, bPost) -> Bool in
@@ -114,7 +114,7 @@ class HomeViewController: UIViewController {
                 return oldPost.postId == removedPost.postId
             }
                     
-            self.users.removeValue(forKey: removedPost.postId!)
+            self.users.removeValue(forKey: removedPost.postId)
             
             print(self.posts)
             self.tableView.reloadData()
@@ -159,7 +159,7 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! HomeTableViewCell
         let post = posts[indexPath.row]
-        let user = users[post.postId!]
+        let user = users[post.postId]
         cell.post = post
         cell.user = user
         cell.delegate = self
@@ -168,6 +168,9 @@ extension HomeViewController: UITableViewDataSource {
 }
 
 extension HomeViewController: HomeTableViewCellDelegate{
+    func onDelete() {
+        refresh()
+    }
     
     func goToCommentViewController(postId: String) {
         self.performSegue(withIdentifier: "CommentSegue", sender: postId)

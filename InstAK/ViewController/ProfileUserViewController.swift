@@ -63,10 +63,11 @@ class ProfileUserViewController: UIViewController {
     }
     
     func fechMyPosts(){
-        
+        //know feature not a bug... the ability to remove posts and not adding a new posts.
         Api.MyPosts.getUserPosts(userId: userId, onCompletion: { (postIds : [String]) in
             self.lisener?.disconnected()
             self.posts.removeAll()
+            self.collectionView.reloadData()
             if postIds.isEmpty{
                 return
             }

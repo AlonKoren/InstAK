@@ -10,10 +10,10 @@ import Foundation
 
 class Post : Codable{
     
-    var postId: String?
+    var postId: String
     var caption: String?
     var photoUrl: String?
-    var uid: String?
+    var uid: String
     var likeCount: Int?
     var ratio : CGFloat?
     var videoUrl : String?

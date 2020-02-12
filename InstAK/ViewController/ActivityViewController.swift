@@ -26,11 +26,13 @@ class ActivityViewController: UIViewController {
     func loadNotifications(){
         ProgressHUD.show("Loading...", interaction: false)
         self.notifications.removeAll()
+        self.tableView.reloadData()
         guard let currentUserId = AuthService.getCurrentUserId() else {
             return
         }
         Api.Notifiaction.getNotifications(userId: currentUserId, onCompletion: { (notifications) in
             self.notifications.removeAll()
+            self.tableView.reloadData()
             notifications.forEach { (notification) in
                 self.fechUser(userId: notification.fromId!) { (user) in
                     self.notifications.insert(notification, at: 0)
@@ -44,6 +46,8 @@ class ActivityViewController: UIViewController {
             ProgressHUD.dismiss()
             
         }) { (error) in
+            self.notifications.removeAll()
+            self.tableView.reloadData()
             print(error.localizedDescription)
         }
     }

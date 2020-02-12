@@ -107,35 +107,45 @@ class CommentViewController: UIViewController {
     
     // load all comments from DB in realtime
     func loadComments(){
-        
-        listener = Api.Comment.observeComments(postId: postId, onAdded: { (addComment) in
-            self.comments.append(addComment)
-            
-            Api.User.getUser(withId: addComment.uid! , onCompletion: { (user) in
-                self.users.updateValue(user, forKey: addComment.commnetId!)
-                self.tableView.reloadData()
-            }) { (error) in
-                print(error.localizedDescription)
+        Api.Post.isExistPost(postId: postId, onCompletion: { (isExist) in
+            if (isExist){
+                self.listener = Api.Comment.observeComments(postId: self.postId, onAdded: { (addComment) in
+                    self.comments.append(addComment)
+                    
+                    Api.User.getUser(withId: addComment.uid! , onCompletion: { (user) in
+                        self.users.updateValue(user, forKey: addComment.commnetId!)
+                        self.tableView.reloadData()
+                    }) { (error) in
+                        print(error.localizedDescription)
+                    }
+                }, onModified: { (modifiedComment) in
+                    
+                    self.comments.removeAll(where: { (oldComment) -> Bool in
+                        return oldComment.commnetId == modifiedComment.commnetId
+                    })
+                    self.comments.append(modifiedComment)
+                    
+                    self.tableView.reloadData()
+                }, onRemoved: { (removedComment) in
+                    
+                    self.comments.removeAll(where: { (oldComment) -> Bool in
+                        return oldComment.commnetId == removedComment.commnetId
+                    })
+                    self.users.removeValue(forKey: removedComment.commnetId!)
+                    
+                    self.tableView.reloadData()
+                }) { (error) in
+                    print(error.localizedDescription)
+                }
+            }else{
+                self.tabBarController?.tabBar.isHidden = false
+                self.navigationController?.popToRootViewController(animated: true)
+                
             }
-        }, onModified: { (modifiedComment) in
-            
-            self.comments.removeAll(where: { (oldComment) -> Bool in
-                return oldComment.commnetId == modifiedComment.commnetId
-            })
-            self.comments.append(modifiedComment)
-            
-            self.tableView.reloadData()
-        }, onRemoved: { (removedComment) in
-            
-            self.comments.removeAll(where: { (oldComment) -> Bool in
-                return oldComment.commnetId == removedComment.commnetId
-            })
-            self.users.removeValue(forKey: removedComment.commnetId!)
-            
-            self.tableView.reloadData()
         }) { (error) in
             print(error.localizedDescription)
         }
+        
     }
 
    // add comment to DB
@@ -146,20 +156,29 @@ class CommentViewController: UIViewController {
            return
        }
         
-        Api.Comment.addComment(postId: postId, commentText: commentTextField.text!, userId: currentUserId, onCompletion: { (comment) in
-            Api.Post.getpost(postId: self.postId, onCompletion: { (post) in
-                let timestamp = Int(Date().timeIntervalSince1970)
-                Api.Notifiaction.addNewNotification(userId: post.uid!, fromId: currentUserId, type: "comment", objectId: self.postId, timestamp: timestamp)
-            }) { (error) in
-                print(error.localizedDescription)
-            }
-            
-            
-            self.empty()
-            self.hideKeyboard()
+        Api.Post.isExistPost(postId: self.postId, onCompletion: { (isExist) in
+            if(isExist){
+                Api.Comment.addComment(postId: self.postId, commentText: self.commentTextField.text!, userId: currentUserId, onCompletion: { (comment) in
+                    Api.Post.getpost(postId: self.postId, onCompletion: { (post) in
+                        let timestamp = Int(Date().timeIntervalSince1970)
+                        Api.Notifiaction.addNewNotification(userId: post.uid, fromId: currentUserId, type: "comment", objectId: self.postId, timestamp: timestamp)
+                    }) { (error) in
+                        print(error.localizedDescription)
+                    }
+                    self.empty()
+                    self.hideKeyboard()
+                }) { (error) in
+                    ProgressHUD.showError(error.localizedDescription)
+                }
+            }else{
+               self.hideKeyboard()
+               ProgressHUD.showError("Couldn't Post your Comment")
+                self.tabBarController?.tabBar.isHidden = false
+               self.navigationController?.popToRootViewController(animated: true)
+           }
         }) { (error) in
-            ProgressHUD.showError(error.localizedDescription)
-        }
+           print(error.localizedDescription)
+       }
     }
     
     func empty() {

@@ -36,12 +36,9 @@ class DetailViewController: UIViewController {
             return
         }
         
+        
         lisener = Api.Post.observePost(postId: postId, onCompletion: { (post : Post) in
-            guard let userId = post.uid else{
-                ProgressHUD.showError("User of post not exist!")
-                return
-            }
-            Api.User.getUser(withId: userId, onCompletion: { (user:User) in
+            Api.User.getUser(withId: post.uid, onCompletion: { (user:User) in
                 self.post = post
                 self.user = user
                 
@@ -49,9 +46,11 @@ class DetailViewController: UIViewController {
             }) { (error) in
                 print(error.localizedDescription)
             }
-        }) { (error) in
+        }, onError: { (error) in
             ProgressHUD.showError(error.localizedDescription)
-        }
+        }, onNotExist: {
+            self.navigationController?.popToRootViewController(animated: true)
+        })
         
     }
     
@@ -88,6 +87,10 @@ extension DetailViewController: UITableViewDataSource{
 }
 
 extension DetailViewController: HomeTableViewCellDelegate{
+    func onDelete() {
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
     
     func goToCommentViewController(postId: String) {
         self.performSegue(withIdentifier: "Detail_CommentSegue", sender: postId)

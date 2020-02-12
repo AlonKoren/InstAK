@@ -91,7 +91,7 @@ class CameraViewController: UIViewController {
     @IBAction func shareButton_TouchUpInside(_ sender: Any) {
         view.endEditing(true)
         ProgressHUD.show("Waiting...", interaction: false)
-        if let profileImg = self.selectedImage, let imageData = profileImg.jpegData(compressionQuality: 0.9) {
+        if let profileImg = self.photo.image, let imageData = profileImg.jpegData(compressionQuality: 0.9) {
             let ratio = profileImg.size.width / profileImg.size.height
             let photoIdString = NSUUID().uuidString
             
@@ -138,16 +138,16 @@ class CameraViewController: UIViewController {
         let timestamp = Int(Date().timeIntervalSince1970)
 
         Api.Post.addPostToDatabase(caption: caption, photoUrl: photoUrl, uid: currentUserId, ratio : ratio, videoUrl: remoteVideoUrl , timestamp: timestamp ,onCompletion: { (post : Post) in
-            Api.MyPosts.connectUserToPost(userId: currentUserId, postId: post.postId!, onCompletion: { () in
+            Api.MyPosts.connectUserToPost(userId: currentUserId, postId: post.postId, onCompletion: { () in
 
-                Api.Feed.addPostToFeed(userId: currentUserId, postId: post.postId!)
+                Api.Feed.addPostToFeed(userId: currentUserId, postId: post.postId)
                 
                 
                 Api.Follow.getAllFollowers(followingUserId: currentUserId, onCompletion: { (usersIds) in
                     
                     usersIds.forEach { (userId) in
-                        Api.Feed.addPostToFeed(userId: userId, postId: post.postId!)
-                        Api.Notifiaction.addNewNotification(userId: userId, fromId: currentUserId, type: "feed", objectId: post.postId!, timestamp: timestamp)
+                        Api.Feed.addPostToFeed(userId: userId, postId: post.postId)
+                        Api.Notifiaction.addNewNotification(userId: userId, fromId: currentUserId, type: "feed", objectId: post.postId, timestamp: timestamp)
                     }
                     
                     ProgressHUD.showSuccess("Success")

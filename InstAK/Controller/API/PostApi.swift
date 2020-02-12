@@ -12,7 +12,7 @@ import FirebaseFirestore
 class PostApi {
     private var COLLECTION_POSTS = Firestore.firestore().collection("posts")
     
-    func observePosts(onAdded: @escaping (Post)-> Void , onModified: @escaping (Post)-> Void , onRemoved: @escaping (Post)-> Void, onError : @escaping (Error)-> Void) ->Listener{
+    func observePosts(onAdded: @escaping (Post)-> Void , onModified: @escaping (Post)-> Void , onRemoved: @escaping (Post)-> Void,onCompletion: @escaping ()-> Void, onError : @escaping (Error)-> Void) ->Listener{
         
         let listener:Listener = Listener()
         listener.firestoreListener = COLLECTION_POSTS.addSnapshotListener { (querySnapshot, error) in
@@ -35,6 +35,7 @@ class PostApi {
                     onRemoved(post)
                 }
             }
+            onCompletion()
         }
         return listener
     }
@@ -54,7 +55,7 @@ class PostApi {
         }
     }
     
-    func observePost(postId : String, onCompletion: @escaping (Post)-> Void , onError : @escaping (Error)-> Void) ->Listener{
+    func observePost(postId : String, onCompletion: @escaping (Post)-> Void , onError : @escaping (Error)-> Void , onNotExist : @escaping ()->Void) ->Listener{
         
         let listener:Listener = Listener()
         listener.firestoreListener = COLLECTION_POSTS.document(postId).addSnapshotListener({ (documentSnapshot, error) in
@@ -62,10 +63,24 @@ class PostApi {
                 onError(error!)
                 return
             }
+            if(!snapshot.exists) {
+                onNotExist();
+                return
+            }
             let post:Post = try! DictionaryDecoder().decode(Post.self, from: snapshot.data()!)
             onCompletion(post)
         })
         return listener
+    }
+    
+    func isExistPost(postId : String,onCompletion: @escaping (Bool)-> Void , onError : @escaping (Error)-> Void){
+        COLLECTION_POSTS.document(postId).getDocument { (documentSnapshot, error) in
+            guard let snapshot = documentSnapshot else {
+                onError(error!)
+                return
+            }
+            onCompletion(snapshot.exists)
+        }
     }
     
     func getpost(postId : String ,onCompletion: @escaping (Post)-> Void, onError : @escaping (Error)-> Void){
@@ -190,7 +205,7 @@ class PostApi {
     }
     
     func observeSpecificPosts(postsIds : [String] ,onAdded: @escaping (Post)-> Void , onModified: @escaping (Post)-> Void , onRemoved: @escaping (Post)-> Void, onError : @escaping (Error)-> Void) ->Listener{
-        
+        	
         let listener:Listener = Listener()
         listener.firestoreListener = COLLECTION_POSTS.whereField("postId", in: postsIds).addSnapshotListener { (querySnapshot, error) in
             guard let snapshot = querySnapshot else {
@@ -228,6 +243,26 @@ class PostApi {
                 posts.append(post)
             }
             onCompletion(posts)
+        }
+    }
+    
+    func removePost(postId : String,onCompletion: @escaping ()-> Void, onError : @escaping (Error)-> Void){
+        COLLECTION_POSTS.document(postId).delete { (error) in
+            if let err = error{
+                onError(err);
+            }else{
+                self.COLLECTION_POSTS.document(postId).collection("likes").getDocuments { (querySnapshot, error) in
+                    if let err = error {
+                        onError(err)
+                        return
+                    }
+                    for document in querySnapshot!.documents{
+                        self.COLLECTION_POSTS.document(postId).collection("likes").document(document.documentID).delete()
+                    }
+                    onCompletion();
+                }
+                
+            }
         }
     }
     

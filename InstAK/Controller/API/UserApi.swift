@@ -58,19 +58,21 @@ class UserApi {
                 return
             }
             for diff in snapshot.documentChanges{
-                let user: User = try! DictionaryDecoder().decode(User.self, from: diff.document.data())
-                if (diff.type == .added) {
-                    print("New User : \(user)")
-                    onAdded(user)
-                }
-                if (diff.type == .modified) {
-                    print("Modified User : \(user)")
-                    onModified(user)
-                }
-                if (diff.type == .removed) {
-                    print("Removed User : \(user)")
-                    onRemoved(user)
-                }
+                do {
+                    let user: User = try DictionaryDecoder().decode(User.self, from: diff.document.data())
+                    if (diff.type == .added) {
+                        print("New User : \(user)")
+                        onAdded(user)
+                    }
+                    if (diff.type == .modified) {
+                        print("Modified User : \(user)")
+                        onModified(user)
+                    }
+                    if (diff.type == .removed) {
+                        print("Removed User : \(user)")
+                        onRemoved(user)
+                    }
+                } catch _ {}
             }
         }
         return listener
