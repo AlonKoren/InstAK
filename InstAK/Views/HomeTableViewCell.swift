@@ -287,19 +287,29 @@ class HomeTableViewCell: UITableViewCell {
         guard let postid = post?.postId, let userId = AuthService.getCurrentUserId() else{
             return
         }
-        Api.Post.incrementLike(postId: postid, userId: userId, onCompletion: { (isLiked) in
-            let timestamp = Int(Date().timeIntervalSince1970)
-            if isLiked{
-                self.likeImageView.image = #imageLiteral(resourceName: "likeSelected")
-                Api.Notifiaction.addNewNotification(userId: self.post!.uid, fromId: userId, type: "like", objectId: postid, timestamp: timestamp)
+        Api.Post.isExistPost(postId: postid, onCompletion: { (isExist) in
+            if(isExist){
+                Api.Post.incrementLike(postId: postid, userId: userId, onCompletion: { (isLiked) in
+                    let timestamp = Int(Date().timeIntervalSince1970)
+                    if isLiked{
+                        self.likeImageView.image = #imageLiteral(resourceName: "likeSelected")
+                        Api.Notifiaction.addNewNotification(userId: self.post!.uid, fromId: userId, type: "like", objectId: postid, timestamp: timestamp)
+                    }else{
+                        self.likeImageView.image = #imageLiteral(resourceName: "like")
+                        Api.Notifiaction.removeNotification(userId: self.post!.uid, fromId: userId, type: "like", objectId: postid)
+                    }
+                }) { (error) in
+                    ProgressHUD.showError("couldn't like this post")
+                    ProgressHUD.showError(error.localizedDescription)
+                }
             }else{
-                self.likeImageView.image = #imageLiteral(resourceName: "like")
-                Api.Notifiaction.removeNotification(userId: self.post!.uid, fromId: userId, type: "like", objectId: postid)
+                ProgressHUD.showError("couldn't like this post")
             }
         }) { (error) in
             ProgressHUD.showError("couldn't like this post")
             ProgressHUD.showError(error.localizedDescription)
         }
+        
 
     }
 

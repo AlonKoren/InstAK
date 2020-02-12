@@ -89,8 +89,15 @@ class PostApi {
                 onError(error!)
                 return
             }
-            let post:Post = try! DictionaryDecoder().decode(Post.self, from: snapshot.data()!)
-            onCompletion(post)
+            if(!snapshot.exists){
+                return
+            }
+            do{
+                let post:Post = try DictionaryDecoder().decode(Post.self, from: snapshot.data()!)
+                onCompletion(post)
+            }catch _{}
+            
+            
         }
     }
     
