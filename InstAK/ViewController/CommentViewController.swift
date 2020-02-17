@@ -168,7 +168,8 @@ class CommentViewController: UIViewController {
                     self.empty()
                     self.hideKeyboard()
                 }) { (error) in
-                    ProgressHUD.showError(error.localizedDescription)
+                    print(error.localizedDescription)
+                    ProgressHUD.showError("Failed to add comment")
                 }
             }else{
                self.hideKeyboard()

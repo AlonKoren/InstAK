@@ -163,6 +163,7 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
                         Api.Feed.addPostsToFeed(userId: AuthService.getCurrentUserId()!, postsIds: postsIds)
                         
                     }) { (error) in
+                        print(error.localizedDescription)
                         ProgressHUD.showError(error.localizedDescription)
                     }
                                         
@@ -170,6 +171,7 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
                     print("success follow")
                     self.configureUnFollowButton()
                 }) { (error) in
+                    print(error.localizedDescription)
                     ProgressHUD.showError(error.localizedDescription)
                 }
             }
@@ -184,6 +186,7 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
                     Api.MyPosts.getUserPosts(userId: self.user!.uid , onCompletion: { (postsIds) in
                         Api.Feed.removePostsToFeed(userId: AuthService.getCurrentUserId()!, postsIds: postsIds)
                     }) { (error) in
+                        print(error.localizedDescription)
                         ProgressHUD.showError(error.localizedDescription)
                     }
                     
@@ -191,6 +194,7 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
                     print("success unfollow")
                     self.configureFollowButton()
                 }) { (error) in
+                    print(error.localizedDescription)
                     ProgressHUD.showError(error.localizedDescription)
                 }
             }

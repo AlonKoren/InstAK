@@ -68,6 +68,7 @@ class Model {
             let stFullData = PostSQL.getAll(database: self.modelSql.database)
             ModelNotification.PostListNotification.notify(data: stFullData)
         } ) { (error) in
+            print(error.localizedDescription)
             ProgressHUD.showError(error.localizedDescription)
         }
         

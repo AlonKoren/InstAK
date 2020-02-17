@@ -51,8 +51,10 @@ class DetailViewController: UIViewController {
                 print(error.localizedDescription)
             }
         }, onError: { (error) in
-            ProgressHUD.showError(error.localizedDescription)
+            print(error.localizedDescription)
+            ProgressHUD.showError("Failed to load post")
         }, onNotExist: {
+            ProgressHUD.showError("This post no longer exists")
             self.navigationController?.popToRootViewController(animated: true)
         })
         

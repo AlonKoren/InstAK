@@ -81,6 +81,7 @@ class HomeViewController: UIViewController {
             }
             ProgressHUD.dismiss()
         }) { (error) in
+            print(error.localizedDescription)
             ProgressHUD.showError(error.localizedDescription)
         }
     }
@@ -119,6 +120,7 @@ class HomeViewController: UIViewController {
             print(self.posts)
             self.tableView.reloadData()
         }, onError: { (err) in
+            print(err.localizedDescription)
             ProgressHUD.showError(err.localizedDescription)
         })
     }

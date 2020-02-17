@@ -71,6 +71,7 @@ class SignInViewController: UIViewController {
             ProgressHUD.showSuccess("Success")
             self.performSegue(withIdentifier: "signInToTabbarVC", sender: nil)
         }, onError: { error in
+            print(error!)
             ProgressHUD.showError(error!)
         })
     

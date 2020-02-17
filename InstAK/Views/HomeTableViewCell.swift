@@ -184,7 +184,7 @@ class HomeTableViewCell: UITableViewCell {
         Api.Post.removePost(postId: thisPostId, onCompletion: {
             
             Api.Comment.deleteAllComments(postId: thisPostId) { (error) in
-                ProgressHUD.showError(error.localizedDescription)
+                print(error.localizedDescription)
             }
             
             Api.Follow.getAllFollowers(followingUserId: postUserId, onCompletion: { (usersIds) in
@@ -193,19 +193,20 @@ class HomeTableViewCell: UITableViewCell {
                     Api.Notifiaction.removeAllNotification(userId: userid, objectId: thisPostId)
                 }
             }) { (error) in
-                ProgressHUD.showError(error.localizedDescription)
+                print(error.localizedDescription)
             }
             Api.Feed.removePostToFeed(userId: postUserId, postId: thisPostId)
             Api.Notifiaction.removeAllNotification(userId: postUserId, objectId: thisPostId)
             Api.MyPosts.removePost(userId: postUserId, postId: thisPostId, onCompletion: {
                 
             }) { (error) in
-                ProgressHUD.showError(error.localizedDescription)
+                print(error.localizedDescription)
             }
             
             self.delegate?.onDelete()
         }) { (error) in
-            ProgressHUD.showError(error.localizedDescription)
+            print(error.localizedDescription)
+            ProgressHUD.showError("Failed to delete this post")
         }
     }
     
@@ -299,15 +300,15 @@ class HomeTableViewCell: UITableViewCell {
                         Api.Notifiaction.removeNotification(userId: self.post!.uid, fromId: userId, type: "like", objectId: postid)
                     }
                 }) { (error) in
+                    print(error.localizedDescription)
                     ProgressHUD.showError("couldn't like this post")
-                    ProgressHUD.showError(error.localizedDescription)
                 }
             }else{
                 ProgressHUD.showError("couldn't like this post")
             }
         }) { (error) in
+            print(error.localizedDescription)
             ProgressHUD.showError("couldn't like this post")
-            ProgressHUD.showError(error.localizedDescription)
         }
         
 

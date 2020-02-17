@@ -55,7 +55,7 @@ class SettingTableViewController: UITableViewController {
         Api.User.getUser(withId: userId, onCompletion: { (currentUser) in
             self.currentUser = currentUser
         }) { (error) in
-            ProgressHUD.showError(error.localizedDescription)
+            print(error.localizedDescription)
         }
     }
     
@@ -92,14 +92,17 @@ class SettingTableViewController: UITableViewController {
                         self.currentUser = user
                         
                     }) { (error) in
-                        ProgressHUD.showError(error.localizedDescription)
+                        print(error.localizedDescription)
+                        ProgressHUD.showError("Failed to update personal information")
                     }
                 }) { (error) in
-                    ProgressHUD.showError(error.localizedDescription)
+                    print(error.localizedDescription)
+                    ProgressHUD.showError("Failed to update email")
                 }
 
             }) { (error) in
-                ProgressHUD.showError(error.localizedDescription)
+                print(error.localizedDescription)
+                ProgressHUD.showError("Failed to update profile picture")
             }
         }
         
@@ -112,8 +115,8 @@ class SettingTableViewController: UITableViewController {
             signInVC.modalPresentationStyle = .fullScreen
             self.present(signInVC, animated: true, completion: nil)
         }) { (error) in
-            ProgressHUD.showError(error.localizedDescription)
-            print(error)
+            ProgressHUD.showError("User logout failed")
+            print(error.localizedDescription)
         }
     }
     

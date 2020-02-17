@@ -113,13 +113,14 @@ class PeopleTableViewCell: UITableViewCell {
                     Api.Feed.addPostsToFeed(userId: AuthService.getCurrentUserId()!, postsIds: postsIds)
                     
                 }) { (error) in
-                    ProgressHUD.showError(error.localizedDescription)
+                    print(error.localizedDescription)
                 }
                 self.isFollowing!.setBool(bool: true)
                 print("success follow")
                 self.configureUnFollowButton()
             }) { (error) in
-                ProgressHUD.showError(error.localizedDescription)
+                print(error.localizedDescription)
+                ProgressHUD.showError("Failed to un/follow")
             }
         }
     }
@@ -133,14 +134,15 @@ class PeopleTableViewCell: UITableViewCell {
                 Api.MyPosts.getUserPosts(userId: self.user!.uid , onCompletion: { (postsIds) in
                     Api.Feed.removePostsToFeed(userId: AuthService.getCurrentUserId()!, postsIds: postsIds)
                 }) { (error) in
-                    ProgressHUD.showError(error.localizedDescription)
+                    print(error.localizedDescription)
                 }
                 
                 self.isFollowing!.setBool(bool: false)
                 print("success unfollow")
                 self.configureFollowButton()
             }) { (error) in
-                ProgressHUD.showError(error.localizedDescription)
+                print(error.localizedDescription)
+                ProgressHUD.showError("Failed to un/follow")
             }
         }
     }

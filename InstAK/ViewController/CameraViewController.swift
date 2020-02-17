@@ -104,10 +104,12 @@ class CameraViewController: UIViewController {
                             self.sendDataToDatabase(photoUrl: photoUrl, ratio : ratio , remoteVideoUrl: remoteVideoUrl)
                             
                         }) { (error) in
-                            ProgressHUD.showError(error.localizedDescription)
+                            print(error.localizedDescription)
+                            ProgressHUD.showError("Unable to upload post")
                         }
                     }) { (error) in
-                        ProgressHUD.showError(error.localizedDescription)
+                        print(error.localizedDescription)
+                        ProgressHUD.showError("Unable to upload post")
                     }
                 }
             }else{
@@ -116,7 +118,8 @@ class CameraViewController: UIViewController {
                     self.sendDataToDatabase(photoUrl: photoUrl, ratio : ratio , remoteVideoUrl: nil)
                     
                 }) { (error) in
-                    ProgressHUD.showError(error.localizedDescription)
+                    print(error.localizedDescription)
+                    ProgressHUD.showError("Unable to upload post")
                 }
             }
             
@@ -153,16 +156,19 @@ class CameraViewController: UIViewController {
                     ProgressHUD.showSuccess("Success")
                     self.tabBarController?.selectedIndex = 0
                 }) { (e) in
-                    ProgressHUD.showError(e.localizedDescription)
+                    print(e.localizedDescription)
+                    ProgressHUD.showError("Failed to successfully upload information")
                 }
                   
                 
             }) { (err) in
-                ProgressHUD.showError(err.localizedDescription)
+                print(err.localizedDescription)
+                ProgressHUD.showError("Failed to successfully upload information")
             }
             
         }) { (error) in
-            ProgressHUD.showError(error.localizedDescription)
+            print(error.localizedDescription)
+            ProgressHUD.showError("Failed to successfully upload information")
         }
     }
     
