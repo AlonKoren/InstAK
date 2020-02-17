@@ -21,18 +21,17 @@ class DiscoverViewController: UIViewController {
         super.viewDidLoad()
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
-
+        loadTopPosts()
     }
     
     
-    override func viewWillAppear(_ animated: Bool) {
-        loadTopPosts()
+    deinit {
+        listener?.disconnected()
     }
     override func viewDidDisappear(_ animated: Bool) {
         if let postsListener = self.postsListener{
             ModelNotification.PostListNotification.remove(observer: postsListener)
         }
-        listener?.disconnected()
     }
 
     

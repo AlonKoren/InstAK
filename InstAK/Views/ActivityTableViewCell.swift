@@ -44,9 +44,18 @@ class ActivityTableViewCell: UITableViewCell {
         switch notification!.type! {
             case "feed":
                 descripitionLabel.text = "added a new post"
-                Api.Post.getpost(postId: notification!.objectId!, onCompletion: { (post) in
+                
+                let objectId = notification!.objectId!
+                Api.Post.getpost(postId: objectId, onCompletion: { (post) in
                     let postImageUrl = URL(string: post.photoUrl!)
                     self.photo.kf.setImage(with: postImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile") ,options: [])
+                    
+//                    if let photoUrlString = post.photoUrl {
+//                        let postImageUrl = URL(string: photoUrlString)
+//                        self.photo.kf.setImage(with: postImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile") ,options: [])
+//
+//                    }
+                    
                 }) { (error) in
                     print(error.localizedDescription)
                 }
@@ -65,6 +74,7 @@ class ActivityTableViewCell: UITableViewCell {
                 })
             case "comment":
                 descripitionLabel.text = "left a comment on your post"
+                
                 let objectId = notification!.objectId!
                 Api.Post.getpost(postId: objectId, onCompletion: { (post) in
                     if let photoUrlString = post.photoUrl {

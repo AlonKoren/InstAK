@@ -15,10 +15,12 @@ class ActivityViewController: UIViewController {
     var notifications : [Notification] = []
     var users = [String: User]()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadNotifications()

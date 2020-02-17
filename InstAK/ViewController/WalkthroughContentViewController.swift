@@ -55,7 +55,7 @@ class WalkthroughContentViewController: UIViewController {
             defaults.set(true, forKey: "hasViewedWalkthrough")
             dismiss(animated: true, completion: nil)
         default:
-            print("gil")
+            print("alon")
         }
     }
     
