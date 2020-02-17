@@ -23,16 +23,20 @@ class ActivityViewController: UIViewController {
         super.viewWillAppear(animated)
         loadNotifications()
     }
+    
     func loadNotifications(){
         ProgressHUD.show("Loading...", interaction: false)
+        self.users.removeAll()
         self.notifications.removeAll()
         self.tableView.reloadData()
         guard let currentUserId = AuthService.getCurrentUserId() else {
             return
         }
         Api.Notifiaction.getNotifications(userId: currentUserId, onCompletion: { (notifications) in
+            self.users.removeAll()
             self.notifications.removeAll()
             self.tableView.reloadData()
+
             notifications.forEach { (notification) in
                 self.fechUser(userId: notification.fromId!) { (user) in
                     self.notifications.insert(notification, at: 0)
@@ -44,8 +48,9 @@ class ActivityViewController: UIViewController {
                 }
             }
             ProgressHUD.dismiss()
-            
+
         }) { (error) in
+            self.users.removeAll()
             self.notifications.removeAll()
             self.tableView.reloadData()
             print(error.localizedDescription)
@@ -92,8 +97,9 @@ extension ActivityViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityTableViewCell", for: indexPath) as! ActivityTableViewCell
-        cell.user = self.users[notifications[indexPath.item].notificationId!]!
-        cell.notification = self.notifications[indexPath.item]
+        let notification = notifications[indexPath.item]
+        cell.user = self.users[notification.notificationId!]!
+        cell.notification = notification
         cell.delegate = self
         return cell
     }

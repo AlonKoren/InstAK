@@ -23,6 +23,10 @@ class DetailViewController: UIViewController {
         tableView.estimatedRowHeight = 520
         tableView.rowHeight = UITableView.automaticDimension
         tableView.dataSource = self
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadPost()
     }
     override func viewDidDisappear(_ animated: Bool) {

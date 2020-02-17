@@ -32,9 +32,13 @@ class NotificationApi  {
     
     func removeAllNotification(userId : String , objectId : String){
         COLLECTION_NOTIFICATION.document(userId).collection(NOTIFICATION)
-            .whereField("userId", isEqualTo: userId).whereField("objectId", isEqualTo: objectId)
+            .whereField("objectId", isEqualTo: objectId)
             .getDocuments { (querySnapshot, error) in
-                querySnapshot?.documents.forEach({ (queryDocumentSnapshot) in
+                if let err = error{
+                    print(err.localizedDescription)
+                    return
+                }
+                querySnapshot!.documents.forEach({ (queryDocumentSnapshot) in
                     self.COLLECTION_NOTIFICATION.document(userId).collection(self.NOTIFICATION).document(queryDocumentSnapshot.documentID).delete()
                 })
         }
@@ -54,6 +58,32 @@ class NotificationApi  {
             print("notifications: \(notifications)")
             onCompletion(notifications)
         }
+    }
+    
+    func observeNotifications(userId:String, onAdded: @escaping (Notification)-> Void , onModified: @escaping (Notification)-> Void , onRemoved: @escaping (Notification)-> Void , onFinish: @escaping ()-> Void, onError : @escaping (Error)-> Void) ->Listener{
+        let listener:Listener = Listener()
+        listener.firestoreListener = self.COLLECTION_NOTIFICATION.document(userId).collection(NOTIFICATION)
+            .addSnapshotListener { (querySnapshot, error) in
+            guard let snapshot = querySnapshot else {
+                onError(error!)
+                return
+            }
+            for diff in snapshot.documentChanges{
+                let notification : Notification = try! DictionaryDecoder().decode(Notification.self, from: diff.document.data())
+                
+                if (diff.type == .added) {
+                    onAdded(notification)
+                }
+                if (diff.type == .modified) {
+                    onModified(notification)
+                }
+                if (diff.type == .removed) {
+                    onRemoved(notification)
+                }
+            }
+            onFinish()
+        }
+        return listener
     }
     
 }

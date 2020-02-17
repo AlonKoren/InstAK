@@ -190,19 +190,19 @@ class HomeTableViewCell: UITableViewCell {
             Api.Follow.getAllFollowers(followingUserId: postUserId, onCompletion: { (usersIds) in
                 for userid in usersIds{
                     Api.Feed.removePostToFeed(userId: userid, postId: thisPostId)
-                    
+                    Api.Notifiaction.removeAllNotification(userId: userid, objectId: thisPostId)
                 }
-                
             }) { (error) in
                 ProgressHUD.showError(error.localizedDescription)
             }
             Api.Feed.removePostToFeed(userId: postUserId, postId: thisPostId)
+            Api.Notifiaction.removeAllNotification(userId: postUserId, objectId: thisPostId)
             Api.MyPosts.removePost(userId: postUserId, postId: thisPostId, onCompletion: {
                 
             }) { (error) in
                 ProgressHUD.showError(error.localizedDescription)
             }
-            Api.Notifiaction.removeAllNotification(userId: postUserId, objectId: thisPostId)
+            
             self.delegate?.onDelete()
         }) { (error) in
             ProgressHUD.showError(error.localizedDescription)

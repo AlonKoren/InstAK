@@ -38,51 +38,48 @@ class ActivityTableViewCell: UITableViewCell {
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    
 
     func updateView(){
         switch notification!.type! {
-        case "feed":
-            descripitionLabel.text = "added a new post"
-            Api.Post.getpost(postId: notification!.objectId!, onCompletion: { (post) in
-                let postImageUrl = URL(string: post.photoUrl!)
-                self.photo.kf.setImage(with: postImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile") ,options: [])
-            }) { (error) in
-                print(error.localizedDescription)
-            }
-        case "like":
-            descripitionLabel.text = "liked your post"
+            case "feed":
+                descripitionLabel.text = "added a new post"
+                Api.Post.getpost(postId: notification!.objectId!, onCompletion: { (post) in
+                    let postImageUrl = URL(string: post.photoUrl!)
+                    self.photo.kf.setImage(with: postImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile") ,options: [])
+                }) { (error) in
+                    print(error.localizedDescription)
+                }
+            case "like":
+                descripitionLabel.text = "liked your post"
 
-            let objectId = notification!.objectId!
-            Api.Post.getpost(postId: objectId, onCompletion: { (post) in
-                if let photoUrlString = post.photoUrl {
-                    let postImageUrl = URL(string: photoUrlString)
-                    self.photo.kf.setImage(with: postImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile") ,options: [])
-                    
-                }
-            }, onError: { (error) in
-                print(error.localizedDescription)
-            })
-        case "comment":
-            descripitionLabel.text = "left a comment on your post"
-            let objectId = notification!.objectId!
-            Api.Post.getpost(postId: objectId, onCompletion: { (post) in
-                if let photoUrlString = post.photoUrl {
-                    let postImageUrl = URL(string: photoUrlString)
-                    self.photo.kf.setImage(with: postImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile") ,options: [])
-                    
-                }
-            }, onError: { (error) in
-                print(error.localizedDescription)
-            })
-        case "follow":
-            descripitionLabel.text = "started following you"
-            self.photo.isHidden = true
-        default:
-            print("")
+                let objectId = notification!.objectId!
+                Api.Post.getpost(postId: objectId, onCompletion: { (post) in
+                    if let photoUrlString = post.photoUrl {
+                        let postImageUrl = URL(string: photoUrlString)
+                        self.photo.kf.setImage(with: postImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile") ,options: [])
+                        
+                    }
+                }, onError: { (error) in
+                    print(error.localizedDescription)
+                })
+            case "comment":
+                descripitionLabel.text = "left a comment on your post"
+                let objectId = notification!.objectId!
+                Api.Post.getpost(postId: objectId, onCompletion: { (post) in
+                    if let photoUrlString = post.photoUrl {
+                        let postImageUrl = URL(string: photoUrlString)
+                        self.photo.kf.setImage(with: postImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile") ,options: [])
+                        
+                    }
+                }, onError: { (error) in
+                    print(error.localizedDescription)
+                })
+            case "follow":
+                descripitionLabel.text = "started following you"
+                self.photo.isHidden = true
+            default:
+                print("")
         }
         if let timestamp = notification?.timestamp{
             showTimestamp(timestamp: timestamp)
@@ -136,6 +133,17 @@ class ActivityTableViewCell: UITableViewCell {
         }
         
         timeLabel.text = timeText
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        self.photo.isHidden = false
+        self.photo.image = nil
+        self.nameLabel.text = ""
+        self.descripitionLabel.text = ""
+        self.timeLabel.text = ""
+        self.profileImage.image = #imageLiteral(resourceName: "placeholder-avatar-profile")
     }
     
     override func prepareForReuse() {
