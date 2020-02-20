@@ -41,11 +41,15 @@ class ActivityTableViewCell: UITableViewCell {
     
 
     func updateView(){
+        if let timestamp = notification?.timestamp{
+            showTimestamp(timestamp: timestamp)
+        }
         switch notification!.type! {
             case "feed":
                 descripitionLabel.text = "added a new post"
                 
                 let objectId = notification!.objectId!
+                //self.photo.isHidden = true
                 Api.Post.getpost(postId: objectId, onCompletion: { (post) in
                     let postImageUrl = URL(string: post.photoUrl!)
                     self.photo.kf.setImage(with: postImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile") ,options: [])
@@ -63,6 +67,7 @@ class ActivityTableViewCell: UITableViewCell {
                 descripitionLabel.text = "liked your post"
 
                 let objectId = notification!.objectId!
+//                self.photo.isHidden = true
                 Api.Post.getpost(postId: objectId, onCompletion: { (post) in
                     if let photoUrlString = post.photoUrl {
                         let postImageUrl = URL(string: photoUrlString)
@@ -76,6 +81,7 @@ class ActivityTableViewCell: UITableViewCell {
                 descripitionLabel.text = "left a comment on your post"
                 
                 let objectId = notification!.objectId!
+//                self.photo.isHidden = true
                 Api.Post.getpost(postId: objectId, onCompletion: { (post) in
                     if let photoUrlString = post.photoUrl {
                         let postImageUrl = URL(string: photoUrlString)
@@ -91,9 +97,7 @@ class ActivityTableViewCell: UITableViewCell {
             default:
                 print("")
         }
-        if let timestamp = notification?.timestamp{
-            showTimestamp(timestamp: timestamp)
-        }
+        
         
         let tapGestureForLikeImage = UITapGestureRecognizer(target: self, action: #selector(self.cell_TouchUpInside))
         addGestureRecognizer(tapGestureForLikeImage)

@@ -14,7 +14,7 @@ class Notification : Codable{
     var type : String?
     var objectId : String?
     var timestamp : Int?
-    var notificationId : String?
+    var notificationId : String
     
     init(notificationId : String, userId : String , fromId : String , type : String, objectId : String, timestamp : Int) {
         self.notificationId = notificationId

@@ -149,12 +149,19 @@ class PostApi {
     func isLiked(postId : String, userId : String, onCompletion: @escaping (Bool)-> Void, onError : @escaping (Error)-> Void) {
         Api.Post.COLLECTION_POSTS.document(postId).collection("likes")
                     .document(userId).getDocument { (documentSnapshot, error) in
-            if let err = error {
-                onError(err)
-                return
-            }
-            let isLiked : Bool = documentSnapshot!.exists
-            onCompletion(isLiked)
+                if let err = error {
+                    onError(err)
+                    return
+                }
+                if(documentSnapshot!.exists){
+                    if let data = documentSnapshot!.data() {
+                        if let bool = data[userId] as! Bool?{
+                            onCompletion(bool)
+                            return
+                        }
+                    }
+                }
+                onCompletion(false)
         }
     }
     

@@ -42,7 +42,7 @@ class ActivityViewController: UIViewController {
             notifications.forEach { (notification) in
                 self.fechUser(userId: notification.fromId!) { (user) in
                     self.notifications.insert(notification, at: 0)
-                    self.users[notification.notificationId!] = user
+                    self.users[notification.notificationId] = user
                     self.notifications.sort { (aNotification, bNotification) -> Bool in
                         return aNotification.timestamp ?? 0 > bNotification.timestamp ?? 0
                     }
@@ -99,8 +99,9 @@ extension ActivityViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityTableViewCell", for: indexPath) as! ActivityTableViewCell
-        let notification = notifications[indexPath.item]
-        cell.user = self.users[notification.notificationId!]!
+        let notification = notifications[indexPath.row]
+        let user = users[notification.notificationId]
+        cell.user = user
         cell.notification = notification
         cell.delegate = self
         return cell

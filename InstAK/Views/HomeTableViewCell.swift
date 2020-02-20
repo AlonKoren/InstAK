@@ -148,6 +148,7 @@ class HomeTableViewCell: UITableViewCell {
         
         if let userId = AuthService.getCurrentUserId(){
             let postId = post.postId
+            self.likeImageView.image = #imageLiteral(resourceName: "like")
             Api.Post.isLiked(postId: postId, userId: userId, onCompletion: { (isLiked : Bool) in
                 if isLiked{
                     self.likeImageView.image = #imageLiteral(resourceName: "likeSelected")
@@ -217,6 +218,8 @@ class HomeTableViewCell: UITableViewCell {
         captionLabel.text = ""
         deleteButton.isHidden = true
         deleteButton.isEnabled = false
+        timeLabel.text = ""
+        self.likeImageView.image = #imageLiteral(resourceName: "like")
         
         let tapGestureForComment = UITapGestureRecognizer(target: self, action: #selector(self.commentImageView_TouchUpInside))
         commentImageView.addGestureRecognizer(tapGestureForComment)
@@ -267,6 +270,8 @@ class HomeTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        self.timeLabel.text = ""
+        self.likeImageView.image = #imageLiteral(resourceName: "like")
         self.volumeView.isHidden = true
         self.deleteButton.isHidden = true
         self.deleteButton.isEnabled = false
