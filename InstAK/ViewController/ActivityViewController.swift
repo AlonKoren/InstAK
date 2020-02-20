@@ -38,14 +38,14 @@ class ActivityViewController: UIViewController {
             self.users.removeAll()
             self.notifications.removeAll()
             self.tableView.reloadData()
-
-            notifications.forEach { (notification) in
-                self.fechUser(userId: notification.fromId!) { (user) in
-                    self.notifications.insert(notification, at: 0)
+            var mynotifications = notifications
+            mynotifications.sort { (aNotification, bNotification) -> Bool in
+                return aNotification.timestamp > bNotification.timestamp
+            }
+            mynotifications.forEach { (notification) in
+                self.notifications.append(notification)
+                self.fechUser(userId: notification.fromId) { (user) in
                     self.users[notification.notificationId] = user
-                    self.notifications.sort { (aNotification, bNotification) -> Bool in
-                        return aNotification.timestamp ?? 0 > bNotification.timestamp ?? 0
-                    }
                     self.tableView.reloadData()
                 }
             }

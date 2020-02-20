@@ -11,13 +11,13 @@ import Foundation
 class Post : Codable{
     
     var postId: String
-    var caption: String?
-    var photoUrl: String?
+    var caption: String
+    var photoUrl: String
     var uid: String
-    var likeCount: Int?
-    var ratio : CGFloat?
+    var likeCount: Int
+    var ratio : CGFloat
     var videoUrl : String?
-    var timestamp : Int?
+    var timestamp : Int
     
     init(captionText: String, photoUrlString: String, uid: String,postId: String,ratio : CGFloat,videoUrl : String? , timestamp : Int) {
         self.caption = captionText

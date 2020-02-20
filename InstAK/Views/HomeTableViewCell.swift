@@ -115,20 +115,20 @@ class HomeTableViewCell: UITableViewCell {
         let componets = Set<Calendar.Component>([.second,.minute,.hour,.day,.weekOfMonth])
         let diff = Calendar.current.dateComponents(componets, from: timetampDate,to: now)
         var timeText = ""
-        if diff.second! <= 0{
-            timeText = "Now"
-        }else if diff.second! > 0 && diff.minute! == 0{
-            timeText = (diff.second! == 1) ? "\(diff.second!) second ago" : "\(diff.second!) seconds ago"
-        } else if diff.minute! > 0 && diff.hour! == 0{
-            timeText = (diff.minute! == 1) ? "\(diff.minute!) minute ago" : "\(diff.minute!) minutes ago"
-        }else if diff.hour! > 0 && diff.day! == 0{
-            timeText = (diff.hour! == 1) ? "\(diff.hour!) hour ago" : "\(diff.hour!) hours ago"
+
+        if diff.weekOfMonth! > 0{
+            timeText = (diff.weekOfMonth! == 1) ? "\(diff.weekOfMonth!) week ago" : "\(diff.weekOfMonth!) weeks ago"
         }else if diff.day! > 0 && diff.weekOfMonth! == 0{
             timeText = (diff.day! == 1) ? "\(diff.day!) day ago" : "\(diff.day!) days ago"
-        }else if diff.weekOfMonth! > 0{
-            timeText = (diff.weekOfMonth! == 1) ? "\(diff.weekOfMonth!) week ago" : "\(diff.weekOfMonth!) weeks ago"
+        }else if diff.hour! > 0 && diff.day! == 0{
+            timeText = (diff.hour! == 1) ? "\(diff.hour!) hour ago" : "\(diff.hour!) hours ago"
+        } else if diff.minute! > 0 && diff.hour! == 0{
+            timeText = (diff.minute! == 1) ? "\(diff.minute!) minute ago" : "\(diff.minute!) minutes ago"
+        }else if diff.second! > 0 && diff.minute! == 0{
+            timeText = (diff.second! == 1) ? "\(diff.second!) second ago" : "\(diff.second!) seconds ago"
+        }else if diff.second! <= 0{
+            timeText = "Now"
         }
-        
         timeLabel.text = timeText
     }
     
@@ -159,13 +159,13 @@ class HomeTableViewCell: UITableViewCell {
                 print("error: \(err)")
             }
         }
-        if let count = post.likeCount{
-            if count != 0{
-                likeCountButton.setTitle("\(count) likes!", for: UIControl.State.normal)
-            }else{
-                likeCountButton.setTitle("Be the first like this", for: UIControl.State.normal)
-            }
+        let count = post.likeCount
+        if count != 0{
+            likeCountButton.setTitle("\(count) likes!", for: UIControl.State.normal)
+        }else{
+            likeCountButton.setTitle("Be the first like this", for: UIControl.State.normal)
         }
+        
     }
     
     func setupUserInfo() {

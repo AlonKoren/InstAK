@@ -30,11 +30,8 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     
     func updateView(){
         print("updateView")
-        if let photoUrlString = post!.photoUrl {
-            print("photoUrlString")
-           let photoUrl = URL(string: photoUrlString)
-           photo.kf.setImage(with: photoUrl)
-        }
+        let photoUrl = URL(string: post!.photoUrl)
+        photo.kf.setImage(with: photoUrl)
         
         let tapGestureForLikeImage = UITapGestureRecognizer(target: self, action: #selector(self.photo_TouchUpInside))
         photo.addGestureRecognizer(tapGestureForLikeImage)

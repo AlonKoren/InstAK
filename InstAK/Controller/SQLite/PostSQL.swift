@@ -37,13 +37,13 @@ class PostSQL : SQLiteProtocol{
         var sqlite3_stmt: OpaquePointer? = nil
         if (sqlite3_prepare_v2(database,"INSERT OR REPLACE INTO \(TableName)(\(post_postId), \(post_caption), \(post_photoUrl), \(post_uid), \(post_likeCount), \(post_ratio), \(post_videoUrl), \(post_timestamp)) VALUES (?,?,?,?,?,?,?,?);",-1, &sqlite3_stmt,nil) == SQLITE_OK){
             let postId      = post.postId.cString(using: .utf8)
-            let caption     = post.caption?.cString(using: .utf8)
-            let photoUrl    = post.photoUrl?.cString(using: .utf8)
+            let caption     = post.caption.cString(using: .utf8)
+            let photoUrl    = post.photoUrl.cString(using: .utf8)
             let uid         = post.uid.cString(using: .utf8)
-            let likeCount   = String(post.likeCount ?? 0).cString(using: .utf8)
-            let ratio       = "\(post.ratio ?? 1.0)".cString(using: .utf8)
+            let likeCount   = String(post.likeCount).cString(using: .utf8)
+            let ratio       = "\(post.ratio)".cString(using: .utf8)
             let videoUrl    = post.videoUrl?.cString(using: .utf8)
-            let timestamp   = String(post.timestamp ?? 0).cString(using: .utf8)
+            let timestamp   = String(post.timestamp).cString(using: .utf8)
             
             sqlite3_bind_text(sqlite3_stmt, 1, postId       ,-1,nil);
             sqlite3_bind_text(sqlite3_stmt, 2, caption      ,-1,nil);

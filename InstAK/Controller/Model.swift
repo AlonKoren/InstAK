@@ -32,8 +32,8 @@ class Model {
         let lisener : Listener =  Api.Post.observePosts(onAdded: { (addedPost) in
             
             PostSQL.addNew(database: self.modelSql.database, data: addedPost)
-            if (addedPost.timestamp != nil && Double(addedPost.timestamp!) > lastUpdated){
-                lastUpdated = Double(addedPost.timestamp!)
+            if (Double(addedPost.timestamp) > lastUpdated){
+                lastUpdated = Double(addedPost.timestamp)
                 //4. update the local users last update date
                 PostSQL.setLastUpdateDate(database: self.modelSql.database, date: lastUpdated)
             }
@@ -45,8 +45,8 @@ class Model {
         }, onModified: { (modifedPost) in
             PostSQL.delete(database: self.modelSql.database, byId: modifedPost.postId)
             PostSQL.addNew(database: self.modelSql.database, data: modifedPost)
-            if (modifedPost.timestamp != nil && Double(modifedPost.timestamp!) > lastUpdated){
-                lastUpdated = Double(modifedPost.timestamp!)
+            if (Double(modifedPost.timestamp) > lastUpdated){
+                lastUpdated = Double(modifedPost.timestamp)
                 //4. update the local users last update date
                 PostSQL.setLastUpdateDate(database: self.modelSql.database, date: lastUpdated)
             }

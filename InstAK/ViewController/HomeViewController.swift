@@ -96,7 +96,7 @@ class HomeViewController: UIViewController {
                 print(self.posts)
 //                self.activityIndicatorView.stopAnimating()
                 self.posts.sort { (aPost, bPost) -> Bool in
-                    return aPost.timestamp ?? 0 > bPost.timestamp ?? 0
+                    return aPost.timestamp > bPost.timestamp
                 }
                 self.tableView.reloadData()
             }) { (error) in

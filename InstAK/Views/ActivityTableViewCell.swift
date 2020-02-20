@@ -44,56 +44,61 @@ class ActivityTableViewCell: UITableViewCell {
         if let timestamp = notification?.timestamp{
             showTimestamp(timestamp: timestamp)
         }
-        switch notification!.type! {
+//        self.photo.isHidden = true
+        let objectId = notification!.objectId
+        Api.Post.getpost(postId: objectId, onCompletion: { (post) in
+            let postImageUrl = URL(string: post.photoUrl)
+            self.photo.kf.setImage(with: postImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile") ,options: [])
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        switch notification!.type {
             case "feed":
                 descripitionLabel.text = "added a new post"
+                break
                 
-                let objectId = notification!.objectId!
-                //self.photo.isHidden = true
-                Api.Post.getpost(postId: objectId, onCompletion: { (post) in
-                    let postImageUrl = URL(string: post.photoUrl!)
-                    self.photo.kf.setImage(with: postImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile") ,options: [])
-                    
+//                let objectId = notification!.objectId!
+//                //self.photo.isHidden = true
+//                Api.Post.getpost(postId: objectId, onCompletion: { (post) in
+//                    let postImageUrl = URL(string: post.photoUrl!)
+//                    self.photo.kf.setImage(with: postImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile") ,options: [])
+//                }) { (error) in
+//                    print(error.localizedDescription)
+//                }
+            case "like":
+                descripitionLabel.text = "liked your post"
+                break
+
+//                let objectId = notification!.objectId!
+////                self.photo.isHidden = true
+//                Api.Post.getpost(postId: objectId, onCompletion: { (post) in
 //                    if let photoUrlString = post.photoUrl {
 //                        let postImageUrl = URL(string: photoUrlString)
 //                        self.photo.kf.setImage(with: postImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile") ,options: [])
 //
 //                    }
-                    
-                }) { (error) in
-                    print(error.localizedDescription)
-                }
-            case "like":
-                descripitionLabel.text = "liked your post"
-
-                let objectId = notification!.objectId!
-//                self.photo.isHidden = true
-                Api.Post.getpost(postId: objectId, onCompletion: { (post) in
-                    if let photoUrlString = post.photoUrl {
-                        let postImageUrl = URL(string: photoUrlString)
-                        self.photo.kf.setImage(with: postImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile") ,options: [])
-                        
-                    }
-                }, onError: { (error) in
-                    print(error.localizedDescription)
-                })
+//                }, onError: { (error) in
+//                    print(error.localizedDescription)
+//                })
             case "comment":
                 descripitionLabel.text = "left a comment on your post"
+                break
                 
-                let objectId = notification!.objectId!
-//                self.photo.isHidden = true
-                Api.Post.getpost(postId: objectId, onCompletion: { (post) in
-                    if let photoUrlString = post.photoUrl {
-                        let postImageUrl = URL(string: photoUrlString)
-                        self.photo.kf.setImage(with: postImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile") ,options: [])
-                        
-                    }
-                }, onError: { (error) in
-                    print(error.localizedDescription)
-                })
+//                let objectId = notification!.objectId!
+////                self.photo.isHidden = true
+//                Api.Post.getpost(postId: objectId, onCompletion: { (post) in
+//                    if let photoUrlString = post.photoUrl {
+//                        let postImageUrl = URL(string: photoUrlString)
+//                        self.photo.kf.setImage(with: postImageUrl, placeholder: #imageLiteral(resourceName: "placeholder-avatar-profile") ,options: [])
+//
+//                    }
+//                }, onError: { (error) in
+//                    print(error.localizedDescription)
+//                })
             case "follow":
                 descripitionLabel.text = "started following you"
                 self.photo.isHidden = true
+                break
             default:
                 print("")
         }
@@ -106,9 +111,9 @@ class ActivityTableViewCell: UITableViewCell {
     
     @objc func cell_TouchUpInside(){
         if let id = notification?.objectId{
-            if notification!.type! == "follow" {
+            if notification!.type == "follow" {
                 delegate?.goToProfileViewController(userId: id)
-            } else if notification!.type! == "comment" {
+            } else if notification!.type == "comment" {
                 delegate?.goToCommentViewController(postId: id)
             } else {
                 delegate?.goToDetailViewController(postId: id)
@@ -131,19 +136,22 @@ class ActivityTableViewCell: UITableViewCell {
         let now = Date()
         let componets = Set<Calendar.Component>([.second,.minute,.hour,.day,.weekOfMonth])
         let diff = Calendar.current.dateComponents(componets, from: timetampDate,to: now)
+//        print("timetampDate=\(timetampDate)\tnow=\(now)\tdiff=\(diff)")
+//        print("------------------------------------------------------")
         var timeText = ""
-        if diff.second! <= 0{
-            timeText = "Now"
-        }else if diff.second! > 0 && diff.minute! == 0{
-            timeText = "\(diff.second!)s"
-        } else if diff.minute! > 0 && diff.hour! == 0{
-            timeText = "\(diff.minute!)m"
-        }else if diff.hour! > 0 && diff.day! == 0{
-            timeText = "\(diff.hour!)h"
+        
+        if diff.weekOfMonth! > 0{
+            timeText = "\(diff.weekOfMonth!)w"
         }else if diff.day! > 0 && diff.weekOfMonth! == 0{
             timeText = "\(diff.day!)d"
-        }else if diff.weekOfMonth! > 0{
-            timeText = "\(diff.weekOfMonth!)w"
+        }else if diff.hour! > 0 && diff.day! == 0{
+            timeText = "\(diff.hour!)h"
+        } else if diff.minute! > 0 && diff.hour! == 0{
+            timeText = "\(diff.minute!)m"
+        }else if diff.second! > 0 && diff.minute! == 0{
+            timeText = "\(diff.second!)s"
+        }else if diff.second! <= 0{
+            timeText = "Now"
         }
         
         timeLabel.text = timeText

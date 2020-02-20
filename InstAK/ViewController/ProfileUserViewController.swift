@@ -74,7 +74,7 @@ class ProfileUserViewController: UIViewController {
             self.lisener = Api.Post.observeSpecificPosts(postsIds: postIds, onAdded: { (addedPost) in
                 self.posts.append(addedPost)
                 self.posts.sort { (aPost, bPost) -> Bool in
-                    return aPost.timestamp! > bPost.timestamp!
+                    return aPost.timestamp > bPost.timestamp
                 }
                 self.collectionView.reloadData()
             }, onModified: { (modifiedpost) in

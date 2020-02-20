@@ -9,11 +9,11 @@
 import Foundation
 
 class Notification : Codable{
-    var userId : String?
-    var fromId : String?
-    var type : String?
-    var objectId : String?
-    var timestamp : Int?
+    var userId : String
+    var fromId : String
+    var type : String
+    var objectId : String
+    var timestamp : Int
     var notificationId : String
     
     init(notificationId : String, userId : String , fromId : String , type : String, objectId : String, timestamp : Int) {
